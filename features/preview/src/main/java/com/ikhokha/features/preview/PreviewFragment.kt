@@ -8,9 +8,11 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.ikhokha.common.base.fragment.SubNavigationFragment
 import com.ikhokha.common.constants.PRODUCT_ID
+import com.ikhokha.common.extensions.loadImageFromUrl
 import com.ikhokha.common.models.Product
 import com.ikhokha.features.preview.databinding.FragmentPreviewBinding
 import com.ikhokha.viewmodels.PreviewViewModel
+import kotlinx.android.synthetic.main.fragment_preview.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -53,13 +55,22 @@ class PreviewFragment : SubNavigationFragment() {
             }
         }
 
+        btnAddToCart.setOnClickListener {
+            //Todo: fix viewModelScope
+            previewViewModel.getViewModelScope().launch(Dispatchers.IO) {
+                previewViewModel.product.value?.let { it1 -> previewViewModel.processProduct(it1) }
+            }
+        }
+
+        btnScanAgain.setOnClickListener {
+            drawerController.popBack()
+        }
+
     }
 
     fun onProductSet(product: Product) {
-        //Todo: fix viewModelScope
-        previewViewModel.getViewModelScope().launch(Dispatchers.IO) {
-            previewViewModel.processProduct(product)
-        }
+        val imageUrl = "gs://the-busy-shop.appspot.com/${product.image}"
+        imgProduct.loadImageFromUrl(requireContext(), imageUrl, com.ikhokha.common.R.drawable.ic_placeholder)
     }
 
     fun onProductError(errorMessage: String) {

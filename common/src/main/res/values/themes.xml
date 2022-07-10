@@ -193,4 +193,18 @@
         <item name="android:layout_height">40dp</item>
         <item name="android:background">@android:color/transparent</item>
     </style>
+
+    <style name="CircularProgressBarTheme">
+        <item name="android:layout_width">@dimen/progress_indicator</item>
+        <item name="android:layout_height">@dimen/progress_indicator</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:indeterminate">true</item>
+        <item name="android:padding">@dimen/medium_spacing</item>
+        <item name="cpb_color">@color/black</item>
+        <item name="cpb_max_sweep_angle">300</item>
+        <item name="cpb_min_sweep_angle">10</item>
+        <item name="cpb_rotation_speed">1.0</item>
+        <item name="cpb_stroke_width">2dp</item>
+        <item name="cpb_sweep_speed">1.0</item>
+    </style>
 </resources>

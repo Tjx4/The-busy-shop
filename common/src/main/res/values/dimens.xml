@@ -41,7 +41,7 @@
     <dimen name="tv_player_action_size">30dp</dimen>
     <dimen name="recently_watched_small_margin">8dp</dimen>
     <dimen name="exo_small_icon_horizontal_margin">2dp</dimen>
-    <dimen name="progress_indicator">100dp</dimen>
+    <dimen name="progress_indicator">90dp</dimen>
     <dimen name="channel_event_width">194dp</dimen>
     <dimen name="tv_channel_event_width">150dp</dimen>
     <dimen name="tv_channel_event_height">193dp</dimen>

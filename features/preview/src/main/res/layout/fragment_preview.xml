@@ -26,6 +26,7 @@
             app:layout_constraintBottom_toBottomOf="parent"/>
 
         <TextView
+            android:visibility="@{!previewViewModel.showLoading}"
             style="@style/NormalTextView"
             android:id="@+id/tvDescription"
             android:layout_width="wrap_content"
@@ -38,6 +39,7 @@
             app:layout_constraintRight_toRightOf="parent"/>
 
         <Button
+            android:visibility="@{!previewViewModel.showLoading}"
             android:id="@+id/btnAddToCart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -49,6 +51,7 @@
             app:layout_constraintRight_toRightOf="parent"/>
 
         <Button
+            android:visibility="@{!previewViewModel.showLoading}"
             android:id="@+id/btnScanAgain"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -58,6 +61,16 @@
             app:layout_constraintTop_toBottomOf="@+id/btnAddToCart"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"/>
+
+        <fr.castorflex.android.circularprogressbar.CircularProgressBar
+            android:visibility="@{previewViewModel.showLoading}"
+            style="@style/CircularProgressBarTheme"
+            android:id="@+id/cpLoader"
+            android:layout_gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

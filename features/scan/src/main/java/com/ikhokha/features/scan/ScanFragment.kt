@@ -37,11 +37,8 @@ class ScanFragment : TopNavigationFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         btnTestProd.setOnClickListener {
-            //Todo: fix viewModelScope
-            scanViewModel.getViewModelScope().launch(Dispatchers.IO) {
-                val productId = btnTestProd.text.toString()
-                onProductSet(productId)
-            }
+            val productId = btnTestProd.text.toString()
+            onProductSet(productId)
         }
     }
 
