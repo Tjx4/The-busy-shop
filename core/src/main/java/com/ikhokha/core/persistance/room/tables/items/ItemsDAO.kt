@@ -1,4 +1,4 @@
-package com.ikhokha.core.persistance.room.tables.users
+package com.ikhokha.core.persistance.room.tables.items
 
 import androidx.lifecycle.LiveData
 import androidx.room.*

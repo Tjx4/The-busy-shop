@@ -55,10 +55,10 @@ class ScanViewModel(application: Application, val productsRepository: ProductsRe
 
     //Todo: rename
     suspend fun isProductExist(product: Product) {
-        val product = productsRepository.getProductFromCart(product.id)
+        val cartProduct = productsRepository.getProductFromCart(product.id)
 
         withContext(Dispatchers.Main) {
-            when (product) {
+            when (cartProduct) {
                 null -> _addProduct.value = product
                 else -> _incrementProduct.value = product
             }

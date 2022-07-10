@@ -1,4 +1,4 @@
-package com.dstvmobile.common.enums
+package com.ikhokha.common.enums
 
 enum class ImageSizes(val index: Int) {
     MediumHero(0),

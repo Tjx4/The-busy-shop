@@ -1,4 +1,4 @@
-package com.dstvmobile.common.enums
+package com.ikhokha.common.enums
 
 enum class Links(val index: Int) {
     CardInfo(0),

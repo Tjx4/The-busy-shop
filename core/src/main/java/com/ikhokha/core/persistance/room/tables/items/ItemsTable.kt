@@ -1,4 +1,4 @@
-package com.ikhokha.core.persistance.room.tables.users
+package com.ikhokha.core.persistance.room.tables.items
 
 import android.os.Parcelable
 import androidx.room.ColumnInfo
@@ -11,13 +11,13 @@ import kotlinx.android.parcel.Parcelize
 data class ItemsTable(
     @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "id")
-    var id: String?,
+    var id: String,
     @ColumnInfo(name = "description")
     var description: String?,
     @ColumnInfo(name = "image")
     var image: String?,
     @ColumnInfo(name = "price")
     var price: Double = 0.0,
-    @ColumnInfo(name = "price")
+    @ColumnInfo(name = "quantity")
     var quantity: Int = 1
 ) : Parcelable

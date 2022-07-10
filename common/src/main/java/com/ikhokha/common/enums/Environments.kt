@@ -1,4 +1,4 @@
-package com.dstvmobile.common.enums
+package com.ikhokha.common.enums
 
 enum class Environments(var url: String) {
     Production("https://ssl.dstv.com/"),

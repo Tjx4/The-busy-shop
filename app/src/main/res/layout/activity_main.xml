@@ -22,15 +22,7 @@
         android:visibility="gone"
         android:id="@+id/toolbar"
         style="@style/ToolBarStyle"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.Toolbar
-        android:visibility="gone"
-        android:id="@+id/tvToolbar"
-        style="@style/ToolBarStyle"
-        app:logo="@drawable/ic_logo_dstv_mobile"
+        app:logo="@drawable/ic_scan"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         app:layout_constraintTop_toTopOf="parent" />
@@ -42,7 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:labelVisibilityMode="labeled"
-        app:menu="@menu/bottom_menu"
+        app:menu="@menu/nav_menu"
         app:itemIconSize="@dimen/nav_bar_icon_size"
         app:itemPaddingBottom="@dimen/nav_bar_item_bottom_padding"
         android:paddingBottom="@dimen/nav_bar_bottom_padding"
