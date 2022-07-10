@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">The busy shop</string>
     <string name="scan">Scan</string>
+    <string name="cart">Cart</string>
 </resources>
