@@ -44,6 +44,10 @@ dependencies {
     implementation "androidx.room:room-rxjava2:$room"
     implementation "androidx.room:room-guava:$room"
     testImplementation "androidx.room:room-testing:$room"
+    //Firebase
+    implementation platform("com.google.firebase:firebase-bom:$firebase_database")
+    implementation 'com.google.firebase:firebase-database'
+    implementation 'com.firebaseui:firebase-ui-storage'
 
     //Modules
     implementation project("$common")

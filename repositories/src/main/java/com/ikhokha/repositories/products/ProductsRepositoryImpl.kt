@@ -1,9 +1,11 @@
-package com.example.barcodescanner.repositories
+package com.ikhokha.repositories.products
 
+import com.google.firebase.database.FirebaseDatabase
 import com.ikhokha.common.models.Product
+import com.ikhokha.core.persistance.room.CartDB
 import com.ikhokha.repositories.products.ProductsRepository
 
-class ProductsRepositoryImpl(val firebaseDatabase: String, cartDB: String) : ProductsRepository {
+class ProductsRepositoryImpl(val firebaseDatabase: FirebaseDatabase, cartDB: CartDB) : ProductsRepository {
 
     override suspend fun getProduct(productId: String): Product? {
         TODO("Not yet implemented")
