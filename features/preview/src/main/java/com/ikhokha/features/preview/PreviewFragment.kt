@@ -79,10 +79,10 @@ class PreviewFragment : SubNavigationFragment() {
             val imageRef = firebaseStorageRef.child(it)
             imageRef.downloadUrl.addOnSuccessListener {
                 val imageURL = it.toString()
-                imgProduct.loadImageFromUrl(requireContext(), imageURL, com.ikhokha.common.R.drawable.ic_placeholder)
+                imgProduct?.loadImageFromUrl(requireContext(), imageURL, com.ikhokha.common.R.drawable.ic_placeholder)
             }
             imageRef.downloadUrl.addOnFailureListener {
-                val dfd = it
+                val dfd = it //Todo remove
             }
         }
 
@@ -112,6 +112,8 @@ class PreviewFragment : SubNavigationFragment() {
             "${product.description} added to cart",
             Toast.LENGTH_SHORT
         ).show()
+
+        drawerController.popBack()
     }
 
     private fun onProductAddError(errorMessage: String) {
@@ -124,6 +126,8 @@ class PreviewFragment : SubNavigationFragment() {
             "incremented",
             Toast.LENGTH_SHORT
         ).show()
+
+        drawerController.popBack()
     }
 
     private fun onProductIncrementError(errorMessage: String) {
