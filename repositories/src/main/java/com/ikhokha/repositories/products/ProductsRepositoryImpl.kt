@@ -4,6 +4,8 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import com.ikhokha.common.extensions.getProductFromDataSnapshot
 import com.ikhokha.common.models.Product
 import com.ikhokha.core.persistance.room.CartDB
@@ -15,8 +17,11 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
-class ProductsRepositoryImpl(val firebaseDatabase: FirebaseDatabase, val cartDB: CartDB) :
+class ProductsRepositoryImpl(val firebaseDatabase: FirebaseDatabase, val firebaseStorage: FirebaseStorage, val cartDB: CartDB) :
     ProductsRepository {
+
+    override val firebaseStorageRef: StorageReference
+        get() = firebaseStorage.reference
 
     override suspend fun getProduct(productId: String): Product? {
         var product: Product? = null

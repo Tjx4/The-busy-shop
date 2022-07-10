@@ -48,6 +48,9 @@ dependencies {
     implementation "androidx.paging:paging-runtime-ktx:$paging"
     //Gson
     implementation "com.squareup.retrofit2:converter-gson:$retrofit"
+    //Firebase
+    implementation "com.google.firebase:firebase-database:$firebase_database"
+    implementation "com.google.firebase:firebase-storage:$firebase_storage"
 
     //Modules
     implementation project("$common")

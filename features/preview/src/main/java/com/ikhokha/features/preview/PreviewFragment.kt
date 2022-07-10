@@ -30,7 +30,9 @@ class PreviewFragment : SubNavigationFragment() {
         previewViewModel.addProduct.observe(this) { onNewProduct(it) }
         previewViewModel.incrementProduct.observe(this) { onProductExist(it) }
         previewViewModel.productAdded.observe(this) { onProductAdded(it) }
+        previewViewModel.addProductError.observe(this) { onProductAddError(it) }
         previewViewModel.incrementedProduct.observe(this) { onProductIncremenrted() }
+        previewViewModel.incrementProductError.observe(this) { onProductIncrementError(it) }
     }
 
     override fun onCreateView(
@@ -69,8 +71,21 @@ class PreviewFragment : SubNavigationFragment() {
     }
 
     fun onProductSet(product: Product) {
-        val imageUrl = "gs://the-busy-shop.appspot.com/${product.image}"
-        imgProduct.loadImageFromUrl(requireContext(), imageUrl, com.ikhokha.common.R.drawable.ic_placeholder)
+        previewViewModel.showLoading.value = false
+
+        //Todo: handle firebase storage
+        product.image?.let {
+            val firebaseStorageRef = previewViewModel.getFirebaseStorageRef()
+            val imageRef = firebaseStorageRef.child(it)
+            imageRef.downloadUrl.addOnSuccessListener {
+                val imageURL = it.toString()
+                imgProduct.loadImageFromUrl(requireContext(), imageURL, com.ikhokha.common.R.drawable.ic_placeholder)
+            }
+            imageRef.downloadUrl.addOnFailureListener {
+                val dfd = it
+            }
+        }
+
     }
 
     fun onProductError(errorMessage: String) {
@@ -99,6 +114,10 @@ class PreviewFragment : SubNavigationFragment() {
         ).show()
     }
 
+    private fun onProductAddError(errorMessage: String) {
+        //Show error alert
+    }
+
     fun onProductIncremenrted() {
         Toast.makeText(
             requireContext(),
@@ -106,4 +125,9 @@ class PreviewFragment : SubNavigationFragment() {
             Toast.LENGTH_SHORT
         ).show()
     }
+
+    private fun onProductIncrementError(errorMessage: String) {
+        //Show error alert
+    }
+
 }

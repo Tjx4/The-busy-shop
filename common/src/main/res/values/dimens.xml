@@ -109,4 +109,6 @@
     <dimen name="try_this_items_horizontal_padding">20dp</dimen>
     <dimen name="try_this_age_restriction_margin_left">20dp</dimen>
     <dimen name="try_this_synopsis_margin_top">2dp</dimen>
+    <dimen name="product_image_size">200dp</dimen>
+    <dimen name="product_image_courner_redius">100dp</dimen>
 </resources>

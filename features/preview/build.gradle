@@ -45,6 +45,11 @@ dependencies {
     implementation "io.insert-koin:koin-android:$koin"
     //Smooth progressbar
     implementation "com.github.castorflex.smoothprogressbar:library-circular:$smoothprogressbar"
+    //Round imageview
+    implementation "com.makeramen:roundedimageview:$rounded_imageview"
+    //Firebase
+    implementation "com.google.firebase:firebase-storage:$firebase_storage"
+
 
     //Modules
     implementation project("$common")
