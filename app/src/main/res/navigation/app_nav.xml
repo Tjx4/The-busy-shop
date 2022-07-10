@@ -13,5 +13,9 @@
         android:id="@+id/cartFragment"
         android:name="com.ikhokha.features.cart.CartFragment"
         android:label="CartFragment" />
+    <fragment
+        android:id="@+id/summaryFragment"
+        android:name="com.ikhokha.features.summary.SummaryFragment"
+        android:label="SummaryFragment" />
 
 </navigation>
