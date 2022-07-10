@@ -14,7 +14,7 @@ import com.ikhokha.common.base.fragment.BaseFragment
 import com.ikhokha.common.extensions.setupWithCustomAnimNavController
 import com.ikhokha.common.interfaces.MyDrawerController
 import com.ikhokha.common.models.NavMenuItem
-import com.ikhokha.common.models.Product
+import com.ikhokha.features.scan.ScanFragmentDirections
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), MyDrawerController {
@@ -98,9 +98,9 @@ class MainActivity : AppCompatActivity(), MyDrawerController {
         }
     }
 
-    override fun navigateFromPreviewnerToPreview(product: Product) {
-        //val action = SelectionFragmentDirections.actionSelectionFragmentToMobileNavigation(product)
-        //navController.navigate(action)
+    override fun navigateFromPreviewnerToPreview(productId: String) {
+        val action = ScanFragmentDirections.actionScanFragmentToPreviewFragment(productId)
+        navController.navigate(action)
     }
 
     override fun onBackPressed() {

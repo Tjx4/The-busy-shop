@@ -16,5 +16,5 @@ interface MyDrawerController {
     fun showBottomNav()
     fun hideBottomNav()
     //navigation
-    fun navigateFromPreviewnerToPreview(product: Product)
+    fun navigateFromPreviewnerToPreview(productId: String)
 }

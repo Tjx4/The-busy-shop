@@ -6,16 +6,40 @@
 
     <fragment
         android:id="@+id/scanFragment"
-        android:name="com.ikhokha.features.scan.PreviewFragment"
-        android:label="PreviewFragment" />
+        android:name="com.ikhokha.features.scan.ScanFragment"
+        android:label="ScanFragment" >
+        <action
+            android:id="@+id/action_scanFragment_to_previewFragment"
+            app:destination="@id/previewFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/no_transition"
+            app:popEnterAnim="@anim/no_transition"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpToInclusive="true">
+
+            <argument
+                android:name="productId"
+                app:argType="string"
+                app:nullable="false" />
+
+            <deepLink
+                android:id="@+id/preview_deepLink"
+                app:uri="https://domain.tld/preview/productId={productId}" />
+        </action>
+    </fragment>
 
     <fragment
         android:id="@+id/cartFragment"
         android:name="com.ikhokha.features.cart.CartFragment"
         android:label="CartFragment" />
+
     <fragment
         android:id="@+id/summaryFragment"
         android:name="com.ikhokha.features.summary.SummaryFragment"
         android:label="SummaryFragment" />
+    <fragment
+        android:id="@+id/previewFragment"
+        android:name="com.ikhokha.features.preview.PreviewFragment"
+        android:label="PreviewFragment" />
 
 </navigation>

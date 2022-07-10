@@ -4,10 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.ikhokha.common.base.fragment.TopNavigationFragment
-import com.ikhokha.common.models.Product
 import com.ikhokha.features.scan.databinding.FragmentScanBinding
 import com.ikhokha.viewmodels.ScanViewModel
 import kotlinx.android.synthetic.main.fragment_scan.*
@@ -21,7 +19,7 @@ class ScanFragment : TopNavigationFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        scanViewModel.product.observe(this) { onProductSet(it) }
+       // scanViewModel.product.observe(this) { onProductSet(it) }
     }
 
     override fun onCreateView(
@@ -39,17 +37,16 @@ class ScanFragment : TopNavigationFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         btnTestProd.setOnClickListener {
-
             //Todo: fix viewModelScope
             scanViewModel.getViewModelScope().launch(Dispatchers.IO) {
                 val productId = btnTestProd.text.toString()
-                scanViewModel.getProduct(productId)
+                onProductSet(productId)
             }
         }
     }
 
-    fun onProductSet(product: Product) {
-        drawerController.navigateFromPreviewnerToPreview(product)
+    fun onProductSet(productId: String) {
+        drawerController.navigateFromPreviewnerToPreview(productId)
     }
 
 }

@@ -10,6 +10,10 @@ import kotlinx.coroutines.withContext
 class PreviewViewModel(application: Application, val productsRepository: ProductsRepository) :
     BaseViewModel(application) {
 
+    private val _showLoading: MutableLiveData<Boolean> = MutableLiveData()
+    val showLoading: MutableLiveData<Boolean>
+        get() = _showLoading
+
     private var _product: MutableLiveData<Product> = MutableLiveData()
     val product: MutableLiveData<Product>
         get() = _product
@@ -42,6 +46,9 @@ class PreviewViewModel(application: Application, val productsRepository: Product
     val incrementProduct: MutableLiveData<Product>
         get() = _incrementProduct
 
+    init {
+        _showLoading.value = true
+    }
 
     suspend fun getProduct(productId: String) {
         val product = productsRepository.getProduct(productId)

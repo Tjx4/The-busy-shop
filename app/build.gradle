@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
     id 'com.google.gms.google-services'
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
@@ -59,6 +60,7 @@ dependencies {
     implementation project("$viewmodels")
     implementation project("$repos")
     implementation project("$splash")
+    implementation project("$preview")
     implementation project("$cart")
     implementation project("$scan")
     implementation project("$summary")
