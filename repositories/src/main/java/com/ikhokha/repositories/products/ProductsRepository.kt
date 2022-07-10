@@ -1,6 +1,6 @@
 package com.ikhokha.repositories.products
 
-import com.ikhokha.common.model.Product
+import com.ikhokha.common.models.Product
 
 interface ProductsRepository {
     suspend fun getProduct(productId: String): Product?

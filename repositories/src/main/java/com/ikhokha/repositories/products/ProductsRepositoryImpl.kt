@@ -1,6 +1,6 @@
 package com.example.barcodescanner.repositories
 
-import com.ikhokha.common.model.Product
+import com.ikhokha.common.models.Product
 import com.ikhokha.repositories.products.ProductsRepository
 
 class ProductsRepositoryImpl(val firebaseDatabase: String, cartDB: String) : ProductsRepository {

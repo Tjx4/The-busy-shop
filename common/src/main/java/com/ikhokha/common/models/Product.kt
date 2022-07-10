@@ -1,4 +1,4 @@
-package com.ikhokha.common.model
+package com.ikhokha.common.models
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
