@@ -5,6 +5,7 @@
         android:id="@+id/scanFragment"
         android:title="@string/scan"
         android:icon="@drawable/ic_scan"/>
+
     <item
         android:id="@+id/cartFragment"
         android:title="@string/cart"

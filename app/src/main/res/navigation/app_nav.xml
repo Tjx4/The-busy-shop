@@ -9,4 +9,9 @@
         android:name="com.ikhokha.features.scan.ScanFragment"
         android:label="ScanFragment" />
 
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="com.ikhokha.features.cart.CartFragment"
+        android:label="CartFragment" />
+
 </navigation>

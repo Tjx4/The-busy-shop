@@ -80,11 +80,11 @@ class ScanViewModel(application: Application, val productsRepository: ProductsRe
     }
 
     suspend fun incrementProduct(product: Product) {
-        val response = productsRepository.incrementCartProductQuantity(product)
+        val response = productsRepository.incrementCartProductQuantity(product.id ?: "")
 
         withContext(Dispatchers.Main) {
             when (response) {
-                false -> _incrementProductError.value = "Error deleting product"
+                false -> _incrementProductError.value = "Error incrementing product"
                 else -> _incrementedProduct.value = product
             }
         }

@@ -7,7 +7,9 @@
         <entry key="common/src/main/res/drawable/navigation_view_colored.xml" value="0.224" />
         <entry key="common/src/main/res/drawable/splash_background.xml" value="0.225" />
         <entry key="common/src/main/res/menu/nav_menu.xml" value="0.26458333333333334" />
+        <entry key="features/cart/src/main/res/layout/fragment_cart.xml" value="0.265625" />
         <entry key="features/scan/src/main/res/layout/fragment_scan.xml" value="0.20416666666666666" />
+        <entry key="features/summary/src/main/res/layout/fragment_summary.xml" value="0.25052083333333336" />
       </map>
     </option>
   </component>

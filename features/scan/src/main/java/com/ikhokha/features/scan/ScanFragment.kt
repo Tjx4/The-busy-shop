@@ -1,12 +1,12 @@
 package com.ikhokha.features.scan
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import com.ikhokha.common.base.fragment.TopNavigationFragment
 import com.ikhokha.common.models.Product
 import com.ikhokha.features.scan.databinding.FragmentScanBinding
 import com.ikhokha.viewmodels.ScanViewModel
@@ -15,7 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ScanFragment : Fragment() {
+class ScanFragment : TopNavigationFragment() {
 
     private lateinit var binding: FragmentScanBinding
     private val scanViewModel: ScanViewModel by viewModel()
@@ -26,6 +26,7 @@ class ScanFragment : Fragment() {
         scanViewModel.addProduct.observe(this) { onNewProduct(it) }
         scanViewModel.incrementProduct.observe(this) { onProductExist(it) }
         scanViewModel.productAdded.observe(this) { onProductAdded(it) }
+        scanViewModel.incrementedProduct.observe(this) { onProductIncremenrted() }
     }
 
     override fun onCreateView(
@@ -77,6 +78,14 @@ class ScanFragment : Fragment() {
         Toast.makeText(
             requireContext(),
             "${product.description} added to cart",
+            Toast.LENGTH_SHORT
+        ).show()
+    }
+
+    fun onProductIncremenrted() {
+        Toast.makeText(
+            requireContext(),
+            "incremented",
             Toast.LENGTH_SHORT
         ).show()
     }

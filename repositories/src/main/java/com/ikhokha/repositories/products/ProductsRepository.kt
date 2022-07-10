@@ -7,6 +7,6 @@ interface ProductsRepository {
     suspend fun getCartProducts(): List<Product>?
     suspend fun removeProductFromCart(productId: String): Boolean
     suspend fun addProductToCart(product: Product): Boolean
-    suspend fun incrementCartProductQuantity(product: Product): Boolean
+    suspend fun incrementCartProductQuantity(product: String): Boolean
     suspend fun getProductFromCart(productId: String): Product?
 }

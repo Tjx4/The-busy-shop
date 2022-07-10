@@ -15,7 +15,7 @@ interface ItemsDAO {
     fun delete(itemsTable: ItemsTable)
 
     @Query("SELECT * FROM items WHERE id = :key")
-    fun get(key: Long): ItemsTable?
+    fun get(key: String): ItemsTable?
 
     @Query("SELECT * FROM items ORDER BY id DESC LIMIT 1")
     fun getLastUser(): ItemsTable?
