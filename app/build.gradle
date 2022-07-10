@@ -39,11 +39,6 @@ dependencies {
     implementation "com.google.android.material:material:$material"
     implementation "androidx.constraintlayout:constraintlayout:$constraintlayout"
     implementation "androidx.work:work-runtime-ktx:$work_runtimen"
-
-    //Testing
-    testImplementation "junit:junit:$junit"
-    androidTestImplementation "androidx.test.ext:junit:$ext_junit"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso"
     //koin
     implementation "io.insert-koin:koin-core:$koin"
     implementation "io.insert-koin:koin-android:$koin"
