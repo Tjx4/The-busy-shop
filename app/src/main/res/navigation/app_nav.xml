@@ -6,8 +6,8 @@
 
     <fragment
         android:id="@+id/scanFragment"
-        android:name="com.ikhokha.features.scan.ScanFragment"
-        android:label="ScanFragment" />
+        android:name="com.ikhokha.features.scan.PreviewFragment"
+        android:label="PreviewFragment" />
 
     <fragment
         android:id="@+id/cartFragment"

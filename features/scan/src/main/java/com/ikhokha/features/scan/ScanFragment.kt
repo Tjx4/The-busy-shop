@@ -16,17 +16,12 @@ import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ScanFragment : TopNavigationFragment() {
-
     private lateinit var binding: FragmentScanBinding
     private val scanViewModel: ScanViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         scanViewModel.product.observe(this) { onProductSet(it) }
-        scanViewModel.addProduct.observe(this) { onNewProduct(it) }
-        scanViewModel.incrementProduct.observe(this) { onProductExist(it) }
-        scanViewModel.productAdded.observe(this) { onProductAdded(it) }
-        scanViewModel.incrementedProduct.observe(this) { onProductIncremenrted() }
     }
 
     override fun onCreateView(
@@ -54,40 +49,7 @@ class ScanFragment : TopNavigationFragment() {
     }
 
     fun onProductSet(product: Product) {
-        //Todo: fix viewModelScope
-        scanViewModel.getViewModelScope().launch(Dispatchers.IO) {
-            scanViewModel.processProduct(product)
-        }
-    }
-
-    fun onNewProduct(product: Product) {
-        //Todo: fix viewModelScope
-        scanViewModel.getViewModelScope().launch(Dispatchers.IO) {
-            scanViewModel.addProductToCart(product)
-        }
-    }
-
-    fun onProductExist(product: Product) {
-        //Todo: fix viewModelScope
-        scanViewModel.getViewModelScope().launch(Dispatchers.IO) {
-            scanViewModel.incrementProduct(product)
-        }
-    }
-
-    fun onProductAdded(product: Product) {
-        Toast.makeText(
-            requireContext(),
-            "${product.description} added to cart",
-            Toast.LENGTH_SHORT
-        ).show()
-    }
-
-    fun onProductIncremenrted() {
-        Toast.makeText(
-            requireContext(),
-            "incremented",
-            Toast.LENGTH_SHORT
-        ).show()
+        drawerController.navigateFromPreviewnerToPreview(product)
     }
 
 }

@@ -98,7 +98,7 @@ class MainActivity : AppCompatActivity(), MyDrawerController {
         }
     }
 
-    override fun navigateFromScannerToPreview(product: Product) {
+    override fun navigateFromPreviewnerToPreview(product: Product) {
         //val action = SelectionFragmentDirections.actionSelectionFragmentToMobileNavigation(product)
         //navController.navigate(action)
     }
