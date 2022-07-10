@@ -5,5 +5,5 @@ import com.ikhokha.repositories.products.ProductsRepositoryImpl
 import org.koin.dsl.module
 
 val repositoryModule = module {
-    single<ProductsRepository> { ProductsRepositoryImpl(get(), get()) }
+    single<ProductsRepository> { ProductsRepositoryImpl(get()) }
 }

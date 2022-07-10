@@ -47,6 +47,8 @@ dependencies {
     //Firebase
     implementation platform("com.google.firebase:firebase-bom:$firebase_database")
     implementation 'com.google.firebase:firebase-database'
+    implementation 'com.google.firebase:firebase-core'
+    implementation 'com.google.firebase:firebase-storage'
 
     //Modules
     implementation project("$common")

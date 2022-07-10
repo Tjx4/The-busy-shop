@@ -24,6 +24,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    dataBinding {
+        enabled = true
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -48,12 +51,15 @@ dependencies {
     //Firebase
     implementation platform("com.google.firebase:firebase-bom:$firebase_database")
     implementation 'com.google.firebase:firebase-database'
+    implementation 'com.google.firebase:firebase-core'
+    implementation 'com.google.firebase:firebase-storage'
 
     //Modules
     implementation project("$common")
     implementation project("$core")
     implementation project("$viewmodels")
     implementation project("$repos")
+    implementation project("$splash")
     implementation project("$cart")
     implementation project("$scan")
     implementation project("$summary")

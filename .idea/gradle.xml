@@ -15,6 +15,7 @@
             <option value="$PROJECT_DIR$/features" />
             <option value="$PROJECT_DIR$/features/cart" />
             <option value="$PROJECT_DIR$/features/scan" />
+            <option value="$PROJECT_DIR$/features/splash" />
             <option value="$PROJECT_DIR$/features/summary" />
             <option value="$PROJECT_DIR$/repositories" />
             <option value="$PROJECT_DIR$/viewmodels" />
