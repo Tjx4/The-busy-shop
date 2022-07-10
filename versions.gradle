@@ -5,7 +5,8 @@ ext {
     constraintlayout = "2.1.3"
     work_runtimen = "2.8.0-alpha01"
     workmanager = "2.3.1"
-    firebase_database = "28.4.1" //Todo: update to latest version
+    firebase_database = "19.2.1"
+    firebase_storage = "19.1.1"
 
     koin = "3.1.2"
     glide = "4.13.0"

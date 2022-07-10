@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -49,10 +50,8 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$nav"
     implementation "androidx.navigation:navigation-ui-ktx:$nav"
     //Firebase
-    implementation platform("com.google.firebase:firebase-bom:$firebase_database")
-    implementation 'com.google.firebase:firebase-database'
-    implementation 'com.google.firebase:firebase-core'
-    implementation 'com.google.firebase:firebase-storage'
+    implementation "com.google.firebase:firebase-database:$firebase_database"
+    implementation "com.google.firebase:firebase-storage:$firebase_storage"
 
     //Modules
     implementation project("$common")

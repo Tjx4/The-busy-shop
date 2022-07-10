@@ -19,7 +19,7 @@ class ScanViewModel(application: Application, val productsRepository: ProductsRe
         get() = _productError
 
     private var _productAdded: MutableLiveData<Product> = MutableLiveData()
-    val newProduct: MutableLiveData<Product>
+    val productAdded: MutableLiveData<Product>
         get() = _productAdded
 
     private var _productAddError: MutableLiveData<String> = MutableLiveData()
@@ -54,8 +54,11 @@ class ScanViewModel(application: Application, val productsRepository: ProductsRe
     }
 
     //Todo: rename
-    suspend fun isProductExist(product: Product) {
-        val cartProduct = productsRepository.getProductFromCart(product.id)
+    suspend fun processProduct(product: Product) {
+        var cartProduct:Product? = null
+        product?.id?.let {
+            cartProduct  = productsRepository.getProductFromCart(it)
+        }
 
         withContext(Dispatchers.Main) {
             when (cartProduct) {
@@ -65,7 +68,7 @@ class ScanViewModel(application: Application, val productsRepository: ProductsRe
         }
     }
 
-    suspend fun addProduct(product: Product) {
+    suspend fun addProductToCart(product: Product) {
         val response = productsRepository.addProductToCart(product)
 
         withContext(Dispatchers.Main) {
