@@ -70,7 +70,7 @@
     </style>
 
     <style name="NavigationBar">
-        <item name="android:background">@color/transparent_black</item>
+        <item name="android:background">@color/black</item>
         <item name="itemTextColor">@drawable/navigation_view_colored</item>
         <item name="itemIconTint">@drawable/navigation_view_colored</item>
     </style>
