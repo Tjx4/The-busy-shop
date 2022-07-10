@@ -22,10 +22,10 @@
             android:src="@drawable/ic_placeholder"
             android:scaleType="centerCrop"
             app:riv_corner_radius="@dimen/product_image_courner_redius"
+            android:layout_marginTop="@dimen/large_spacing"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintRight_toRightOf="parent"/>
 
         <TextView
             android:visibility="@{!previewViewModel.showLoading}"
