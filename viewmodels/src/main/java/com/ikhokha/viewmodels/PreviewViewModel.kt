@@ -68,14 +68,14 @@ class PreviewViewModel(application: Application, val productsRepository: Product
     }
 
     suspend fun processProduct(product: Product) {
-        var cartProduct:Product? = null
+        var productAdded = false
         product?.id?.let {
-            cartProduct  = productsRepository.getProductFromCart(it)
+            productAdded  = productsRepository.isProductAddedToCart(it)
         }
 
         withContext(Dispatchers.Main) {
-            when (cartProduct) {
-                null -> _addProduct.value = product
+            when (productAdded) {
+                false -> _addProduct.value = product
                 else -> _incrementProduct.value = product
             }
         }

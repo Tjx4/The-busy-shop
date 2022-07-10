@@ -16,9 +16,7 @@
 
         <Button
             android:id="@+id/btnTestProd"
-            style="@style/HeadingTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/Scanner"
             android:textColor="@color/dark_text"
             android:text="BAN258"
             app:layout_constraintTop_toTopOf="parent"

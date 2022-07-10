@@ -59,10 +59,9 @@ class ProductsRepositoryImpl(val firebaseDatabase: FirebaseDatabase, val firebas
             product.id?.let {
                 val itemsTable = ItemsTable(it, product.description, product.image, product.price)
                 cartDB.itemsDAO.insert(itemsTable)
-                true
             }
+            true
 
-            false
         } catch (exception: Exception) {
             false
         }
@@ -73,17 +72,21 @@ class ProductsRepositoryImpl(val firebaseDatabase: FirebaseDatabase, val firebas
             cartDB.itemsDAO.get(productId)?.let { itemsTable ->
                 itemsTable?.quantity = itemsTable.quantity + 1
                 cartDB.itemsDAO.update(itemsTable)
-                true
             }
+            true
 
-            false
         } catch (exception: Exception) {
             false
         }
     }
 
-    override suspend fun getProductFromCart(productId: String): Product? {
-        TODO("Not yet implemented")
+    override suspend fun isProductAddedToCart(productId: String): Boolean {
+        return try {
+            val itemsTable = cartDB.itemsDAO.get(productId)
+            itemsTable != null
+        } catch (exception: Exception) {
+            false
+        }
     }
 
     class FValueEventListener(

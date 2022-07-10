@@ -207,4 +207,10 @@
         <item name="cpb_stroke_width">2dp</item>
         <item name="cpb_sweep_speed">1.0</item>
     </style>
+
+    <style name="Scanner">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">100dp</item>
+        <item name="android:layout_margin">@dimen/xlarge_spacing</item>
+    </style>
 </resources>
