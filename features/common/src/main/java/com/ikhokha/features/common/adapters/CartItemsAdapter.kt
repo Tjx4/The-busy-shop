@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.ikhokha.common.models.Product
@@ -29,7 +30,7 @@ class CartItemsAdapter(private val context: Context, private val products: List<
     inner class ViewHolder internal constructor(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
         internal var tvDescription: TextView = itemView.findViewById(R.id.tvDescription)
-        internal var imgBtnDelete: TextView = itemView.findViewById(R.id.imgBtnDelete)
+        internal var imgBtnDelete: ImageButton = itemView.findViewById(R.id.imgBtnDelete)
 
         init {
             itemView.setOnClickListener(this)
