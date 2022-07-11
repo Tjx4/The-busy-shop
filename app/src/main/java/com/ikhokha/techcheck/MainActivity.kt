@@ -57,6 +57,10 @@ class MainActivity : AppCompatActivity(), MyDrawerController {
         navController.popBackStack()
     }
 
+    override fun topNavBackClicked() {
+        onBackPressed()
+    }
+
     override fun exitApp() {
         finish()
     }

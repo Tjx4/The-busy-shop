@@ -12,6 +12,7 @@ interface MyDrawerController {
     fun onBackNav()
     fun popAll()
     fun popBack()
+    fun topNavBackClicked()
     fun exitApp()
     fun showBadge(value: String)
     fun removeBadge()
