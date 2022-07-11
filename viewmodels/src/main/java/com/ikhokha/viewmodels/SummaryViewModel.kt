@@ -60,7 +60,7 @@ class SummaryViewModel(application: Application, val productsRepository: Product
     }
 
     fun setOrderDate()  {
-        _orderDateAndTime.value = "Order date: ${getCurrentDateAndTime()}"
+        _orderDateAndTime.value = app.getString(com.ikhokha.common.R.string.order_date, getCurrentDateAndTime())
     }
 
 }
