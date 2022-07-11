@@ -3,6 +3,7 @@ package com.ikhokha.viewmodels
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.ikhokha.common.helpers.getCurrentDateAndTime
 import com.ikhokha.common.helpers.getTotalPrice
 import com.ikhokha.common.models.Product
 import com.ikhokha.repositories.products.ProductsRepository
@@ -28,6 +29,10 @@ class SummaryViewModel(application: Application, val productsRepository: Product
     val grandTotal: MutableLiveData<Double>
         get() = _grandTotal
 
+    private var _orderDateAndTime: MutableLiveData<String> = MutableLiveData()
+    val orderDateAndTime: MutableLiveData<String>
+        get() = _orderDateAndTime
+
     init {
         _showLoading.value = true
         viewModelScope.launch(Dispatchers.IO) {
@@ -52,6 +57,10 @@ class SummaryViewModel(application: Application, val productsRepository: Product
             grandTotal += getTotalPrice(it.price, it.quantity)
         }
         _grandTotal.value = grandTotal
+    }
+
+    fun setOrderDate()  {
+        _orderDateAndTime.value = "Order date: ${getCurrentDateAndTime()}"
     }
 
 }

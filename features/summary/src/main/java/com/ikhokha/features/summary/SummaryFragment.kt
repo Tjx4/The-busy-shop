@@ -68,6 +68,7 @@ class SummaryFragment : SubNavigationFragment(), CartItemsAdapter.ProductListene
         rvCartItems.runWhenReady {
             summaryViewModel.showLoading.value = false
             summaryViewModel.setGrandTotalPrice()
+            summaryViewModel.setOrderDate()
         }
     }
 
