@@ -19,7 +19,7 @@
             android:id="@+id/btnTestProd"
             style="@style/Scanner"
             android:textColor="@color/dark_text"
-            android:text="ORN750"
+            android:text="WML999"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
