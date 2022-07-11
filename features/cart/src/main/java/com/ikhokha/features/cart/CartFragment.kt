@@ -72,13 +72,6 @@ class CartFragment : TopNavigationFragment(), CartItemsAdapter.ProductListener {
                     cartViewModel.getViewModelScope().launch(Dispatchers.IO) {
                         cartViewModel.clearItems()
                     }
-                },
-                {
-                    Toast.makeText(
-                        requireContext(),
-                        "You are not sure",
-                        Toast.LENGTH_SHORT
-                    ).show()
                 }
             )
 
