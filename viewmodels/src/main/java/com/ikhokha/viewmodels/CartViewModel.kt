@@ -2,13 +2,19 @@ package com.ikhokha.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.ikhokha.common.models.Product
 import com.ikhokha.repositories.products.ProductsRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class CartViewModel(application: Application, val productsRepository: ProductsRepository) :
     BaseViewModel(application) {
+
+    private val _showLoading: MutableLiveData<Boolean> = MutableLiveData()
+    val showLoading: MutableLiveData<Boolean>
+        get() = _showLoading
 
     private var _products: MutableLiveData<List<Product>> = MutableLiveData()
     val products: MutableLiveData<List<Product>>
@@ -26,6 +32,13 @@ class CartViewModel(application: Application, val productsRepository: ProductsRe
     val productDeleteError: MutableLiveData<String>
         get() = _productDeleteError
 
+    init {
+        _showLoading.value = true
+        viewModelScope.launch(Dispatchers.IO) {
+            getProducts()
+        }
+    }
+
     suspend fun getProducts() {
         val products = productsRepository.getCartProducts()
 
@@ -37,8 +50,8 @@ class CartViewModel(application: Application, val productsRepository: ProductsRe
         }
     }
 
-    suspend fun deleteProduct(productId: String, position: Int) {
-        val response = productsRepository.removeProductFromCart(productId)
+    suspend fun deleteProduct(productId: String?, position: Int) {
+        val response = productId?.let { productsRepository.removeProductFromCart(it) }
 
         withContext(Dispatchers.Main) {
             when (response) {

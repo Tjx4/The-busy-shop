@@ -7,6 +7,7 @@ buildscript {
     ext.viewmodels = ":viewmodels"
     ext.repos = ":repositories"
     ext.splash = ":features:splash"
+    ext.ui_common = ":features:common"
     ext.preview = ":features:preview"
     ext.cart = ":features:cart"
     ext.scan = ":features:scan"

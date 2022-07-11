@@ -16,5 +16,7 @@ data class Product(
     @PropertyName("image") @SerializedName("image")
     var image: String? = null,
     @PropertyName("price") @SerializedName("price")
-    var price: Double = 0.0
+    var price: Double = 0.0,
+    @Exclude
+    var quantity: Int = 1
 ) : Parcelable

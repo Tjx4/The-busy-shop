@@ -15,6 +15,7 @@
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/features" />
             <option value="$PROJECT_DIR$/features/cart" />
+            <option value="$PROJECT_DIR$/features/common" />
             <option value="$PROJECT_DIR$/features/preview" />
             <option value="$PROJECT_DIR$/features/scan" />
             <option value="$PROJECT_DIR$/features/splash" />

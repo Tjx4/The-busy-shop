@@ -4,17 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.ikhokha.common.base.fragment.TopNavigationFragment
 import com.ikhokha.common.models.Product
 import com.ikhokha.features.cart.databinding.FragmentCartBinding
+import com.ikhokha.features.common.adapters.CartItemsAdapter
 import com.ikhokha.viewmodels.CartViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class CartFragment : TopNavigationFragment() {
+class CartFragment : TopNavigationFragment(), CartItemsAdapter.ProductListener {
     private lateinit var binding: FragmentCartBinding
     private val cartViewModel: CartViewModel by viewModel()
-   // private lateinit var cartItemsAdapter: CartItemsAdapter
+    private lateinit var cartItemsAdapter: CartItemsAdapter
 
     override fun onStart() {
         super.onStart()
@@ -42,7 +44,7 @@ class CartFragment : TopNavigationFragment() {
     }
 
     private fun onProductsSet(product: List<Product>) {
-
+        cartViewModel.showLoading.value = false
     }
 
     private fun onProductsError(errorMessage: String) {
@@ -55,5 +57,17 @@ class CartFragment : TopNavigationFragment() {
 
     private fun onProductDeleteError(errorMessage: String) {
 
+    }
+
+    override fun onProductClicked(product: Product, position: Int) {
+        Toast.makeText(
+            requireContext(),
+            "incremented",
+            Toast.LENGTH_SHORT
+        ).show()
+    }
+
+    override fun onDeleteProductClicked(product: Product, position: Int) {
+        cartViewModel.deleteProduct(product.id, position)
     }
 }

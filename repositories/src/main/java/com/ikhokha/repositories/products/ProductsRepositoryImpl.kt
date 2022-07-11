@@ -45,8 +45,17 @@ class ProductsRepositoryImpl(val firebaseDatabase: FirebaseDatabase, val firebas
     }
 
     override suspend fun getCartProducts(): List<Product>? {
-        TODO("Not yet implemented")
-        //cartDB
+        return try {
+            val products = ArrayList<Product>()
+            cartDB.itemsDAO.getAllItems()?.forEach {
+                products.add(Product(it.id, it.description, it.image, it.price, it.quantity))
+            }
+
+            products
+
+        } catch (exception: Exception) {
+            null
+        }
     }
 
     override suspend fun removeProductFromCart(productId: String): Boolean {

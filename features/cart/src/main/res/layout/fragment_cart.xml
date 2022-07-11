@@ -15,10 +15,21 @@
         tools:context=".CartFragment"
         android:background="@color/light_background">
 
-        <TextView
-            style="@style/HeadingTextView"
-            android:textColor="@color/dark_text"
-            android:text="Cart"
+        <androidx.recyclerview.widget.RecyclerView
+            android:visibility="@{!cartViewModel.showLoading}"
+            android:id="@+id/rvCartItems"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:clipToPadding="false"
+            android:paddingBottom="?attr/actionBarSize"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <fr.castorflex.android.circularprogressbar.CircularProgressBar
+            android:visibility="@{cartViewModel.showLoading}"
+            style="@style/CircularProgressBarTheme"
+            android:id="@+id/cpLoader"
+            android:layout_gravity="center"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"

@@ -47,5 +47,6 @@ dependencies {
 
     //Modules
     implementation project("$common")
+    implementation project("$ui_common")
     implementation project("$viewmodels")
 }
