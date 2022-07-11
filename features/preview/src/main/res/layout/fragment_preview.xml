@@ -24,6 +24,20 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"/>
 
+        <TextView
+            android:id="@+id/tvDescription"
+            android:visibility="@{!previewViewModel.showLoading}"
+            style="@style/SubHeadingTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{previewViewModel.product.description}"
+            tools:text="Name"
+            android:layout_marginRight="@dimen/xlarge_spacing"
+            app:layout_constraintTop_toTopOf="@+id/btnBack"
+            app:layout_constraintBottom_toBottomOf="@+id/btnBack"
+            app:layout_constraintLeft_toRightOf="@+id/btnBack"
+            app:layout_constraintRight_toRightOf="parent"/>
+
         <com.makeramen.roundedimageview.RoundedImageView
             android:visibility="@{!previewViewModel.showLoading}"
             android:id="@+id/imgProduct"
@@ -37,18 +51,6 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"/>
 
-        <TextView
-            android:visibility="@{!previewViewModel.showLoading}"
-            style="@style/NormalTextView"
-            android:id="@+id/tvDescription"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{previewViewModel.product.description}"
-            tools:text="Name"
-            android:layout_marginTop="@dimen/small_spacing"
-            app:layout_constraintTop_toBottomOf="@+id/imgProduct"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"/>
 
         <Button
             style="@style/BlackRoundedButton"
@@ -58,7 +60,7 @@
             android:layout_height="wrap_content"
             android:text="@string/add_to_cart"
             android:layout_marginTop="@dimen/small_spacing"
-            app:layout_constraintTop_toBottomOf="@+id/tvDescription"
+            app:layout_constraintTop_toBottomOf="@+id/imgProduct"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"/>
 

@@ -24,6 +24,17 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"/>
 
+        <TextView
+            style="@style/SubHeadingTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cart"
+            android:layout_marginRight="@dimen/xlarge_spacing"
+            app:layout_constraintTop_toTopOf="@+id/btnBack"
+            app:layout_constraintBottom_toBottomOf="@+id/btnBack"
+            app:layout_constraintLeft_toRightOf="@+id/btnBack"
+            app:layout_constraintRight_toRightOf="parent"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:visibility="@{!cartViewModel.showLoading}"
             android:id="@+id/rvCartItems"
