@@ -13,9 +13,9 @@ data class ItemsTable(
     @ColumnInfo(name = "id")
     var id: String,
     @ColumnInfo(name = "description")
-    var description: String?,
+    var description: String? = null,
     @ColumnInfo(name = "image")
-    var image: String?,
+    var image: String? = null,
     @ColumnInfo(name = "price")
     var price: Double = 0.0,
     @ColumnInfo(name = "quantity")

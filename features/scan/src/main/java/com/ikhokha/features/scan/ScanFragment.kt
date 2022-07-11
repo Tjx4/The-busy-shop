@@ -24,7 +24,8 @@ class ScanFragment : TopNavigationFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-       // scanViewModel.product.observe(this) { onProductSet(it) }
+        scanViewModel.cartItemCount.observe(this) { onCartItemsSet(it) }
+        scanViewModel.noCartItems.observe(this) { onNoCartItems() }
     }
 
     override fun onCreateView(
@@ -41,14 +42,29 @@ class ScanFragment : TopNavigationFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        //Todo: fix viewModelScope
+        scanViewModel.getViewModelScope().launch(Dispatchers.IO) {
+            scanViewModel.checkCartItems()
+        }
+
         btnTestProd.setOnClickListener {
             val productId = btnTestProd.text.toString()
             onProductSet(productId)
         }
+
     }
 
     fun onProductSet(productId: String) {
         drawerController.navigateFromPreviewnerToPreview(productId)
+    }
+
+    fun onCartItemsSet(cartItemCount: Int) {
+        drawerController.showBadge("$cartItemCount")
+    }
+
+    fun onNoCartItems() {
+        drawerController.removeBadge()
     }
 
 }

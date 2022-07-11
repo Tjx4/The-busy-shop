@@ -68,7 +68,7 @@ class CartFragment : TopNavigationFragment(), CartItemsAdapter.ProductListener {
     }
 
     private fun onProductDeleted(position: Int) {
-
+        cartItemsAdapter.notifyItemRemoved(position)
     }
 
     private fun onProductDeleteError(errorMessage: String) {
@@ -86,7 +86,7 @@ class CartFragment : TopNavigationFragment(), CartItemsAdapter.ProductListener {
     override fun onDeleteProductClicked(product: Product, position: Int) {
         //Todo: fix viewModelScope
         cartViewModel.getViewModelScope().launch(Dispatchers.IO) {
-            cartViewModel.deleteProduct(product.id, position)
+            cartViewModel.deleteProduct(product, position)
         }
     }
 }

@@ -13,6 +13,8 @@ interface MyDrawerController {
     fun popAll()
     fun popBack()
     fun exitApp()
+    fun showBadge(value: String)
+    fun removeBadge()
     fun showBottomNav()
     fun hideBottomNav()
     //navigation

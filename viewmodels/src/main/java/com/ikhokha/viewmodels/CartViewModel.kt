@@ -40,7 +40,7 @@ class CartViewModel(application: Application, val productsRepository: ProductsRe
     }
 
     suspend fun getProducts() {
-        val products = productsRepository.getCartProducts()
+        val products = productsRepository.getCartItems()
 
         withContext(Dispatchers.Main) {
             when (products.isNullOrEmpty()) {
@@ -50,9 +50,8 @@ class CartViewModel(application: Application, val productsRepository: ProductsRe
         }
     }
 
-    suspend fun deleteProduct(productId: String?, position: Int) {
-        //Todo: rethink
-        val response = productId?.let { productsRepository.removeProductFromCart(it) }
+    suspend fun deleteProduct(product: Product, position: Int) {
+        val response = productsRepository.removeProductFromCart(product)
 
         withContext(Dispatchers.Main) {
             when (response) {

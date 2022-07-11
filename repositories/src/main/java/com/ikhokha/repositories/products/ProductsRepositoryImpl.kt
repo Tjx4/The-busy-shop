@@ -44,7 +44,7 @@ class ProductsRepositoryImpl(val firebaseDatabase: FirebaseDatabase, val firebas
         return product
     }
 
-    override suspend fun getCartProducts(): List<Product>? {
+    override suspend fun getCartItems(): List<Product>? {
         return try {
             val products = ArrayList<Product>()
             cartDB.itemsDAO.getAllItems()?.forEach {
@@ -58,9 +58,25 @@ class ProductsRepositoryImpl(val firebaseDatabase: FirebaseDatabase, val firebas
         }
     }
 
-    override suspend fun removeProductFromCart(productId: String): Boolean {
-        TODO("Not yet implemented")
-        //cartDB
+    override suspend fun getCartItemCount(): Int {
+        return try {
+            cartDB.itemsDAO.getAllItems()?.count() ?: 0
+        } catch (exception: Exception) {
+            0
+        }
+    }
+
+    override suspend fun removeProductFromCart(product: Product): Boolean {
+        return try {
+            product.id?.let {
+                val itemsTable = ItemsTable(it)
+                cartDB.itemsDAO.delete(itemsTable)
+            }
+            true
+
+        } catch (exception: Exception) {
+            false
+        }
     }
 
     override suspend fun addProductToCart(product: Product): Boolean {

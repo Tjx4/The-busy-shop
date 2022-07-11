@@ -225,4 +225,16 @@
         <item name="android:layout_height">100dp</item>
         <item name="android:layout_margin">@dimen/xlarge_spacing</item>
     </style>
+
+    <style name="BadgeTextView" parent="SmallTextView">
+        <item name="android:layout_width">@dimen/badge_size</item>
+        <item name="android:layout_height">@dimen/badge_size</item>
+        <item name="android:textSize">@dimen/badge_text</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/light_text</item>
+        <item name="android:background">@drawable/badge_background</item>
+        <item name="android:layout_marginTop">@dimen/badge_top_margin</item>
+        <item name="android:layout_marginStart">@dimen/small_spacing</item>
+        <item name="android:padding">@dimen/badge_padding</item>
+    </style>
 </resources>

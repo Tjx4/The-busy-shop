@@ -5,9 +5,12 @@ import android.animation.AnimatorListenerAdapter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.KeyEvent
+import android.view.LayoutInflater
 import android.view.View
+import android.widget.TextView
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.ikhokha.common.base.fragment.TopNavigationFragment
 import com.google.firebase.FirebaseApp
 import com.ikhokha.common.base.fragment.BaseFragment
@@ -58,6 +61,26 @@ class MainActivity : AppCompatActivity(), MyDrawerController {
         finish()
     }
 
+    override fun showBadge(value: String) {
+        val itemId = R.id.cartFragment
+        removeBadge()
+        bnBottomNav?.findViewById<BottomNavigationItemView?>(itemId)?.let { itemView ->
+            val badge: View = LayoutInflater.from(this)
+                .inflate(com.ikhokha.features.common.R.layout.badge_layout, bnBottomNav, false)
+            val text: TextView = badge.findViewById(com.ikhokha.features.common.R.id.badge_text_view)
+            text.text = value
+            itemView.addView(badge)
+        }
+    }
+
+    override fun removeBadge() {
+        val itemId = R.id.cartFragment
+        bnBottomNav?.findViewById<BottomNavigationItemView?>(itemId)?.let { itemView ->
+            if (itemView.childCount == 3) {
+                itemView.removeViewAt(2)
+            }
+        }
+    }
 
     override fun showBottomNav() {
         bnBottomNav?.let {

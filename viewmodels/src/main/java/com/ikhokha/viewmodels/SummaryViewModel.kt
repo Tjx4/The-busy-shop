@@ -18,7 +18,7 @@ class SummaryViewModel(application: Application, val productsRepository: Product
         get() = _productsError
 
     suspend fun getCartProducts() {
-        val products = productsRepository.getCartProducts()
+        val products = productsRepository.getCartItems()
 
         withContext(Dispatchers.Main) {
             when (products.isNullOrEmpty()) {
