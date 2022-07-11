@@ -119,6 +119,18 @@
         <item name="android:scaleType">fitCenter</item>
     </style>
 
+    <style name="BlackRoundedButton" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="colorButtonNormal">@color/black</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/rounded_black_button</item>
+        <item name="android:textColor">@color/light_text</item>
+        <item name="android:paddingStart">18dp</item>
+        <item name="android:paddingEnd">18dp</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
     <style name="LabelButton" parent="SelectableItemBackground">
         <item name="android:textSize">@dimen/small_text</item>
         <item name="android:gravity">center</item>

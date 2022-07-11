@@ -12,7 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:animateLayoutChanges="true"
-        tools:context=".PreviewFragment">
+        tools:context=".PreviewFragment"
+        android:background="@color/light_background">
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:visibility="@{!previewViewModel.showLoading}"
@@ -41,11 +42,11 @@
             app:layout_constraintRight_toRightOf="parent"/>
 
         <Button
+            style="@style/BlackRoundedButton"
             android:visibility="@{!previewViewModel.showLoading}"
             android:id="@+id/btnAddToCart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/dark_text"
             android:text="@string/add_to_cart"
             android:layout_marginTop="@dimen/small_spacing"
             app:layout_constraintTop_toBottomOf="@+id/tvDescription"
@@ -53,11 +54,11 @@
             app:layout_constraintRight_toRightOf="parent"/>
 
         <Button
+            style="@style/BlackRoundedButton"
             android:visibility="@{!previewViewModel.showLoading}"
             android:id="@+id/btnScanAgain"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/dark_text"
             android:text="@string/scan_again"
             android:layout_marginTop="@dimen/small_spacing"
             app:layout_constraintTop_toBottomOf="@+id/btnAddToCart"
