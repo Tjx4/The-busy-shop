@@ -12,7 +12,27 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:animateLayoutChanges="true"
-        tools:context=".SummaryFragment">
+        tools:context=".SummaryFragment"
+        android:background="@color/light_background">
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btnBack"
+            style="@style/BackButton"
+            android:src="@drawable/ic_back"
+            android:layout_margin="@dimen/small_spacing"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <TextView
+            style="@style/SubHeadingTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/summary"
+            android:layout_marginRight="@dimen/xlarge_spacing"
+            app:layout_constraintTop_toTopOf="@+id/btnBack"
+            app:layout_constraintBottom_toBottomOf="@+id/btnBack"
+            app:layout_constraintLeft_toRightOf="@+id/btnBack"
+            app:layout_constraintRight_toRightOf="parent"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

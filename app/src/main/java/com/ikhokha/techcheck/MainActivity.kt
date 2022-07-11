@@ -17,6 +17,7 @@ import com.ikhokha.common.base.fragment.BaseFragment
 import com.ikhokha.common.extensions.setupWithCustomAnimNavController
 import com.ikhokha.common.interfaces.MyDrawerController
 import com.ikhokha.common.models.NavMenuItem
+import com.ikhokha.features.cart.CartFragmentDirections
 import com.ikhokha.features.scan.ScanFragmentDirections
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -137,7 +138,8 @@ class MainActivity : AppCompatActivity(), MyDrawerController {
     }
 
     override fun navigateFromCartToSummary() {
-        TODO("Not yet implemented")
+        val action = CartFragmentDirections.actionCartFragmentToSummaryFragment()
+        navController.navigate(action)
     }
 
     override fun onBackPressed() {

@@ -31,12 +31,22 @@
     <fragment
         android:id="@+id/cartFragment"
         android:name="com.ikhokha.features.cart.CartFragment"
-        android:label="CartFragment" />
+        android:label="CartFragment" >
+        <action
+            android:id="@+id/action_cartFragment_to_summaryFragment"
+            app:destination="@id/summaryFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/no_transition"
+            app:popEnterAnim="@anim/no_transition"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpToInclusive="true"/>
+    </fragment>
 
     <fragment
         android:id="@+id/summaryFragment"
         android:name="com.ikhokha.features.summary.SummaryFragment"
         android:label="SummaryFragment" />
+
     <fragment
         android:id="@+id/previewFragment"
         android:name="com.ikhokha.features.preview.PreviewFragment"

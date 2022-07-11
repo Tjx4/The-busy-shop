@@ -9,4 +9,5 @@
     <string name="clear_error" >Error clearing cart</string>
     <string name="checkout">Checkout</string>
     <string name="clear">Clear</string>
+    <string name="summary">Summary</string>
 </resources>

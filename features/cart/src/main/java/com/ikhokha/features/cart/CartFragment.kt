@@ -47,6 +47,11 @@ class CartFragment : TopNavigationFragment(), CartItemsAdapter.ProductListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        cartViewModel.products.value?.let {
+          // Show content
+        }
+
         btnBack.setOnClickListener {
             onBackPressed()
         }
