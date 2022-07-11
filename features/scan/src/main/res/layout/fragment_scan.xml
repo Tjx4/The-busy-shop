@@ -14,14 +14,14 @@
         android:animateLayoutChanges="true"
         tools:context=".ScanFragment"
         android:background="@color/light_background">
-        <!-- ORN750 WML999 COC378 BAN258-->
+        <!--PER478 ORN750 WML999 COC378 BAN258 SBR101 GPF208 APL883-->
 
         <Button
             android:visibility="@{!scanViewModel.showLoading}"
             android:id="@+id/btnTestProd"
             style="@style/Scanner"
             android:textColor="@color/dark_text"
-            android:text="COC378"
+            android:text="PER478"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
