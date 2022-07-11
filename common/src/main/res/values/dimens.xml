@@ -111,4 +111,5 @@
     <dimen name="try_this_synopsis_margin_top">2dp</dimen>
     <dimen name="product_image_size">200dp</dimen>
     <dimen name="product_image_courner_redius">100dp</dimen>
+    <dimen name="price_width">60dp</dimen>
 </resources>

@@ -40,8 +40,6 @@
             android:id="@+id/rvCartItems"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:clipToPadding="false"
-            android:paddingBottom="?attr/actionBarSize"
             android:layout_marginVertical="@dimen/small_spacing"
             app:layout_constraintBottom_toTopOf="@+id/btnClear"
             app:layout_constraintTop_toBottomOf="@+id/btnBack" />

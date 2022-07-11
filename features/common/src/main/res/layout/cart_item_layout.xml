@@ -33,10 +33,9 @@
         app:layout_constraintBottom_toBottomOf="@id/tvDescription"/>
 
     <TextView
-        style="@style/NormalTextView"
-        android:layout_width="wrap_content"
+        style="@style/PriceTextView"
         android:id="@+id/tvPrice"
-        tools:text="R0.00"
+        tools:text="@string/placeholder_price"
         android:layout_marginVertical="@dimen/xxsmall_spacing"
         android:layout_marginRight="@dimen/small_spacing"
         app:layout_constraintTop_toTopOf="@id/tvDescription"

@@ -37,12 +37,24 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvCartItems"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:clipToPadding="false"
-            android:paddingBottom="?attr/actionBarSize"
+            android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/small_spacing"
-            app:layout_constraintBottom_toTopOf="@+id/btnProceed"
             app:layout_constraintTop_toBottomOf="@+id/btnBack" />
+
+        <TextView
+            android:id="@+id/tvTotalPrice"
+            style="@style/NormalTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="@string/placeholder_price"
+            android:text="@string/placeholder_price"
+            android:layout_marginRight="@dimen/small_spacing"
+            app:layout_constraintVertical_bias="0"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintTop_toBottomOf="@+id/rvCartItems"
+            app:layout_constraintBottom_toTopOf="@+id/btnProceed"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
 
         <Button
             style="@style/BlackRoundedButton"

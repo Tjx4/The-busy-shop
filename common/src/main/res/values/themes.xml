@@ -241,4 +241,9 @@
         <item name="android:layout_marginStart">@dimen/small_spacing</item>
         <item name="android:padding">@dimen/badge_padding</item>
     </style>
+
+    <style name="PriceTextView" parent="BaseTextView">
+        <item name="android:layout_width">@dimen/price_width</item>
+        <item name="android:gravity">end</item>
+    </style>
 </resources>
