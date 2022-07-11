@@ -4,4 +4,6 @@
     <string name="cart">Cart</string>
     <string name="scan_again">Scan again</string>
     <string name="add_to_cart">Add to cart</string>
+    <string name="no_items">No items found</string>
+    <string name="delete_error" />
 </resources>

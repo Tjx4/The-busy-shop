@@ -14,7 +14,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class CartFragment : TopNavigationFragment() {
     private lateinit var binding: FragmentCartBinding
     private val cartViewModel: CartViewModel by viewModel()
-   // private lateinit var productsAdapter: ProductsAdapter
+   // private lateinit var cartItemsAdapter: CartItemsAdapter
 
     override fun onStart() {
         super.onStart()
@@ -26,6 +26,7 @@ class CartFragment : TopNavigationFragment() {
         cartViewModel.products.observe(this) { onProductsSet(it) }
         cartViewModel.productsError.observe(this) { onProductsError(it) }
         cartViewModel.deletedPosition.observe(this) { onProductDeleted(it) }
+        cartViewModel.productDeleteError.observe(this) { onProductDeleteError(it) }
     }
 
     override fun onCreateView(
@@ -49,6 +50,10 @@ class CartFragment : TopNavigationFragment() {
     }
 
     private fun onProductDeleted(position: Int) {
+
+    }
+
+    private fun onProductDeleteError(errorMessage: String) {
 
     }
 }

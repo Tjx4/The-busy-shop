@@ -31,7 +31,7 @@ class CartViewModel(application: Application, val productsRepository: ProductsRe
 
         withContext(Dispatchers.Main) {
             when (products.isNullOrEmpty()) {
-                true -> _productsError.value = "No items found"
+                true -> _productsError.value = app.getString(com.ikhokha.common.R.string.no_items)
                 else -> _products.value = products
             }
         }
@@ -42,7 +42,7 @@ class CartViewModel(application: Application, val productsRepository: ProductsRe
 
         withContext(Dispatchers.Main) {
             when (response) {
-                false -> _productDeleteError.value = "Error deleting product"
+                false -> _productDeleteError.value = app.getString(com.ikhokha.common.R.string.delete_error)
                 else -> _deletedPosition.value = position
             }
         }
