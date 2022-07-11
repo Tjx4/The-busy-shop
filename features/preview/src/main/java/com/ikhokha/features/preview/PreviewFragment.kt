@@ -29,12 +29,8 @@ class PreviewFragment : SubNavigationFragment() {
         //previewViewModel.showLoading.observe(this) { showLoading() }
         previewViewModel.product.observe(this) { onProductSet(it) }
         previewViewModel.productError.observe(this) { onProductError(it) }
-        previewViewModel.addProduct.observe(this) { onNewProduct(it) }
-        previewViewModel.incrementProduct.observe(this) { onProductExist(it) }
         previewViewModel.productAdded.observe(this) { onProductAdded(it) }
         previewViewModel.addProductError.observe(this) { onProductAddError(it) }
-        previewViewModel.incrementedProduct.observe(this) { onProductIncremenrted() }
-        previewViewModel.incrementProductError.observe(this) { onProductIncrementError(it) }
     }
 
     override fun onCreateView(
@@ -66,7 +62,7 @@ class PreviewFragment : SubNavigationFragment() {
         btnAddToCart.setOnClickListener {
             //Todo: fix viewModelScope
             previewViewModel.getViewModelScope().launch(Dispatchers.IO) {
-                previewViewModel.product.value?.let { it1 -> previewViewModel.processProduct(it1) }
+                previewViewModel.addProductToCart()
             }
         }
 
@@ -107,20 +103,6 @@ class PreviewFragment : SubNavigationFragment() {
         )
     }
 
-    fun onNewProduct(product: Product) {
-        //Todo: fix viewModelScope
-        previewViewModel.getViewModelScope().launch(Dispatchers.IO) {
-            previewViewModel.addProductToCart(product)
-        }
-    }
-
-    fun onProductExist(product: Product) {
-        //Todo: fix viewModelScope
-        previewViewModel.getViewModelScope().launch(Dispatchers.IO) {
-            previewViewModel.incrementProduct(product)
-        }
-    }
-
     fun onProductAdded(product: Product) {
         showSuccessDialog(
             requireContext(),
@@ -141,23 +123,5 @@ class PreviewFragment : SubNavigationFragment() {
         )
     }
 
-    fun onProductIncremenrted() {
-        Toast.makeText(
-            requireContext(),
-            "incremented",
-            Toast.LENGTH_SHORT
-        ).show()
-
-        onBackPressed()
-    }
-
-    private fun onProductIncrementError(errorMessage: String) {
-        showErrorDialog(
-            requireContext(),
-            getString(com.ikhokha.common.R.string.error),
-            errorMessage,
-            getString(com.ikhokha.common.R.string.close)
-        )
-    }
 
 }

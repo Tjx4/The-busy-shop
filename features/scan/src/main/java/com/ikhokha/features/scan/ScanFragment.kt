@@ -4,8 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.ikhokha.common.base.fragment.TopNavigationFragment
+import com.ikhokha.common.helpers.showErrorDialog
+import com.ikhokha.common.models.Product
 import com.ikhokha.features.scan.databinding.FragmentScanBinding
 import com.ikhokha.viewmodels.ScanViewModel
 import kotlinx.android.synthetic.main.fragment_scan.*
@@ -24,8 +27,12 @@ class ScanFragment : TopNavigationFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        scanViewModel.addProduct.observe(this) { onNewProduct(it) }
+        scanViewModel.incrementProduct.observe(this) { onProductExist(it) }
         scanViewModel.cartItemCount.observe(this) { onCartItemsSet(it) }
         scanViewModel.noCartItems.observe(this) { onNoCartItems() }
+        scanViewModel.incrementedProduct.observe(this) { onProductIncremented(it) }
+        scanViewModel.incrementProductError.observe(this) { onProductIncrementError(it) }
     }
 
     override fun onCreateView(
@@ -48,14 +55,45 @@ class ScanFragment : TopNavigationFragment() {
         }
 
         btnTestProd.setOnClickListener {
-            val productId = btnTestProd.text.toString()
-            onProductSet(productId)
+            //Todo: fix viewModelScope
+            scanViewModel.getViewModelScope().launch(Dispatchers.IO) {
+                val productId = btnTestProd.text.toString()
+                scanViewModel.processProduct(productId)
+            }
         }
-
     }
 
-    fun onProductSet(productId: String) {
+    fun onNewProduct(productId: String) {
         drawerController.navigateFromScannerToPreview(productId)
+    }
+
+    fun onProductExist(productId: String) {
+        //Todo: fix viewModelScope
+        scanViewModel.getViewModelScope().launch(Dispatchers.IO) {
+            scanViewModel.incrementProduct(productId)
+        }
+    }
+
+    fun onProductIncremented(product: Product) {
+        Toast.makeText(
+            requireContext(),
+            getString(com.ikhokha.common.R.string.product_incremented, product.description),
+            Toast.LENGTH_SHORT
+        ).show()
+
+        //Todo: fix viewModelScope
+        scanViewModel.getViewModelScope().launch(Dispatchers.IO) {
+            scanViewModel.checkCartItems()
+        }
+    }
+
+    private fun onProductIncrementError(errorMessage: String) {
+        showErrorDialog(
+            requireContext(),
+            getString(com.ikhokha.common.R.string.error),
+            errorMessage,
+            getString(com.ikhokha.common.R.string.close)
+        )
     }
 
     fun onCartItemsSet(cartItemCount: Int) {
