@@ -83,7 +83,11 @@ class PreviewFragment : SubNavigationFragment() {
             val imageRef = firebaseStorageRef.child(it)
             imageRef.downloadUrl.addOnSuccessListener {
                 val imageURL = it.toString()
-                imgProduct?.loadImageFromUrl(requireContext(), imageURL, com.ikhokha.common.R.drawable.ic_placeholder)
+                imgProduct?.loadImageFromUrl(requireContext(), imageURL, com.ikhokha.common.R.drawable.ic_placeholder, {
+                    val dfd = it //Todo remove
+                }, {
+                    val dfd = it //Todo remove
+                })
             }
             imageRef.downloadUrl.addOnFailureListener {
                 val dfd = it //Todo remove
