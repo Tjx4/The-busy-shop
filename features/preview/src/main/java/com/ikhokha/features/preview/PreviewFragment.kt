@@ -121,7 +121,7 @@ class PreviewFragment : SubNavigationFragment() {
             Toast.LENGTH_SHORT
         ).show()
 
-        drawerController.popBack()
+        drawerController.navigateFromPreviewToCart()
     }
 
     private fun onProductAddError(errorMessage: String) {
@@ -135,7 +135,7 @@ class PreviewFragment : SubNavigationFragment() {
             Toast.LENGTH_SHORT
         ).show()
 
-        drawerController.popBack()
+        drawerController.navigateFromPreviewToCart()
     }
 
     private fun onProductIncrementError(errorMessage: String) {

@@ -126,9 +126,14 @@ class MainActivity : AppCompatActivity(), MyDrawerController {
         }
     }
 
-    override fun navigateFromPreviewnerToPreview(productId: String) {
+    override fun navigateFromScannerToPreview(productId: String) {
         val action = ScanFragmentDirections.actionScanFragmentToPreviewFragment(productId)
         navController.navigate(action)
+    }
+
+    //Todo: rethink
+    override fun navigateFromPreviewToCart() {
+        onBackPressed()
     }
 
     override fun onBackPressed() {
