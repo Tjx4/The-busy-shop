@@ -51,6 +51,7 @@ class CartViewModel(application: Application, val productsRepository: ProductsRe
     }
 
     suspend fun deleteProduct(productId: String?, position: Int) {
+        //Todo: rethink
         val response = productId?.let { productsRepository.removeProductFromCart(it) }
 
         withContext(Dispatchers.Main) {

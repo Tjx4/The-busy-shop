@@ -6,11 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.ikhokha.common.base.fragment.TopNavigationFragment
+import com.ikhokha.common.extensions.runWhenReady
 import com.ikhokha.common.models.Product
 import com.ikhokha.features.cart.databinding.FragmentCartBinding
 import com.ikhokha.features.common.adapters.CartItemsAdapter
 import com.ikhokha.viewmodels.CartViewModel
+import kotlinx.android.synthetic.main.fragment_cart.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CartFragment : TopNavigationFragment(), CartItemsAdapter.ProductListener {
@@ -43,8 +48,19 @@ class CartFragment : TopNavigationFragment(), CartItemsAdapter.ProductListener {
         return binding.root
     }
 
-    private fun onProductsSet(product: List<Product>) {
-        cartViewModel.showLoading.value = false
+    private fun onProductsSet(products: List<Product>) {
+        val itemsLayoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+
+        itemsLayoutManager.initialPrefetchItemCount = products.size
+        rvCartItems?.layoutManager = itemsLayoutManager
+        cartItemsAdapter = CartItemsAdapter(requireContext(), products)
+        cartItemsAdapter?.addProductListener(this)
+        rvCartItems?.adapter = cartItemsAdapter
+
+        rvCartItems.runWhenReady {
+            cartViewModel.showLoading.value = false
+        }
     }
 
     private fun onProductsError(errorMessage: String) {
@@ -68,6 +84,9 @@ class CartFragment : TopNavigationFragment(), CartItemsAdapter.ProductListener {
     }
 
     override fun onDeleteProductClicked(product: Product, position: Int) {
-        cartViewModel.deleteProduct(product.id, position)
+        //Todo: fix viewModelScope
+        cartViewModel.getViewModelScope().launch(Dispatchers.IO) {
+            cartViewModel.deleteProduct(product.id, position)
+        }
     }
 }
