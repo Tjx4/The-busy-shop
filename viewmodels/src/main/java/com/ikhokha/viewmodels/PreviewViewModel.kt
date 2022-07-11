@@ -44,9 +44,10 @@ class PreviewViewModel(application: Application, val productsRepository: Product
 
     suspend fun isItemExist() {
         val productId = _product.value?.id ?: ""
+        val itemExist = productsRepository.isProductAddedToCart(productId)
 
         withContext(Dispatchers.Main) {
-            _itemExist.value = productsRepository.isProductAddedToCart(productId)
+            _itemExist.value = itemExist
         }
     }
 
