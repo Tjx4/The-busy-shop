@@ -64,4 +64,13 @@ class CartViewModel(application: Application, val productsRepository: ProductsRe
         }
     }
 
+    suspend fun checkCartItems() {
+        val itemCount = productsRepository.getCartItemCount()
+
+        withContext(Dispatchers.Main) {
+            if (itemCount < 1) {
+                _productsError.value = app.getString(com.ikhokha.common.R.string.no_items)
+            }
+        }
+    }
 }

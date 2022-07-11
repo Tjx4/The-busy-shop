@@ -45,7 +45,6 @@ class CartFragment : TopNavigationFragment(), CartItemsAdapter.ProductListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         btnBack.setOnClickListener {
             onBackPressed()
         }
@@ -72,6 +71,10 @@ class CartFragment : TopNavigationFragment(), CartItemsAdapter.ProductListener {
 
     private fun onProductDeleted(position: Int) {
         cartItemsAdapter.notifyItemRemoved(position)
+        //Todo: fix viewModelScope
+        cartViewModel.getViewModelScope().launch(Dispatchers.IO) {
+            cartViewModel.checkCartItems()
+        }
     }
 
     private fun onProductDeleteError(errorMessage: String) {
@@ -92,4 +95,5 @@ class CartFragment : TopNavigationFragment(), CartItemsAdapter.ProductListener {
             cartViewModel.deleteItem(product, position)
         }
     }
+
 }
