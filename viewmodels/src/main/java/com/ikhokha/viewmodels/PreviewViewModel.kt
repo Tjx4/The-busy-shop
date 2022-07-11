@@ -40,9 +40,6 @@ class PreviewViewModel(application: Application, val productsRepository: Product
 
     init {
         _showLoading.value = true
-        viewModelScope.launch(Dispatchers.IO) {
-            isItemExist()
-        }
     }
 
     suspend fun isItemExist() {

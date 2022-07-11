@@ -72,8 +72,12 @@ class PreviewFragment : SubNavigationFragment() {
 
     }
 
-    fun onProductSet(product: Product) {
+    private fun onProductSet(product: Product) {
         previewViewModel.showLoading.value = false
+        //Todo: fix viewModelScope
+        previewViewModel.getViewModelScope().launch(Dispatchers.IO) {
+            previewViewModel.isItemExist()
+        }
 
         //Todo: handle firebase storage
         product.image?.let {
@@ -94,7 +98,7 @@ class PreviewFragment : SubNavigationFragment() {
 
     }
 
-    fun onProductError(errorMessage: String) {
+    private fun onProductError(errorMessage: String) {
         showErrorDialog(
             requireContext(),
             getString(com.ikhokha.common.R.string.error),
@@ -103,7 +107,7 @@ class PreviewFragment : SubNavigationFragment() {
         )
     }
 
-    fun onProductAdded(product: Product) {
+    private fun onProductAdded(product: Product) {
         showSuccessDialog(
             requireContext(),
             getString(com.ikhokha.common.R.string.success),
