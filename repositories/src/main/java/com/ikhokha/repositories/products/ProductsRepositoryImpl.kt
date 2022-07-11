@@ -17,7 +17,11 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
-class ProductsRepositoryImpl(val firebaseDatabase: FirebaseDatabase, val firebaseStorage: FirebaseStorage, val cartDB: CartDB) :
+class ProductsRepositoryImpl(
+    val firebaseDatabase: FirebaseDatabase,
+    val firebaseStorage: FirebaseStorage,
+    val cartDB: CartDB
+) :
     ProductsRepository {
 
     override val firebaseStorageRef: StorageReference
@@ -66,12 +70,22 @@ class ProductsRepositoryImpl(val firebaseDatabase: FirebaseDatabase, val firebas
         }
     }
 
-    override suspend fun removeProductFromCart(product: Product): Boolean {
+    override suspend fun removeItemFromCart(product: Product): Boolean {
         return try {
             product.id?.let {
                 val itemsTable = ItemsTable(it)
                 cartDB.itemsDAO.delete(itemsTable)
             }
+            true
+
+        } catch (exception: Exception) {
+            false
+        }
+    }
+
+    override suspend fun clearCart(): Boolean {
+        return try {
+            cartDB.itemsDAO.clear()
             true
 
         } catch (exception: Exception) {

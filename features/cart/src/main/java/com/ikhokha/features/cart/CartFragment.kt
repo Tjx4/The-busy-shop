@@ -29,6 +29,8 @@ class CartFragment : TopNavigationFragment(), CartItemsAdapter.ProductListener {
         cartViewModel.productsError.observe(this) { onNoProducts(it) }
         cartViewModel.deletedPosition.observe(this) { onProductDeleted(it) }
         cartViewModel.productDeleteError.observe(this) { onProductDeleteError(it) }
+        cartViewModel.cartClear.observe(this) { onCartCleared() }
+        cartViewModel.clearError.observe(this) { onCartClearError(it) }
     }
 
     override fun onCreateView(
@@ -47,6 +49,13 @@ class CartFragment : TopNavigationFragment(), CartItemsAdapter.ProductListener {
         super.onViewCreated(view, savedInstanceState)
         btnBack.setOnClickListener {
             onBackPressed()
+        }
+
+        btnClear.setOnClickListener {
+            //Todo: fix viewModelScope
+            cartViewModel.getViewModelScope().launch(Dispatchers.IO) {
+                cartViewModel.clearItems()
+            }
         }
     }
 
@@ -78,7 +87,7 @@ class CartFragment : TopNavigationFragment(), CartItemsAdapter.ProductListener {
     }
 
     private fun onProductDeleteError(errorMessage: String) {
-
+        //Todo: show error alert
     }
 
     override fun onProductClicked(product: Product, position: Int) {
@@ -94,6 +103,17 @@ class CartFragment : TopNavigationFragment(), CartItemsAdapter.ProductListener {
         cartViewModel.getViewModelScope().launch(Dispatchers.IO) {
             cartViewModel.deleteItem(product, position)
         }
+    }
+
+    private fun onCartCleared() {
+        cartItemsAdapter.notifyDataSetChanged()
+        cartViewModel.getViewModelScope().launch(Dispatchers.IO) {
+            cartViewModel.checkCartItems()
+        }
+    }
+
+    private fun onCartClearError(errorMessage: String) {
+        //Todo: show error alert
     }
 
 }

@@ -32,6 +32,15 @@ class CartViewModel(application: Application, val productsRepository: ProductsRe
     val productDeleteError: MutableLiveData<String>
         get() = _productDeleteError
 
+    //Todo: rename
+    private val _cartClear: MutableLiveData<Boolean> = MutableLiveData()
+    val cartClear: MutableLiveData<Boolean>
+        get() = _cartClear
+
+    private var _clearError: MutableLiveData<String> = MutableLiveData()
+    val clearError: MutableLiveData<String>
+        get() = _clearError
+
     init {
         _showLoading.value = true
         viewModelScope.launch(Dispatchers.IO) {
@@ -51,7 +60,7 @@ class CartViewModel(application: Application, val productsRepository: ProductsRe
     }
 
     suspend fun deleteItem(product: Product, position: Int) {
-        val response = productsRepository.removeProductFromCart(product)
+        val response = productsRepository.removeItemFromCart(product)
 
         withContext(Dispatchers.Main) {
             when (response) {
@@ -59,6 +68,20 @@ class CartViewModel(application: Application, val productsRepository: ProductsRe
                 else ->  {
                     (_products.value as ArrayList).remove(product)
                     _deletedPosition.value = position
+                }
+            }
+        }
+    }
+
+    suspend fun clearItems() {
+        val response = productsRepository.clearCart()
+
+        withContext(Dispatchers.Main) {
+            when (response) {
+                false -> _clearError.value = app.getString(com.ikhokha.common.R.string.clear_error)
+                else ->  {
+                    (_products.value as ArrayList).clear()
+                    _cartClear.value = true
                 }
             }
         }
