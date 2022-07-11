@@ -12,7 +12,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:animateLayoutChanges="true"
-        tools:context=".CartFragment">
+        tools:context=".CartFragment"
+        android:background="@color/light_background">
+
+        <TextView
+            style="@style/HeadingTextView"
+            android:textColor="@color/dark_text"
+            android:text="Cart"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

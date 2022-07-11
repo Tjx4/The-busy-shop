@@ -57,6 +57,10 @@ class PreviewFragment : SubNavigationFragment() {
             }
         }
 
+        btnBack.setOnClickListener {
+            drawerController.popBack()
+        }
+
         btnAddToCart.setOnClickListener {
             //Todo: fix viewModelScope
             previewViewModel.getViewModelScope().launch(Dispatchers.IO) {

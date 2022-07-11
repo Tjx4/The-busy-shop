@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity(), MyDrawerController {
         navController = findNavController(R.id.navControllerFragment)
 
         setSupportActionBar(toolbar)
+        initBottomNavBar()
     }
 
     override fun initBottomNavBar() {

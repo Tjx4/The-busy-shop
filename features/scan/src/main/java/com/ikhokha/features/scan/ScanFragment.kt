@@ -17,6 +17,11 @@ class ScanFragment : TopNavigationFragment() {
     private lateinit var binding: FragmentScanBinding
     private val scanViewModel: ScanViewModel by viewModel()
 
+    override fun onStart() {
+        super.onStart()
+        drawerController.showBottomNav()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
        // scanViewModel.product.observe(this) { onProductSet(it) }

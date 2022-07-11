@@ -5,6 +5,6 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class NavMenuItem(
-    var fragment: Int,
-    var index: Int
+    var index: Int,
+    var fragment: Int
 ) : Parcelable

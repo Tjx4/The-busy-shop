@@ -137,7 +137,7 @@
         <item name="android:background">@android:color/transparent</item>
     </style>
 
-    <style name="BackButton">
+    <style name="BackButton" parent="SelectableItemBackground">
         <item name="android:background">@android:color/transparent</item>
         <item name="android:layout_width">40dp</item>
         <item name="android:layout_height">40dp</item>

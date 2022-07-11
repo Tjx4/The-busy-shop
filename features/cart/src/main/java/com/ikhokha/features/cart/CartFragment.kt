@@ -16,11 +16,16 @@ class CartFragment : TopNavigationFragment() {
     private val cartViewModel: CartViewModel by viewModel()
    // private lateinit var productsAdapter: ProductsAdapter
 
+    override fun onStart() {
+        super.onStart()
+        drawerController.showBottomNav()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         cartViewModel.products.observe(this) { onProductsSet(it) }
         cartViewModel.productsError.observe(this) { onProductsError(it) }
-        cartViewModel.deletedPosition.observe(this) { onProductsDeleted(it) }
+        cartViewModel.deletedPosition.observe(this) { onProductDeleted(it) }
     }
 
     override fun onCreateView(
@@ -43,7 +48,7 @@ class CartFragment : TopNavigationFragment() {
         //Show error dialog
     }
 
-    private fun onProductsDeleted(position: Int) {
+    private fun onProductDeleted(position: Int) {
 
     }
 }

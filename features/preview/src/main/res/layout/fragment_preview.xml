@@ -15,6 +15,14 @@
         tools:context=".PreviewFragment"
         android:background="@color/light_background">
 
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btnBack"
+            style="@style/BackButton"
+            android:src="@drawable/ic_back"
+            android:layout_margin="@dimen/medium_spacing"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
         <com.makeramen.roundedimageview.RoundedImageView
             android:visibility="@{!previewViewModel.showLoading}"
             android:id="@+id/imgProduct"
@@ -24,7 +32,7 @@
             android:scaleType="centerCrop"
             app:riv_corner_radius="@dimen/product_image_courner_redius"
             android:layout_marginTop="@dimen/large_spacing"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnBack"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"/>
 
