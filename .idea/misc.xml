@@ -12,6 +12,7 @@
         <entry key="features/cart/src/main/res/layout/fragment_cart.xml" value="0.265625" />
         <entry key="features/common/src/main/res/layout/badge_layout.xml" value="0.25833333333333336" />
         <entry key="features/common/src/main/res/layout/cart_item_layout.xml" value="0.20364583333333333" />
+        <entry key="features/common/src/main/res/layout/summary_item_layout.xml" value="0.25729166666666664" />
         <entry key="features/preview/src/main/res/layout/fragment_preview.xml" value="0.265625" />
         <entry key="features/scan/src/main/res/layout/fragment_scan.xml" value="0.20416666666666666" />
         <entry key="features/summary/src/main/res/layout/fragment_summary.xml" value="0.25052083333333336" />

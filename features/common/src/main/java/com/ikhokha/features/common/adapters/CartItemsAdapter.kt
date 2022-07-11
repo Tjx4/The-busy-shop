@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.ikhokha.common.helpers.getTotalPrice
 import com.ikhokha.common.models.Product
 import com.ikhokha.features.common.R
 
@@ -23,7 +24,7 @@ class CartItemsAdapter(private val context: Context, private val products: List<
         val product = products[position]
         holder.tvQuantity?.text = "${product.quantity}x"
         holder.tvDescription?.text = product.description
-        holder.tvPrice?.text = "R${product.price}"
+        holder.tvPrice?.text = "R${getTotalPrice(product.price, product.quantity)}"
         holder.imgBtnDelete?.setOnClickListener {
             productListener?.onDeleteProductClicked(product, position)
         }
@@ -31,10 +32,10 @@ class CartItemsAdapter(private val context: Context, private val products: List<
 
     inner class ViewHolder internal constructor(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
-        internal var tvQuantity: TextView = itemView.findViewById(R.id.tvQuantity)
-        internal var tvDescription: TextView = itemView.findViewById(R.id.tvDescription)
-        internal var tvPrice: TextView = itemView.findViewById(R.id.tvPrice)
-        internal var imgBtnDelete: ImageButton = itemView.findViewById(R.id.imgBtnDelete)
+        internal var tvQuantity: TextView? = itemView.findViewById(R.id.tvQuantity)
+        internal var tvDescription: TextView? = itemView.findViewById(R.id.tvDescription)
+        internal var tvPrice: TextView? = itemView.findViewById(R.id.tvPrice)
+        internal var imgBtnDelete: ImageButton? = itemView.findViewById(R.id.imgBtnDelete)
 
         init {
             itemView.setOnClickListener(this)
