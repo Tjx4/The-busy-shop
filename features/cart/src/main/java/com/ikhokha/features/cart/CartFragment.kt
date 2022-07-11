@@ -47,7 +47,7 @@ class CartFragment : TopNavigationFragment(), CartItemsAdapter.ProductListener {
         super.onViewCreated(view, savedInstanceState)
 
         btnBack.setOnClickListener {
-            drawerController.popBack()
+            onBackPressed()
         }
     }
 

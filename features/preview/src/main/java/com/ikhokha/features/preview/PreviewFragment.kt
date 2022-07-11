@@ -58,7 +58,7 @@ class PreviewFragment : SubNavigationFragment() {
         }
 
         btnBack.setOnClickListener {
-            drawerController.popBack()
+            onBackPressed()
         }
 
         btnAddToCart.setOnClickListener {
