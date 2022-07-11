@@ -21,4 +21,5 @@ interface MyDrawerController {
     //navigation
     fun navigateFromScannerToPreview(productId: String)
     fun navigateFromPreviewToCart()
+    fun navigateFromCartToSummary()
 }

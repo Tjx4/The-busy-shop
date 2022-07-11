@@ -7,4 +7,6 @@
     <string name="no_items">No items found</string>
     <string name="delete_error">Error deleting</string>
     <string name="clear_error" >Error clearing cart</string>
+    <string name="checkout">Checkout</string>
+    <string name="clear">Clear</string>
 </resources>

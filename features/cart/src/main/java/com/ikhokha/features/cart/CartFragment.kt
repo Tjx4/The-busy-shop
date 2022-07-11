@@ -57,6 +57,10 @@ class CartFragment : TopNavigationFragment(), CartItemsAdapter.ProductListener {
                 cartViewModel.clearItems()
             }
         }
+
+        btnCheckout.setOnClickListener {
+            drawerController.navigateFromCartToSummary()
+        }
     }
 
     private fun onProductsSet(products: List<Product>) {
@@ -93,7 +97,7 @@ class CartFragment : TopNavigationFragment(), CartItemsAdapter.ProductListener {
     override fun onProductClicked(product: Product, position: Int) {
         Toast.makeText(
             requireContext(),
-            "incremented",
+            "${product.description}",
             Toast.LENGTH_SHORT
         ).show()
     }

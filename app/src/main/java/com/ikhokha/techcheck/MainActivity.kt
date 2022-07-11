@@ -136,6 +136,10 @@ class MainActivity : AppCompatActivity(), MyDrawerController {
         onBackPressed()
     }
 
+    override fun navigateFromCartToSummary() {
+        TODO("Not yet implemented")
+    }
+
     override fun onBackPressed() {
         when (currentFragment is TopNavigationFragment) {
             true -> handleTopNavigation()

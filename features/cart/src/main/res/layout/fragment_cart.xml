@@ -51,7 +51,16 @@
             android:visibility="@{!cartViewModel.showLoading}"
             android:id="@+id/btnClear"
             android:layout_width="match_parent"
-            android:text="Clear"
+            android:text="@string/clear"
+            android:layout_margin="@dimen/small_spacing"
+            app:layout_constraintBottom_toTopOf="@+id/btnCheckout"/>
+
+        <Button
+            style="@style/BlackRoundedButton"
+            android:visibility="@{!cartViewModel.showLoading}"
+            android:id="@+id/btnCheckout"
+            android:layout_width="match_parent"
+            android:text="@string/checkout"
             android:layout_margin="@dimen/small_spacing"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
