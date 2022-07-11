@@ -44,6 +44,8 @@ dependencies {
     //koin
     implementation "io.insert-koin:koin-core:$koin"
     implementation "io.insert-koin:koin-android:$koin"
+    //Smooth progressbar
+    implementation "com.github.castorflex.smoothprogressbar:library-circular:$smoothprogressbar"
 
     //Modules
     implementation project("$common")

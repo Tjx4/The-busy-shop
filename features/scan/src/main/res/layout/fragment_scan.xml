@@ -15,11 +15,23 @@
         tools:context=".ScanFragment"
         android:background="@color/light_background">
         <!-- ORN750 WML999 COC378 BAN258-->
+
         <Button
+            android:visibility="@{!scanViewModel.showLoading}"
             android:id="@+id/btnTestProd"
             style="@style/Scanner"
             android:textColor="@color/dark_text"
             android:text="COC378"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <fr.castorflex.android.circularprogressbar.CircularProgressBar
+            android:visibility="@{scanViewModel.showLoading}"
+            style="@style/CircularProgressBarTheme"
+            android:id="@+id/cpLoader"
+            android:layout_gravity="center"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"

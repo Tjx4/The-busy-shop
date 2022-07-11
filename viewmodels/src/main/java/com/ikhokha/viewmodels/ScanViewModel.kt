@@ -10,6 +10,10 @@ import kotlinx.coroutines.withContext
 class ScanViewModel(application: Application, val productsRepository: ProductsRepository) :
     BaseViewModel(application) {
 
+    private val _showLoading: MutableLiveData<Boolean> = MutableLiveData()
+    val showLoading: MutableLiveData<Boolean>
+        get() = _showLoading
+
     private var _addProduct: MutableLiveData<String> = MutableLiveData()
     val addProduct: MutableLiveData<String>
         get() = _addProduct
