@@ -16,9 +16,12 @@
     <string name="product_added">%1$s has been added to your cart</string>
     <string name="product_incremented">%1$s incremented"</string>
     <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+    <string name="confirm">Confirm</string>
     <string name="error">Error</string>
     <string name="close">Close</string>
     <string name="success">Success</string>
     <string name="increment_error">Error incrementing product</string>
     <string name="product_add_error">Error adding product</string>
+    <string name="clear_cart_confirm">Are you sure you want to clear your cart</string>
 </resources>

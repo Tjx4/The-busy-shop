@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ikhokha.common.base.fragment.TopNavigationFragment
 import com.ikhokha.common.extensions.runWhenReady
+import com.ikhokha.common.helpers.showConfirmDialog
 import com.ikhokha.common.helpers.showErrorDialog
 import com.ikhokha.common.helpers.showSuccessDialog
 import com.ikhokha.common.models.Product
@@ -59,10 +60,28 @@ class CartFragment : TopNavigationFragment(), CartItemsAdapter.ProductListener {
         }
 
         btnClear.setOnClickListener {
-            //Todo: fix viewModelScope
-            cartViewModel.getViewModelScope().launch(Dispatchers.IO) {
-                cartViewModel.clearItems()
-            }
+
+            showConfirmDialog(
+                requireContext(),
+                getString(com.ikhokha.common.R.string.confirm),
+                getString(com.ikhokha.common.R.string.clear_cart_confirm),
+                getString(com.ikhokha.common.R.string.close),
+                "",
+                {
+                    //Todo: fix viewModelScope
+                    cartViewModel.getViewModelScope().launch(Dispatchers.IO) {
+                        cartViewModel.clearItems()
+                    }
+                },
+                {
+                    Toast.makeText(
+                        requireContext(),
+                        "You are not sure",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            )
+
         }
 
         btnCheckout.setOnClickListener {

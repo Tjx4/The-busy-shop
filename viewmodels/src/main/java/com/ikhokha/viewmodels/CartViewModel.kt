@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.ikhokha.common.models.Product
 import com.ikhokha.repositories.products.ProductsRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -44,6 +45,7 @@ class CartViewModel(application: Application, val productsRepository: ProductsRe
     init {
         _showLoading.value = true
         viewModelScope.launch(Dispatchers.IO) {
+            delay(300)
             getCartItems()
         }
     }

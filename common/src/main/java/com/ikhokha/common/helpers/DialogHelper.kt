@@ -11,9 +11,9 @@ fun showSuccessDialog(
     title: String,
     message: String,
     buttonText: String = context.getString(R.string.ok),
-    callbackFun: () -> Unit = {}
+    callback: () -> Unit = {}
 ) {
-    showDialog(context, title, message, buttonText, callbackFun, R.drawable.ic_success)
+    showDialog(context, title, message, buttonText, null, callback, {}, R.drawable.ic_success)
 }
 
 fun showErrorDialog(
@@ -21,20 +21,34 @@ fun showErrorDialog(
     title: String,
     message: String,
     buttonText: String = context.getString(R.string.ok),
-    callbackFun: () -> Unit = {}
+    callback: () -> Unit = {}
 ) {
-    showDialog(context, title, message, buttonText, callbackFun, R.drawable.ic_error)
+    showDialog(context, title, message, buttonText, null, callback, {}, R.drawable.ic_error)
+}
+
+fun showConfirmDialog(
+    context: Context,
+    title: String,
+    message: String,
+    positiveButtonText: String? = context.getString(R.string.ok),
+    negativeButtonText: String? = context.getString(R.string.cancel),
+    positiveCallback: () -> Unit = {},
+    negativeCallback: () -> Unit = {}
+) {
+    showDialog(context, title, message, positiveButtonText, negativeButtonText,  positiveCallback,  negativeCallback, R.drawable.ic_confirm)
 }
 
 private fun showDialog(
     context: Context,
     title: String,
     message: String,
-    buttonText: String = context.getString(R.string.ok),
-    callbackFun: () -> Unit = {},
+    positiveButtonText: String?,
+    negativeButtonText: String?,
+    positiveCallback: () -> Unit = {},
+    negativeCallback: () -> Unit = {},
     icon: Int
 ) {
-    val ab = setupBasicMessage(title, message, buttonText, "", "", callbackFun, {}, {}, context)
+    val ab = setupBasicMessage(title, message, positiveButtonText, "", negativeButtonText, positiveCallback, {}, negativeCallback, context)
     ab.setIcon(icon)
     ab.setCancelable(false)
     showDialogMessage(ab, context)
@@ -71,13 +85,13 @@ private fun setupBasicMessage(
             positiveCallback()
         }
 
-    if (neutralButtonText != null) {
+    neutralButtonText?.let {
         ab.setNeutralButton(neutralButtonText) { dialogInterface, i ->
             neutralCallback()
         }
     }
 
-    if (negativeButtonText != null) {
+    negativeButtonText?.let {
         ab.setNegativeButton(negativeButtonText) { dialogInterface, i ->
             negativeCallback()
         }
