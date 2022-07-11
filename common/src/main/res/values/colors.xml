@@ -15,7 +15,7 @@
 
     <color name="dark_background">#000</color>
     <color name="light_background">#FFF</color>
-    <color name="light_background_2">#DDD</color>
+    <color name="light_grey_background">#DDD</color>
 
     <color name="dark_text">#111</color>
     <color name="light_text">#EEE</color>

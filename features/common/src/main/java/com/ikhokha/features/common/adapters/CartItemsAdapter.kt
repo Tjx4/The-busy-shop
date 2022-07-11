@@ -21,6 +21,7 @@ class CartItemsAdapter(private val context: Context, private val products: List<
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val product = products[position]
+        holder.tvQuantity.text = "${product.quantity}"
         holder.tvDescription.text = product.description
         holder.imgBtnDelete.setOnClickListener {
             productListener?.onDeleteProductClicked(product, position)
@@ -29,6 +30,7 @@ class CartItemsAdapter(private val context: Context, private val products: List<
 
     inner class ViewHolder internal constructor(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
+        internal var tvQuantity: TextView = itemView.findViewById(R.id.tvQuantity)
         internal var tvDescription: TextView = itemView.findViewById(R.id.tvDescription)
         internal var imgBtnDelete: ImageButton = itemView.findViewById(R.id.imgBtnDelete)
 
