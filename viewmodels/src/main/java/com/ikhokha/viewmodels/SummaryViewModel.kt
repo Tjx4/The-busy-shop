@@ -3,6 +3,7 @@ package com.ikhokha.viewmodels
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.ikhokha.common.helpers.getTotalPrice
 import com.ikhokha.common.models.Product
 import com.ikhokha.repositories.products.ProductsRepository
 import kotlinx.coroutines.Dispatchers
@@ -48,7 +49,7 @@ class SummaryViewModel(application: Application, val productsRepository: Product
     fun setGrandTotalPrice()  {
         var grandTotal = 0.0
         _products.value?.forEach {
-            grandTotal += it.price
+            grandTotal += getTotalPrice(it.price, it.quantity)
         }
         _grandTotal.value = grandTotal
     }

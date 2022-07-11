@@ -92,6 +92,7 @@
             android:layout_height="wrap_content"
             tools:text="@string/placeholder_price"
             android:text="@{`R` + summaryViewModel.grandTotal}"
+            android:textStyle="bold"
             android:layout_marginRight="@dimen/small_spacing"
             app:layout_constraintVertical_bias="0"
             app:layout_constraintHorizontal_bias="1"
