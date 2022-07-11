@@ -23,6 +23,10 @@ class SummaryViewModel(application: Application, val productsRepository: Product
     val productsError: MutableLiveData<String>
         get() = _productsError
 
+    private var _grandTotal: MutableLiveData<Double> = MutableLiveData(0.0)
+    val grandTotal: MutableLiveData<Double>
+        get() = _grandTotal
+
     init {
         _showLoading.value = true
         viewModelScope.launch(Dispatchers.IO) {
@@ -40,4 +44,13 @@ class SummaryViewModel(application: Application, val productsRepository: Product
             }
         }
     }
+
+    fun setGrandTotalPrice()  {
+        var grandTotal = 0.0
+        _products.value?.forEach {
+            grandTotal += it.price
+        }
+        _grandTotal.value = grandTotal
+    }
+
 }

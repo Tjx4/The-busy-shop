@@ -34,12 +34,56 @@
             app:layout_constraintLeft_toRightOf="@+id/btnBack"
             app:layout_constraintRight_toRightOf="parent"/>
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clHeaders"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="1dp"
+            android:background="@color/light_grey_background"
+            app:layout_constraintTop_toBottomOf="@+id/btnBack">
+
+            <TextView
+                style="@style/NormalTextView"
+                android:id="@+id/tvDescription"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Description"
+                android:gravity="start"
+                android:layout_marginHorizontal="@dimen/small_spacing"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/tvQuantity"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <TextView
+                style="@style/NormalTextView"
+                android:id="@+id/tvQuantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="quantity"
+                android:layout_marginHorizontal="@dimen/small_spacing"
+                app:layout_constraintRight_toLeftOf="@+id/tvPrice"
+                app:layout_constraintTop_toTopOf="@id/tvDescription"
+                app:layout_constraintBottom_toBottomOf="@id/tvDescription"/>
+
+            <TextView
+                style="@style/PriceTextView"
+                android:id="@+id/tvPrice"
+                android:text="Price"
+                android:layout_marginVertical="@dimen/xxsmall_spacing"
+                android:layout_marginRight="@dimen/small_spacing"
+                app:layout_constraintTop_toTopOf="@id/tvDescription"
+                app:layout_constraintBottom_toBottomOf="@id/tvDescription"
+                app:layout_constraintRight_toRightOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvCartItems"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/small_spacing"
-            app:layout_constraintTop_toBottomOf="@+id/btnBack" />
+            app:layout_constraintTop_toBottomOf="@+id/clHeaders" />
 
         <TextView
             android:id="@+id/tvTotalPrice"
@@ -47,7 +91,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="@string/placeholder_price"
-            android:text="@string/placeholder_price"
+            android:text="@{`R` + summaryViewModel.grandTotal}"
             android:layout_marginRight="@dimen/small_spacing"
             app:layout_constraintVertical_bias="0"
             app:layout_constraintHorizontal_bias="1"
@@ -60,7 +104,7 @@
             style="@style/BlackRoundedButton"
             android:id="@+id/btnProceed"
             android:layout_width="match_parent"
-            android:text="Proceed"
+            android:text="@string/proceed"
             android:layout_margin="@dimen/small_spacing"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
