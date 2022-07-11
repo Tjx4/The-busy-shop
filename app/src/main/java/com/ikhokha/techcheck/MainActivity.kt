@@ -132,11 +132,6 @@ class MainActivity : AppCompatActivity(), MyDrawerController {
         navController.navigate(action)
     }
 
-    //Todo: rethink
-    override fun navigateFromPreviewToCart() {
-        onBackPressed()
-    }
-
     override fun navigateFromCartToSummary() {
         val action = CartFragmentDirections.actionCartFragmentToSummaryFragment()
         navController.navigate(action)

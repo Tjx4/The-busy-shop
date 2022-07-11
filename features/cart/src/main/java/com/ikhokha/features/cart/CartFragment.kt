@@ -9,6 +9,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ikhokha.common.base.fragment.TopNavigationFragment
 import com.ikhokha.common.extensions.runWhenReady
+import com.ikhokha.common.helpers.showErrorDialog
+import com.ikhokha.common.helpers.showSuccessDialog
 import com.ikhokha.common.models.Product
 import com.ikhokha.features.cart.databinding.FragmentCartBinding
 import com.ikhokha.features.common.adapters.CartItemsAdapter
@@ -96,7 +98,12 @@ class CartFragment : TopNavigationFragment(), CartItemsAdapter.ProductListener {
     }
 
     private fun onProductDeleteError(errorMessage: String) {
-        //Todo: show error alert
+        showErrorDialog(
+            requireContext(),
+            getString(com.ikhokha.common.R.string.error),
+            errorMessage,
+            getString(com.ikhokha.common.R.string.close)
+        )
     }
 
     override fun onProductClicked(product: Product, position: Int) {

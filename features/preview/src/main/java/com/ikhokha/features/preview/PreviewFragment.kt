@@ -9,6 +9,8 @@ import androidx.databinding.DataBindingUtil
 import com.ikhokha.common.base.fragment.SubNavigationFragment
 import com.ikhokha.common.constants.PRODUCT_ID
 import com.ikhokha.common.extensions.loadImageFromUrl
+import com.ikhokha.common.helpers.showErrorDialog
+import com.ikhokha.common.helpers.showSuccessDialog
 import com.ikhokha.common.models.Product
 import com.ikhokha.features.preview.databinding.FragmentPreviewBinding
 import com.ikhokha.viewmodels.PreviewViewModel
@@ -97,7 +99,12 @@ class PreviewFragment : SubNavigationFragment() {
     }
 
     fun onProductError(errorMessage: String) {
-        //Show error alert
+        showErrorDialog(
+            requireContext(),
+            getString(com.ikhokha.common.R.string.error),
+            errorMessage,
+            getString(com.ikhokha.common.R.string.close)
+        )
     }
 
     fun onNewProduct(product: Product) {
@@ -115,17 +122,23 @@ class PreviewFragment : SubNavigationFragment() {
     }
 
     fun onProductAdded(product: Product) {
-        Toast.makeText(
+        showSuccessDialog(
             requireContext(),
-            "${product.description} added to cart",
-            Toast.LENGTH_SHORT
-        ).show()
-
-        drawerController.navigateFromPreviewToCart()
+            getString(com.ikhokha.common.R.string.success),
+            getString(com.ikhokha.common.R.string.product_added, product.description),
+            getString(com.ikhokha.common.R.string.ok)
+        ) {
+            onBackPressed()
+        }
     }
 
     private fun onProductAddError(errorMessage: String) {
-        //Show error alert
+        showErrorDialog(
+            requireContext(),
+            getString(com.ikhokha.common.R.string.error),
+            errorMessage,
+            getString(com.ikhokha.common.R.string.close)
+        )
     }
 
     fun onProductIncremenrted() {
@@ -135,11 +148,16 @@ class PreviewFragment : SubNavigationFragment() {
             Toast.LENGTH_SHORT
         ).show()
 
-        drawerController.navigateFromPreviewToCart()
+        onBackPressed()
     }
 
     private fun onProductIncrementError(errorMessage: String) {
-        //Show error alert
+        showErrorDialog(
+            requireContext(),
+            getString(com.ikhokha.common.R.string.error),
+            errorMessage,
+            getString(com.ikhokha.common.R.string.close)
+        )
     }
 
 }
