@@ -21,7 +21,7 @@ class CartItemsAdapter(private val context: Context, private val products: List<
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val product = products[position]
-        holder.tvQuantity.text = "${product.quantity}"
+        holder.tvQuantity.text = "${product.quantity}x"
         holder.tvDescription.text = product.description
         holder.imgBtnDelete.setOnClickListener {
             productListener?.onDeleteProductClicked(product, position)
