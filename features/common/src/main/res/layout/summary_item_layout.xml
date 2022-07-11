@@ -7,7 +7,6 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="1dp">
 
-
     <TextView
         style="@style/NormalTextView"
         android:id="@+id/tvDescription"
@@ -37,16 +36,6 @@
         android:layout_width="wrap_content"
         android:id="@+id/tvPrice"
         tools:text="R0.00"
-        android:layout_marginVertical="@dimen/xxsmall_spacing"
-        android:layout_marginRight="@dimen/small_spacing"
-        app:layout_constraintTop_toTopOf="@id/tvDescription"
-        app:layout_constraintBottom_toBottomOf="@id/tvDescription"
-        app:layout_constraintRight_toLeftOf="@+id/imgBtnDelete"/>
-
-    <ImageButton
-        android:id="@+id/imgBtnDelete"
-        style="@style/BackButton"
-        android:src="@drawable/ic_delete"
         android:layout_marginVertical="@dimen/xxsmall_spacing"
         android:layout_marginRight="@dimen/small_spacing"
         app:layout_constraintTop_toTopOf="@id/tvDescription"

@@ -10,20 +10,21 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ikhokha.common.models.Product
 import com.ikhokha.features.common.R
 
-class CartItemsAdapter(private val context: Context, private val products: List<Product>) :
+class CartItemsAdapter(private val context: Context, private val products: List<Product>, val layout: Int) :
     RecyclerView.Adapter<CartItemsAdapter.ViewHolder>() {
     private var productListener: ProductListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.cart_item_layout, parent, false)
+        val view = LayoutInflater.from(context).inflate(layout, parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val product = products[position]
-        holder.tvQuantity.text = "${product.quantity}x"
-        holder.tvDescription.text = product.description
-        holder.imgBtnDelete.setOnClickListener {
+        holder.tvQuantity?.text = "${product.quantity}x"
+        holder.tvDescription?.text = product.description
+        holder.tvPrice?.text = "R${product.price}"
+        holder.imgBtnDelete?.setOnClickListener {
             productListener?.onDeleteProductClicked(product, position)
         }
     }
@@ -32,6 +33,7 @@ class CartItemsAdapter(private val context: Context, private val products: List<
         View.OnClickListener {
         internal var tvQuantity: TextView = itemView.findViewById(R.id.tvQuantity)
         internal var tvDescription: TextView = itemView.findViewById(R.id.tvDescription)
+        internal var tvPrice: TextView = itemView.findViewById(R.id.tvPrice)
         internal var imgBtnDelete: ImageButton = itemView.findViewById(R.id.imgBtnDelete)
 
         init {

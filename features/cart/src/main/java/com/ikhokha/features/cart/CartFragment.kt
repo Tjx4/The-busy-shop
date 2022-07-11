@@ -49,7 +49,7 @@ class CartFragment : TopNavigationFragment(), CartItemsAdapter.ProductListener {
         super.onViewCreated(view, savedInstanceState)
 
         cartViewModel.products.value?.let {
-          // Show content
+            onProductsSet(it)
         }
 
         btnBack.setOnClickListener {
@@ -74,7 +74,7 @@ class CartFragment : TopNavigationFragment(), CartItemsAdapter.ProductListener {
 
         itemsLayoutManager.initialPrefetchItemCount = products.size
         rvCartItems?.layoutManager = itemsLayoutManager
-        cartItemsAdapter = CartItemsAdapter(requireContext(), products)
+        cartItemsAdapter = CartItemsAdapter(requireContext(), products, com.ikhokha.features.common.R.layout.cart_item_layout)
         cartItemsAdapter?.addProductListener(this)
         rvCartItems?.adapter = cartItemsAdapter
 

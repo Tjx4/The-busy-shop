@@ -2,12 +2,18 @@ package com.ikhokha.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.ikhokha.common.models.Product
 import com.ikhokha.repositories.products.ProductsRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class SummaryViewModel(application: Application, val productsRepository: ProductsRepository) : BaseViewModel(application)  {
+
+    private val _showLoading: MutableLiveData<Boolean> = MutableLiveData()
+    val showLoading: MutableLiveData<Boolean>
+        get() = _showLoading
 
     private var _products: MutableLiveData<List<Product>> = MutableLiveData()
     val products: MutableLiveData<List<Product>>
@@ -17,7 +23,14 @@ class SummaryViewModel(application: Application, val productsRepository: Product
     val productsError: MutableLiveData<String>
         get() = _productsError
 
-    suspend fun getCartProducts() {
+    init {
+        _showLoading.value = true
+        viewModelScope.launch(Dispatchers.IO) {
+            getCartItems()
+        }
+    }
+
+    suspend fun getCartItems() {
         val products = productsRepository.getCartItems()
 
         withContext(Dispatchers.Main) {
