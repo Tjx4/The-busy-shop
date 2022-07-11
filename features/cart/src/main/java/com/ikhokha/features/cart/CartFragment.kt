@@ -120,7 +120,7 @@ class CartFragment : TopNavigationFragment(), CartItemsAdapter.ProductListener {
 
     override fun onProductClicked(product: Product, position: Int) {
         product.id?.let {
-            drawerController.navigateFromScannerToPreview(it)
+            drawerController.navigateFromCartToPreview(it)
         }
     }
 
