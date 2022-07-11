@@ -23,15 +23,10 @@ class CartFragment : TopNavigationFragment(), CartItemsAdapter.ProductListener {
     private val cartViewModel: CartViewModel by viewModel()
     private lateinit var cartItemsAdapter: CartItemsAdapter
 
-    override fun onStart() {
-        super.onStart()
-        drawerController.showBottomNav()
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         cartViewModel.products.observe(this) { onProductsSet(it) }
-        cartViewModel.productsError.observe(this) { onProductsError(it) }
+        cartViewModel.productsError.observe(this) { onNoProducts(it) }
         cartViewModel.deletedPosition.observe(this) { onProductDeleted(it) }
         cartViewModel.productDeleteError.observe(this) { onProductDeleteError(it) }
     }
@@ -46,6 +41,14 @@ class CartFragment : TopNavigationFragment(), CartItemsAdapter.ProductListener {
         binding.lifecycleOwner = this
         binding.cartViewModel = cartViewModel
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        btnBack.setOnClickListener {
+            drawerController.popBack()
+        }
     }
 
     private fun onProductsSet(products: List<Product>) {
@@ -63,8 +66,8 @@ class CartFragment : TopNavigationFragment(), CartItemsAdapter.ProductListener {
         }
     }
 
-    private fun onProductsError(errorMessage: String) {
-        //Show error dialog
+    private fun onNoProducts(errorMessage: String) {
+        cartViewModel.showLoading.value = false
     }
 
     private fun onProductDeleted(position: Int) {
@@ -86,7 +89,7 @@ class CartFragment : TopNavigationFragment(), CartItemsAdapter.ProductListener {
     override fun onDeleteProductClicked(product: Product, position: Int) {
         //Todo: fix viewModelScope
         cartViewModel.getViewModelScope().launch(Dispatchers.IO) {
-            cartViewModel.deleteProduct(product, position)
+            cartViewModel.deleteItem(product, position)
         }
     }
 }

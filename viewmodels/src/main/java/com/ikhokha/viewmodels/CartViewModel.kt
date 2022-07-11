@@ -35,11 +35,11 @@ class CartViewModel(application: Application, val productsRepository: ProductsRe
     init {
         _showLoading.value = true
         viewModelScope.launch(Dispatchers.IO) {
-            getProducts()
+            getCartItems()
         }
     }
 
-    suspend fun getProducts() {
+    suspend fun getCartItems() {
         val products = productsRepository.getCartItems()
 
         withContext(Dispatchers.Main) {
@@ -50,13 +50,16 @@ class CartViewModel(application: Application, val productsRepository: ProductsRe
         }
     }
 
-    suspend fun deleteProduct(product: Product, position: Int) {
+    suspend fun deleteItem(product: Product, position: Int) {
         val response = productsRepository.removeProductFromCart(product)
 
         withContext(Dispatchers.Main) {
             when (response) {
                 false -> _productDeleteError.value = app.getString(com.ikhokha.common.R.string.delete_error)
-                else -> _deletedPosition.value = position
+                else ->  {
+                    (_products.value as ArrayList).remove(product)
+                    _deletedPosition.value = position
+                }
             }
         }
     }

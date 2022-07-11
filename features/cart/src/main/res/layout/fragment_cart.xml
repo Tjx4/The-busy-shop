@@ -15,6 +15,15 @@
         tools:context=".CartFragment"
         android:background="@color/light_background">
 
+        <!-- Use tool bar -->
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btnBack"
+            style="@style/BackButton"
+            android:src="@drawable/ic_back"
+            android:layout_margin="@dimen/medium_spacing"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:visibility="@{!cartViewModel.showLoading}"
             android:id="@+id/rvCartItems"
@@ -22,14 +31,28 @@
             android:layout_height="0dp"
             android:clipToPadding="false"
             android:paddingBottom="?attr/actionBarSize"
+            android:layout_marginTop="@dimen/small_spacing"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/btnBack" />
 
         <fr.castorflex.android.circularprogressbar.CircularProgressBar
             android:visibility="@{cartViewModel.showLoading}"
             style="@style/CircularProgressBarTheme"
             android:id="@+id/cpLoader"
             android:layout_gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:visibility="@{!cartViewModel.showLoading}"
+            style="@style/NormalTextView"
+            android:id="@+id/tvDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{cartViewModel.productsError}"
+            tools:text="@string/no_items"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
