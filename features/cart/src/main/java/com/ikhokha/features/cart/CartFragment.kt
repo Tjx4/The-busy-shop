@@ -119,11 +119,9 @@ class CartFragment : TopNavigationFragment(), CartItemsAdapter.ProductListener {
     }
 
     override fun onProductClicked(product: Product, position: Int) {
-        Toast.makeText(
-            requireContext(),
-            "${product.description}",
-            Toast.LENGTH_SHORT
-        ).show()
+        product.id?.let {
+            drawerController.navigateFromScannerToPreview(it)
+        }
     }
 
     override fun onDeleteProductClicked(product: Product, position: Int) {

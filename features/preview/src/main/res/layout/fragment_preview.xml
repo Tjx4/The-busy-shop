@@ -69,7 +69,7 @@
 
         <Button
             style="@style/BlackRoundedButton"
-            android:visibility="@{!previewViewModel.showLoading}"
+            android:visibility="@{!previewViewModel.showLoading &amp;&amp; !previewViewModel.itemExist}"
             android:id="@+id/btnAddToCart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -81,7 +81,7 @@
 
         <Button
             style="@style/BlackRoundedButton"
-            android:visibility="@{!previewViewModel.showLoading}"
+            android:visibility="@{!previewViewModel.showLoading &amp;&amp; !previewViewModel.itemExist}"
             android:id="@+id/btnScanAgain"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

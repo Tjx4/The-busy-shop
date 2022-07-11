@@ -64,7 +64,7 @@ class ScanFragment : TopNavigationFragment() {
     }
 
     fun onNewProduct(productId: String) {
-        drawerController.navigateFromScannerToPreview(productId)
+        drawerController.navigateFromCartToPreview(productId)
     }
 
     fun onProductExist(productId: String) {

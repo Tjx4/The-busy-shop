@@ -137,6 +137,11 @@ class MainActivity : AppCompatActivity(), MyDrawerController {
         navController.navigate(action)
     }
 
+    override fun navigateFromCartToPreview(productId: String) {
+        val action = CartFragmentDirections.actionCartFragmentToPreviewFragment(productId)
+        navController.navigate(action)
+    }
+
     override fun onBackPressed() {
         when (currentFragment is TopNavigationFragment) {
             true -> handleTopNavigation()

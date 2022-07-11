@@ -21,10 +21,6 @@
                 android:name="productId"
                 app:argType="string"
                 app:nullable="false" />
-
-            <deepLink
-                android:id="@+id/preview_deepLink"
-                app:uri="https://domain.tld/preview/productId={productId}" />
         </action>
     </fragment>
 
@@ -40,6 +36,20 @@
             app:popEnterAnim="@anim/no_transition"
             app:popExitAnim="@anim/slide_out_right"
             app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_cartFragment_to_previewFragment"
+            app:destination="@id/previewFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/no_transition"
+            app:popEnterAnim="@anim/no_transition"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpToInclusive="true">
+
+            <argument
+                android:name="productId"
+                app:argType="string"
+                app:nullable="false" />
+        </action>
     </fragment>
 
     <fragment
@@ -50,6 +60,12 @@
     <fragment
         android:id="@+id/previewFragment"
         android:name="com.ikhokha.features.preview.PreviewFragment"
-        android:label="PreviewFragment" />
+        android:label="PreviewFragment">
+
+        <deepLink
+            android:id="@+id/preview_deepLink"
+            app:uri="https://domain.tld/preview/productId={productId}" />
+
+    </fragment>
 
 </navigation>
