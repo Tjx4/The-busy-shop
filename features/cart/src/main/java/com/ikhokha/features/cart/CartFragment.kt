@@ -65,8 +65,8 @@ class CartFragment : TopNavigationFragment(), CartItemsAdapter.ProductListener {
                 requireContext(),
                 getString(com.ikhokha.common.R.string.confirm),
                 getString(com.ikhokha.common.R.string.clear_cart_confirm),
-                getString(com.ikhokha.common.R.string.close),
-                "",
+                getString(com.ikhokha.common.R.string.clear),
+                getString(com.ikhokha.common.R.string.cancel),
                 {
                     //Todo: fix viewModelScope
                     cartViewModel.getViewModelScope().launch(Dispatchers.IO) {
