@@ -23,8 +23,8 @@
     <dimen name="badge_top_margin">-16dp</dimen>
     <dimen name="badge_start_margin">10dp</dimen>
     <dimen name="badge_padding">2dp</dimen>
-    <dimen name="badge_size">19dp</dimen>
-    <dimen name="badge_text">9sp</dimen>
+    <dimen name="badge_size">16dp</dimen>
+    <dimen name="badge_text">8sp</dimen>
 
     <dimen name="nav_bar_icon_size">25dp</dimen>
     <dimen name="nav_bar_item_bottom_padding">10dp</dimen>
