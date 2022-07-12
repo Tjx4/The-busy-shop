@@ -26,7 +26,6 @@ class PreviewFragment : SubNavigationFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //previewViewModel.showLoading.observe(this) { showLoading() }
         previewViewModel.product.observe(this) { onProductSet(it) }
         previewViewModel.productError.observe(this) { onProductError(it) }
         previewViewModel.productAdded.observe(this) { onProductAdded(it) }

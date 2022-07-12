@@ -13,7 +13,8 @@
         android:layout_height="match_parent"
         android:animateLayoutChanges="true"
         tools:context=".CartFragment"
-        android:background="@color/light_background">
+        android:background="@color/light_background"
+        android:paddingBottom="@dimen/xxlarge_spacing">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/tbCart"

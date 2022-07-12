@@ -15,6 +15,7 @@
     <dimen name="medium_plus_spacing">26dp</dimen>
     <dimen name="large_spacing">30dp</dimen>
     <dimen name="xlarge_spacing">40dp</dimen>
+    <dimen name="xxlarge_spacing">60dp</dimen>
 
     <dimen name="small_corner_radius">6dp</dimen>
     <dimen name="small_stroke_size">2dp</dimen>
