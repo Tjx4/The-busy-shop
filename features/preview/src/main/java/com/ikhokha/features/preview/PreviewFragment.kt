@@ -127,5 +127,4 @@ class PreviewFragment : SubNavigationFragment() {
         )
     }
 
-
 }

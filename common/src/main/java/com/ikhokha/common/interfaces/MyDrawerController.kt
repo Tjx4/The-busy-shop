@@ -18,7 +18,6 @@ interface MyDrawerController {
     fun removeBadge()
     fun showBottomNav()
     fun hideBottomNav()
-    //navigation
     fun navigateFromScannerToPreview(productId: String)
     fun navigateFromCartToSummary()
     fun navigateFromCartToPreview(productId: String)

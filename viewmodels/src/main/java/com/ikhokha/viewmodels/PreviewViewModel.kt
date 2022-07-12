@@ -56,7 +56,7 @@ class PreviewViewModel(application: Application, val productsRepository: Product
 
         withContext(Dispatchers.Main) {
             when (product) {
-                null -> _productError.value = "Product not found"
+                null -> _productError.value = app.getString(com.ikhokha.common.R.string.product_not_found)
                 else -> _product.value = product
             }
         }

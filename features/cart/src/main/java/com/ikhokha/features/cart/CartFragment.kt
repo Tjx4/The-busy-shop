@@ -139,7 +139,12 @@ class CartFragment : TopNavigationFragment(), CartItemsAdapter.ProductListener {
     }
 
     private fun onCartClearError(errorMessage: String) {
-        //Todo: show error alert
+        showErrorDialog(
+            requireContext(),
+            getString(com.ikhokha.common.R.string.error),
+            errorMessage,
+            getString(com.ikhokha.common.R.string.close)
+        )
     }
 
 }

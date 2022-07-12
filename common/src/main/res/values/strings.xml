@@ -24,4 +24,5 @@
     <string name="increment_error">Error incrementing product</string>
     <string name="product_add_error">Error adding product</string>
     <string name="clear_cart_confirm">Are you sure you want to clear your cart</string>
+    <string name="product_not_found">Product not found</string>
 </resources>

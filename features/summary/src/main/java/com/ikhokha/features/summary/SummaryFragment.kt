@@ -49,7 +49,7 @@ class SummaryFragment : SubNavigationFragment(), CartItemsAdapter.ProductListene
         btnProceed.setOnClickListener {
             Toast.makeText(
                 requireContext(),
-                "Proceed",
+                getString(com.ikhokha.common.R.string.proceed),
                 Toast.LENGTH_SHORT
             ).show()
         }
