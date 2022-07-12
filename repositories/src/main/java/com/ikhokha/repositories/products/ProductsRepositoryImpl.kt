@@ -119,7 +119,7 @@ class ProductsRepositoryImpl(
         }
     }
 
-    override suspend fun isProductAddedToCart(productId: String): Boolean {
+    override suspend fun isProductExistsInCart(productId: String): Boolean {
         return try {
             val itemsTable = cartDB.itemsDAO.get(productId)
             itemsTable != null

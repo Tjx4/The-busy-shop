@@ -13,5 +13,5 @@ interface ProductsRepository {
     suspend fun clearCart(): Boolean
     suspend fun addProductToCart(product: Product): Boolean
     suspend fun incrementCartProductQuantity(product: String): Boolean
-    suspend fun isProductAddedToCart(productId: String): Boolean //Todo: rename
+    suspend fun isProductExistsInCart(productId: String): Boolean //Todo: rename
 }

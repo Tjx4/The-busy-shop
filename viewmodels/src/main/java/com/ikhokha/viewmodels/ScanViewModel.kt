@@ -50,7 +50,7 @@ class ScanViewModel(application: Application, val productsRepository: ProductsRe
     }
 
     suspend fun processProduct(productId: String) {
-        var productExist = productsRepository.isProductAddedToCart(productId)
+        var productExist = productsRepository.isProductExistsInCart(productId)
 
         withContext(Dispatchers.Main) {
             when (productExist) {

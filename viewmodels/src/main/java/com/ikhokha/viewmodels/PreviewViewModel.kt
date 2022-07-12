@@ -2,13 +2,10 @@ package com.ikhokha.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
-import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.ikhokha.common.models.Product
 import com.ikhokha.repositories.products.ProductsRepository
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class PreviewViewModel(application: Application, val productsRepository: ProductsRepository) :
@@ -18,9 +15,9 @@ class PreviewViewModel(application: Application, val productsRepository: Product
     val showLoading: MutableLiveData<Boolean>
         get() = _showLoading
 
-    private val _itemExist: MutableLiveData<Boolean> = MutableLiveData()
-    val itemExist: MutableLiveData<Boolean>
-        get() = _itemExist
+    private val _showAddButtons: MutableLiveData<Boolean> = MutableLiveData(false)
+    val showAddButtons: MutableLiveData<Boolean>
+        get() = _showAddButtons
 
     private var _product: MutableLiveData<Product> = MutableLiveData()
     val product: MutableLiveData<Product>
@@ -44,10 +41,10 @@ class PreviewViewModel(application: Application, val productsRepository: Product
 
     suspend fun isItemExist() {
         val productId = _product.value?.id ?: ""
-        val itemExist = productsRepository.isProductAddedToCart(productId)
+        val itemExist = productsRepository.isProductExistsInCart(productId)
 
         withContext(Dispatchers.Main) {
-            _itemExist.value = itemExist
+            _showAddButtons.value = !itemExist
         }
     }
 
