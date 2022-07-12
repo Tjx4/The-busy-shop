@@ -16,7 +16,6 @@
         android:background="@color/light_background">
 
         <androidx.appcompat.widget.Toolbar
-            android:visibility="@{!previewViewModel.showLoading}"
             android:id="@+id/tbPreview"
             style="@style/ToolBarStyle"
             android:layout_width="match_parent"
@@ -25,6 +24,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
+                android:visibility="@{!previewViewModel.showLoading}"
                 style="@style/SubHeadingTextView"
                 android:id="@+id/tvDescription"
                 android:layout_width="wrap_content"
