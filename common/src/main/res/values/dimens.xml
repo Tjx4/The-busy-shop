@@ -20,10 +20,11 @@
     <dimen name="small_corner_radius">6dp</dimen>
     <dimen name="small_stroke_size">2dp</dimen>
 
-    <dimen name="badge_top_margin">4dp</dimen>
+    <dimen name="badge_top_margin">-16dp</dimen>
+    <dimen name="badge_start_margin">10dp</dimen>
     <dimen name="badge_padding">2dp</dimen>
     <dimen name="badge_size">19dp</dimen>
-    <dimen name="badge_text">11sp</dimen>
+    <dimen name="badge_text">9sp</dimen>
 
     <dimen name="nav_bar_icon_size">25dp</dimen>
     <dimen name="nav_bar_item_bottom_padding">10dp</dimen>

@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -35,7 +36,7 @@ class MainActivity : AppCompatActivity(), MyDrawerController {
     }
 
     override fun initBottomNavBar() {
-        val navMenuItems = arrayListOf<NavMenuItem>(
+        val navMenuItems = arrayListOf(
             NavMenuItem(0, R.id.scanFragment),
             NavMenuItem(1, R.id.cartFragment)
         )
@@ -91,7 +92,6 @@ class MainActivity : AppCompatActivity(), MyDrawerController {
 
             it.animate()
                 .translationY(0f)
-                //.alpha(1f)
                 .setDuration(200)
                 .setListener(object : AnimatorListenerAdapter() {
                     override fun onAnimationEnd(animation: Animator?) {

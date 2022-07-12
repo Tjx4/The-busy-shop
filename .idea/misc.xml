@@ -15,7 +15,7 @@
         <entry key="common/src/main/res/drawable/splash_background_gradient.xml" value="0.2635" />
         <entry key="common/src/main/res/menu/nav_menu.xml" value="0.26458333333333334" />
         <entry key="features/cart/src/main/res/layout/fragment_cart.xml" value="0.265625" />
-        <entry key="features/common/src/main/res/layout/badge_layout.xml" value="0.25833333333333336" />
+        <entry key="features/common/src/main/res/layout/badge_layout.xml" value="0.5" />
         <entry key="features/common/src/main/res/layout/cart_item_layout.xml" value="0.20364583333333333" />
         <entry key="features/common/src/main/res/layout/summary_item_layout.xml" value="0.25729166666666664" />
         <entry key="features/preview/src/main/res/layout/fragment_preview.xml" value="0.265625" />
