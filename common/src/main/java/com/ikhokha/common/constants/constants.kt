@@ -9,4 +9,4 @@ const val MAIN_ACTIVITY = "com.ikhokha.techcheck.MainActivity"
 const val CART_DB = "cart_db"
 const val PREFERENCE = "_preferences"
 //Other
-const val DURATION_SHORT = 70L
+const val SHORT_VIBRATION_DURATION = 70L

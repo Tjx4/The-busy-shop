@@ -5,17 +5,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import com.budiyev.android.codescanner.AutoFocusMode
 import com.budiyev.android.codescanner.CodeScanner
 import com.budiyev.android.codescanner.DecodeCallback
 import com.budiyev.android.codescanner.ErrorCallback
 import com.budiyev.android.codescanner.ScanMode
 import com.google.zxing.Result
 import com.ikhokha.common.base.fragment.TopNavigationFragment
-import com.ikhokha.common.constants.DURATION_SHORT
+import com.ikhokha.common.constants.SHORT_VIBRATION_DURATION
 import com.ikhokha.common.helpers.*
 import com.ikhokha.common.models.Product
 import com.ikhokha.features.scan.databinding.FragmentScanBinding
@@ -97,7 +95,7 @@ class ScanFragment : TopNavigationFragment() {
     }
 
     private fun handleScannedBarcode(result: Result) {
-        vibratePhone(requireContext(), DURATION_SHORT)
+        vibratePhone(requireContext(), SHORT_VIBRATION_DURATION)
         //Todo: fix viewModelScope
         scanViewModel.getViewModelScope().launch(Dispatchers.IO) {
             val productId = result.text
