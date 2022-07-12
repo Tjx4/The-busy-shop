@@ -54,7 +54,7 @@ class PreviewFragment : SubNavigationFragment() {
             }
         }
 
-        tbPreview?.setNavigationOnClickListener  {
+        tbPreview?.setNavigationOnClickListener {
             onBackPressed()
         }
 
@@ -68,7 +68,6 @@ class PreviewFragment : SubNavigationFragment() {
         btnScanAgain.setOnClickListener {
             drawerController.popBack()
         }
-
     }
 
     private fun onProductSet(product: Product) {
@@ -84,11 +83,16 @@ class PreviewFragment : SubNavigationFragment() {
             val imageRef = firebaseStorageRef.child(it)
             imageRef.downloadUrl.addOnSuccessListener {
                 val imageURL = it.toString()
-                imgProduct?.loadImageFromUrl(requireContext(), imageURL, com.ikhokha.common.R.drawable.ic_placeholder, {
-                    val dfd = it //Todo remove
-                }, {
-                    val dfd = it //Todo remove
-                })
+                imgProduct?.loadImageFromUrl(
+                    requireContext(),
+                    imageURL,
+                    com.ikhokha.common.R.drawable.ic_placeholder,
+                    {
+                        val dfd = it //Todo remove
+                    },
+                    {
+                        val dfd = it //Todo remove
+                    })
             }
             imageRef.downloadUrl.addOnFailureListener {
                 val dfd = it //Todo remove
@@ -103,7 +107,9 @@ class PreviewFragment : SubNavigationFragment() {
             getString(com.ikhokha.common.R.string.error),
             errorMessage,
             getString(com.ikhokha.common.R.string.close)
-        )
+        ) {
+            onBackPressed()
+        }
     }
 
     private fun onProductAdded(product: Product) {
@@ -123,7 +129,9 @@ class PreviewFragment : SubNavigationFragment() {
             getString(com.ikhokha.common.R.string.error),
             errorMessage,
             getString(com.ikhokha.common.R.string.close)
-        )
+        ) {
+            onBackPressed()
+        }
     }
 
 }

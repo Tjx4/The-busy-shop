@@ -88,23 +88,8 @@ class ScanFragment : TopNavigationFragment() {
 
     private fun initScanner() {
         codeScanner = CodeScanner(requireActivity(), scanner_view).apply {
-            /*
-            camera = if (settings.isBackCamera) {
-                CodeScanner.CAMERA_BACK
-            } else {
-                CodeScanner.CAMERA_FRONT
-            }
-
-            autoFocusMode = if (settings.simpleAutoFocus) {
-                AutoFocusMode.SAFE
-            } else {
-                AutoFocusMode.CONTINUOUS
-            }
-            //formats = SupportedBarcodeFormats.FORMATS.filter(settings::isFormatSelected)
-            */
             scanMode = ScanMode.SINGLE
             isAutoFocusEnabled = true
-           // isFlashEnabled = true
             isTouchFocusEnabled = false
             decodeCallback = DecodeCallback(::handleScannedBarcode)
             errorCallback = ErrorCallback(::scannerError)
