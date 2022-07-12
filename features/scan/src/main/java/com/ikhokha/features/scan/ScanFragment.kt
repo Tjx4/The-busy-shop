@@ -16,10 +16,7 @@ import com.budiyev.android.codescanner.ScanMode
 import com.google.zxing.Result
 import com.ikhokha.common.base.fragment.TopNavigationFragment
 import com.ikhokha.common.constants.DURATION_SHORT
-import com.ikhokha.common.helpers.areAllPermissionsGranted
-import com.ikhokha.common.helpers.requestNotGrantedPermissions
-import com.ikhokha.common.helpers.showErrorDialog
-import com.ikhokha.common.helpers.vibratePhone
+import com.ikhokha.common.helpers.*
 import com.ikhokha.common.models.Product
 import com.ikhokha.features.scan.databinding.FragmentScanBinding
 import com.ikhokha.viewmodels.ScanViewModel
@@ -138,7 +135,6 @@ class ScanFragment : TopNavigationFragment() {
 
     fun onProductExist(productId: String) {
         scanViewModel.showLoading.value = true
-
         //Todo: fix viewModelScope
         scanViewModel.getViewModelScope().launch(Dispatchers.IO) {
             scanViewModel.incrementProduct(productId)
@@ -147,14 +143,22 @@ class ScanFragment : TopNavigationFragment() {
 
     fun onProductIncremented(product: Product) {
         scanViewModel.showLoading.value = false
-
+        showSuccessDialog(
+            requireContext(),
+            getString(com.ikhokha.common.R.string.success),
+            getString(com.ikhokha.common.R.string.product_incremented, product.description),
+            getString(com.ikhokha.common.R.string.ok)
+        ) {
+            codeScanner.startPreview()
+        }
+/*
         Toast.makeText(
             requireContext(),
             getString(com.ikhokha.common.R.string.product_incremented, product.description),
             Toast.LENGTH_SHORT
         ).show()
+*/
 
-        codeScanner.startPreview()
     }
 
     private fun onProductIncrementError(errorMessage: String) {
