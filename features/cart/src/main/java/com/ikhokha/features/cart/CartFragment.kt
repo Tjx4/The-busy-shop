@@ -26,11 +26,6 @@ class CartFragment : TopNavigationFragment(), CartItemsAdapter.ProductListener {
     private val cartViewModel: CartViewModel by viewModel()
     private lateinit var cartItemsAdapter: CartItemsAdapter
 
-    override fun onStart() {
-        super.onStart()
-        drawerController.showBottomNav()
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         cartViewModel.products.observe(this) { onProductsSet(it) }
