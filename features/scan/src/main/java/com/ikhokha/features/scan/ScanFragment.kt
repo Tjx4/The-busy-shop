@@ -151,13 +151,6 @@ class ScanFragment : TopNavigationFragment() {
         ) {
             codeScanner.startPreview()
         }
-/*
-        Toast.makeText(
-            requireContext(),
-            getString(com.ikhokha.common.R.string.product_incremented, product.description),
-            Toast.LENGTH_SHORT
-        ).show()
-*/
 
     }
 
