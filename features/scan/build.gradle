@@ -47,7 +47,7 @@ dependencies {
     //Smooth progressbar
     implementation "com.github.castorflex.smoothprogressbar:library-circular:$smoothprogressbar"
     // Barcode Scanner
-    implementation "com.budiyev.android:code-scanner:$code_scanner"
+    implementation "com.github.yuriy-budiyev:code-scanner:$code_scanner"
 
     //Modules
     implementation project("$common")
