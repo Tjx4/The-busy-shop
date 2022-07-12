@@ -18,15 +18,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
 
-    <androidx.appcompat.widget.Toolbar
-        android:visibility="gone"
-        android:id="@+id/toolbar"
-        style="@style/ToolBarStyle"
-        app:logo="@drawable/ic_scan"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <com.google.android.material.bottomnavigation.BottomNavigationView
         style="@style/NavigationBar"
         android:id="@+id/bnBottomNav"

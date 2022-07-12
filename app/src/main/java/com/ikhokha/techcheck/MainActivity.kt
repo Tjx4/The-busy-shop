@@ -31,8 +31,6 @@ class MainActivity : AppCompatActivity(), MyDrawerController {
         FirebaseApp.initializeApp(this)
         setContentView(R.layout.activity_main)
         navController = findNavController(R.id.navControllerFragment)
-
-        setSupportActionBar(toolbar)
         initBottomNavBar()
     }
 

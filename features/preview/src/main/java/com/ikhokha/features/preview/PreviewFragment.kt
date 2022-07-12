@@ -55,7 +55,7 @@ class PreviewFragment : SubNavigationFragment() {
             }
         }
 
-        btnBack.setOnClickListener {
+        tbPreview?.setNavigationOnClickListener  {
             onBackPressed()
         }
 

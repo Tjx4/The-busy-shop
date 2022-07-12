@@ -42,7 +42,8 @@ class SummaryFragment : SubNavigationFragment(), CartItemsAdapter.ProductListene
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        btnBack.setOnClickListener {
+
+        tbSummary?.setNavigationOnClickListener  {
             onBackPressed()
         }
 

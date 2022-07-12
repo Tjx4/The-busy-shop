@@ -55,7 +55,7 @@ class CartFragment : TopNavigationFragment(), CartItemsAdapter.ProductListener {
             onProductsSet(it)
         }
 
-        btnBack.setOnClickListener {
+        tbCart?.setNavigationOnClickListener  {
             onBackPressed()
         }
 
