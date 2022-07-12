@@ -43,7 +43,7 @@
 
         <Button
             style="@style/BlackRoundedButton"
-            android:visibility="@{!cartViewModel.showLoading}"
+            android:visibility="@{!cartViewModel.showLoading &amp;&amp; cartViewModel.products.size() > 0}"
             android:id="@+id/btnClear"
             android:layout_width="match_parent"
             android:text="@string/clear"
@@ -52,7 +52,7 @@
 
         <Button
             style="@style/BlackRoundedButton"
-            android:visibility="@{!cartViewModel.showLoading}"
+            android:visibility="@{!cartViewModel.showLoading &amp;&amp; cartViewModel.products.size() > 0}"
             android:id="@+id/btnCheckout"
             android:layout_width="match_parent"
             android:text="@string/checkout"
