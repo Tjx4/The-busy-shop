@@ -43,7 +43,7 @@ class SummaryFragment : SubNavigationFragment(), CartItemsAdapter.ProductListene
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        tbSummary?.setNavigationOnClickListener  {
+        tbSummary?.setNavigationOnClickListener {
             onBackPressed()
         }
 
@@ -62,7 +62,11 @@ class SummaryFragment : SubNavigationFragment(), CartItemsAdapter.ProductListene
 
         itemsLayoutManager.initialPrefetchItemCount = products.size
         rvCartItems?.layoutManager = itemsLayoutManager
-        cartItemsAdapter = CartItemsAdapter(requireContext(), products, com.ikhokha.features.common.R.layout.summary_item_layout)
+        cartItemsAdapter = CartItemsAdapter(
+            requireContext(),
+            products,
+            com.ikhokha.features.common.R.layout.summary_item_layout
+        )
         cartItemsAdapter?.addProductListener(this)
         rvCartItems?.adapter = cartItemsAdapter
 

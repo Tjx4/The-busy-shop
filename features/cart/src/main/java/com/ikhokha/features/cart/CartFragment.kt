@@ -55,12 +55,11 @@ class CartFragment : TopNavigationFragment(), CartItemsAdapter.ProductListener {
             onProductsSet(it)
         }
 
-        tbCart?.setNavigationOnClickListener  {
+        tbCart?.setNavigationOnClickListener {
             onBackPressed()
         }
 
         btnClear.setOnClickListener {
-
             showConfirmDialog(
                 requireContext(),
                 getString(com.ikhokha.common.R.string.confirm),
@@ -88,7 +87,11 @@ class CartFragment : TopNavigationFragment(), CartItemsAdapter.ProductListener {
 
         itemsLayoutManager.initialPrefetchItemCount = products.size
         rvCartItems?.layoutManager = itemsLayoutManager
-        cartItemsAdapter = CartItemsAdapter(requireContext(), products, com.ikhokha.features.common.R.layout.cart_item_layout)
+        cartItemsAdapter = CartItemsAdapter(
+            requireContext(),
+            products,
+            com.ikhokha.features.common.R.layout.cart_item_layout
+        )
         cartItemsAdapter?.addProductListener(this)
         rvCartItems?.adapter = cartItemsAdapter
 
