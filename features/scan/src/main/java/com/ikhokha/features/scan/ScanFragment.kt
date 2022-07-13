@@ -75,7 +75,7 @@ class ScanFragment : TopNavigationFragment() {
             scanViewModel.checkCartItems()
 
             //Todo: definately remove
-            delay(500)
+            delay(1000)
             withContext(Dispatchers.Main) {
                 scanner_view?.visibility = View.VISIBLE
             }

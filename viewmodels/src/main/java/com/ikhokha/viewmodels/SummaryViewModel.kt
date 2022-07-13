@@ -37,7 +37,7 @@ class SummaryViewModel(application: Application, val productsRepository: Product
     init {
         _showLoading.value = true
         viewModelScope.launch(Dispatchers.IO) {
-            delay(500)
+            delay(1000)
             getCartItems()
         }
     }
