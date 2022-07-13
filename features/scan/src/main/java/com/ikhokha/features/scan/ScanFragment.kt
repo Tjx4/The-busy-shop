@@ -75,11 +75,11 @@ class ScanFragment : TopNavigationFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        checkPermissions()
         initScanner()
         handleZoomChanged()
         onZoomDecreaseClicked()
         onZoomIncreaseClicked()
+        checkPermissions()
 
         //Todo: fix viewModelScope
         scanViewModel.getViewModelScope().launch(Dispatchers.IO) {
@@ -184,7 +184,7 @@ class ScanFragment : TopNavigationFragment() {
 
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 if (fromUser) {
-                    codeScanner?.zoom = progress
+                    codeScanner.zoom = progress
                 }
             }
         })
@@ -192,7 +192,7 @@ class ScanFragment : TopNavigationFragment() {
 
     private fun onZoomDecreaseClicked() {
         imgBtnDecreaseZoom.setOnClickListener {
-            codeScanner?.apply {
+            codeScanner.apply {
                 if (zoom > zoomStep) {
                     zoom -= zoomStep
                 } else {
@@ -205,7 +205,7 @@ class ScanFragment : TopNavigationFragment() {
 
     private fun onZoomIncreaseClicked() {
         imgBtnIncreaseZoom.setOnClickListener {
-            codeScanner?.apply {
+            codeScanner.apply {
                 if (zoom < maxZoom - zoomStep) {
                     zoom += zoomStep
                 } else {
@@ -232,7 +232,6 @@ class ScanFragment : TopNavigationFragment() {
             error?.message ?: getString(com.ikhokha.common.R.string.scanner_error),
             getString(com.ikhokha.common.R.string.close)
         ) {
-            initZoomSeekBar()
             codeScanner.startPreview()
         }
     }
@@ -257,7 +256,6 @@ class ScanFragment : TopNavigationFragment() {
             getString(com.ikhokha.common.R.string.product_incremented, product.description),
             getString(com.ikhokha.common.R.string.ok)
         ) {
-            initZoomSeekBar()
             codeScanner.startPreview()
         }
 
