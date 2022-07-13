@@ -110,5 +110,4 @@ class SummaryFragment : SubNavigationFragment(), CartItemsAdapter.ProductListene
     override fun onDeleteProductClicked(product: Product, position: Int) {
         /* No opp */
     }
-
 }
