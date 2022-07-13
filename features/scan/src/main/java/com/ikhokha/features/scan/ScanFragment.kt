@@ -38,7 +38,7 @@ class ScanFragment : TopNavigationFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         scanViewModel.addProduct.observe(this) { onNewProduct(it) }
-        scanViewModel.incrementProduct.observe(this) { onProductExist(it) }
+        scanViewModel.incrementProduct.observe(this) { onExistingProduct(it) }
         scanViewModel.cartItemCount.observe(this) { onCartItemsSet(it) }
         scanViewModel.noCartItems.observe(this) { onNoCartItems() }
         scanViewModel.incrementedProduct.observe(this) { onProductIncremented(it) }
@@ -144,14 +144,16 @@ class ScanFragment : TopNavigationFragment() {
             getString(com.ikhokha.common.R.string.error),
             error?.message ?: getString(com.ikhokha.common.R.string.scanner_error),
             getString(com.ikhokha.common.R.string.close)
-        )
+        ) {
+            codeScanner.startPreview()
+        }
     }
 
     private fun onNewProduct(productId: String) {
         drawerController.navigateFromScannerToPreview(productId)
     }
 
-    private fun onProductExist(productId: String) {
+    private fun onExistingProduct(productId: String) {
         scanViewModel.showLoading.value = true
         //Todo: fix viewModelScope
         scanViewModel.getViewModelScope().launch(Dispatchers.IO) {
