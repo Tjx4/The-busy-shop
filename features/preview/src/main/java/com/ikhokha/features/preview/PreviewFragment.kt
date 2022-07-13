@@ -77,7 +77,7 @@ class PreviewFragment : SubNavigationFragment() {
             previewViewModel.isItemExist()
         }
 
-        //Todo: handle firebase storage
+        imgProduct.setImageResource(com.ikhokha.common.R.drawable.ic_placeholder)
         product.image?.let {
             val firebaseStorageRef = previewViewModel.getFirebaseStorageRef()
             val imageRef = firebaseStorageRef.child(it)
@@ -86,17 +86,8 @@ class PreviewFragment : SubNavigationFragment() {
                 imgProduct?.loadImageFromUrl(
                     requireContext(),
                     imageURL,
-                    com.ikhokha.common.R.drawable.ic_placeholder,
-                    {
-                        val dfd = it //Todo remove
-                    },
-                    {
-                        val dfd = it //Todo remove
-                    }
+                    com.ikhokha.common.R.drawable.ic_placeholder
                 )
-            }
-            imageRef.downloadUrl.addOnFailureListener {
-                val dfd = it //Todo remove
             }
         }
     }
