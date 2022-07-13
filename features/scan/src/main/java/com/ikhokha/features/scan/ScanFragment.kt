@@ -81,12 +81,13 @@ class ScanFragment : TopNavigationFragment() {
             scanViewModel.checkCartItems()
         }
 
-        scanner_view?.visibility = View.VISIBLE
+        //Todo:
+       // scanner_view?.visibility = View.VISIBLE
     }
 
     override fun onTransitionAnimationComplete(oldFragment: BaseFragment) {
         super.onTransitionAnimationComplete(oldFragment)
-        scanner_view?.visibility = View.VISIBLE
+        //scanner_view?.visibility = View.VISIBLE
     }
 
     private fun requestPermissions() {

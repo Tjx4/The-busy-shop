@@ -12,10 +12,10 @@ import com.bumptech.glide.request.target.Target
 
 fun ImageView.loadImageFromUrl(context: Context, url: String, placeHolderPic: Int?, successCallback: () -> Unit = {}, errorCallback: () -> Unit = {}) {
     val imageView = this
-
-
     val requestBuilder = Glide.with(context).load(url)
-    placeHolderPic?.let { requestBuilder.placeholder(it) }
+    placeHolderPic?.let {
+        requestBuilder.placeholder(it)
+    }
     requestBuilder.fitCenter()
         .listener(object : RequestListener<Drawable> {
             override fun onLoadFailed(

@@ -85,6 +85,7 @@
             app:layout_constraintTop_toBottomOf="@+id/clHeaders"/>
 
         <TextView
+            android:visibility="@{!summaryViewModel.showLoading}"
             android:id="@+id/tvTotalPrice"
             style="@style/NormalTextView"
             android:layout_width="wrap_content"
@@ -100,6 +101,7 @@
             app:layout_constraintRight_toRightOf="parent"/>
 
         <TextView
+            android:visibility="@{!summaryViewModel.showLoading}"
             android:id="@+id/tvOrderDate"
             style="@style/NormalTextView"
             android:layout_width="wrap_content"

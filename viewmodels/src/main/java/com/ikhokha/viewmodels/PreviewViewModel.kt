@@ -59,7 +59,8 @@ class PreviewViewModel(application: Application, val productsRepository: Product
         }
     }
 
-     fun getFirebaseStorageRef(): StorageReference {
+    //Todo: reconsider
+    fun getFirebaseStorageRef(): StorageReference {
         return productsRepository.firebaseStorageRef
      }
 
