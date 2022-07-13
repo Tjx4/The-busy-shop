@@ -20,6 +20,7 @@
     <string name="confirm">Confirm</string>
     <string name="error">Error</string>
     <string name="close">Close</string>
+    <string name="request">Request</string>
     <string name="success">Success</string>
     <string name="increment_error">Error incrementing product</string>
     <string name="product_add_error">Error adding product</string>
@@ -28,4 +29,6 @@
     <string name="description">Description</string>
     <string name="quantity">Quantity</string>
     <string name="price">Price</string>
+    <string name="scanner_error">Scanner error</string>
+    <string name="camera_permission">You need to give access to your camera inorder to use this app</string>
 </resources>

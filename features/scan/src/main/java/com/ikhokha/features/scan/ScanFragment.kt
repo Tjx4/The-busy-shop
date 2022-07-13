@@ -60,7 +60,7 @@ class ScanFragment : TopNavigationFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initScanner()
-        requestPermissions()
+        checkPermissions()
         //Todo: fix viewModelScope
         scanViewModel.getViewModelScope().launch(Dispatchers.IO) {
             scanViewModel.checkCartItems()
@@ -74,14 +74,55 @@ class ScanFragment : TopNavigationFragment() {
         }
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        if (requestCode == PERMISSION_REQUEST_CODE && areAllPermissionsGranted(requireContext(), PERMISSIONS)) {
-            codeScanner.startPreview()
+    fun checkPermissions() {
+        when (areAllPermissionsGranted(requireContext(), PERMISSIONS)) {
+            true -> {
+                codeScanner.startPreview()
+            }
+            else -> requestPermissions()
         }
     }
 
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        when (requestCode == PERMISSION_REQUEST_CODE && areAllPermissionsGranted(
+            requireContext(),
+            PERMISSIONS
+        )) {
+            true -> {
+                codeScanner.startPreview()
+            }
+            else -> {
+                showPermissionDialog()
+            }
+        }
+    }
+
+    private fun showPermissionDialog() {
+        showConfirmDialog(
+            requireContext(),
+            getString(com.ikhokha.common.R.string.confirm),
+            getString(com.ikhokha.common.R.string.camera_permission),
+            getString(com.ikhokha.common.R.string.request),
+            getString(com.ikhokha.common.R.string.close),
+            {
+                requestPermissions()
+            },
+            {
+                requireActivity().finish()
+            }
+        )
+    }
+
     private fun requestPermissions() {
-        requestNotGrantedPermissions(requireActivity() as AppCompatActivity, PERMISSIONS, PERMISSION_REQUEST_CODE)
+        requestNotGrantedPermissions(
+            requireActivity() as AppCompatActivity,
+            PERMISSIONS,
+            PERMISSION_REQUEST_CODE
+        )
     }
 
     private fun initScanner() {
@@ -103,20 +144,20 @@ class ScanFragment : TopNavigationFragment() {
         }
     }
 
-    fun scannerError(error: Throwable?) {
+    private fun scannerError(error: Throwable?) {
         showErrorDialog(
             requireContext(),
             getString(com.ikhokha.common.R.string.error),
-            error?.message ?: getString(R.string.scanner_error),
+            error?.message ?: getString(com.ikhokha.common.R.string.scanner_error),
             getString(com.ikhokha.common.R.string.close)
         )
     }
 
-    fun onNewProduct(productId: String) {
+    private fun onNewProduct(productId: String) {
         drawerController.navigateFromScannerToPreview(productId)
     }
 
-    fun onProductExist(productId: String) {
+    private fun onProductExist(productId: String) {
         scanViewModel.showLoading.value = true
         //Todo: fix viewModelScope
         scanViewModel.getViewModelScope().launch(Dispatchers.IO) {
@@ -124,7 +165,7 @@ class ScanFragment : TopNavigationFragment() {
         }
     }
 
-    fun onProductIncremented(product: Product) {
+    private fun onProductIncremented(product: Product) {
         scanViewModel.showLoading.value = false
         showSuccessDialog(
             requireContext(),
@@ -146,11 +187,11 @@ class ScanFragment : TopNavigationFragment() {
         )
     }
 
-    fun onCartItemsSet(cartItemCount: Int) {
+    private fun onCartItemsSet(cartItemCount: Int) {
         drawerController.showBadge("$cartItemCount")
     }
 
-    fun onNoCartItems() {
+    private fun onNoCartItems() {
         drawerController.removeBadge()
     }
 

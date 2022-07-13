@@ -92,7 +92,7 @@ class CartFragment : TopNavigationFragment(), CartItemsAdapter.ProductListener {
             products,
             com.ikhokha.features.common.R.layout.cart_item_layout
         )
-        cartItemsAdapter?.addProductListener(this)
+        cartItemsAdapter.addProductListener(this)
         rvCartItems?.adapter = cartItemsAdapter
 
         rvCartItems.runWhenReady {

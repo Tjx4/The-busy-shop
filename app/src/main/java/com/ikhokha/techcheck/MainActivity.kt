@@ -35,6 +35,15 @@ class MainActivity : AppCompatActivity(), MyDrawerController {
         initBottomNavBar()
     }
 
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        currentFragment?.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    }
+
     override fun initBottomNavBar() {
         val navMenuItems = arrayListOf(
             NavMenuItem(0, R.id.scanFragment),
