@@ -31,4 +31,16 @@ abstract class BaseFragment : Fragment() {
         drawerController.exitApp()
     }
 
+   override fun onDestroyView() {
+        super.onDestroyView()
+       drawerController.lastViewDestroyed(this)
+    }
+
+    open fun lastViewDestroyed(oldFragment: BaseFragment) {
+        onTransitionAnimationComplete()
+    }
+
+    open fun onTransitionAnimationComplete(){
+        /* No op */
+    }
 }

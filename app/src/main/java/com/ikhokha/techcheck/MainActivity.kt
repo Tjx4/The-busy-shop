@@ -122,6 +122,10 @@ class MainActivity : AppCompatActivity(), MyDrawerController {
         navController.navigate(action)
     }
 
+    override fun lastViewDestroyed(baseFragment: BaseFragment) {
+        currentFragment?.lastViewDestroyed(baseFragment)
+    }
+
     override fun onBackPressed() {
         when (currentFragment is TopNavigationFragment) {
             true -> handleTopNavigation()

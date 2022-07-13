@@ -44,10 +44,6 @@ class CartViewModel(application: Application, val productsRepository: ProductsRe
 
     init {
         _showLoading.value = true
-        viewModelScope.launch(Dispatchers.IO) {
-            delay(500)
-            getCartItems()
-        }
     }
 
     suspend fun getCartItems() {

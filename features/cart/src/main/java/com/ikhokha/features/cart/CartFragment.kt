@@ -4,14 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.view.ViewTreeObserver
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ikhokha.common.base.fragment.TopNavigationFragment
 import com.ikhokha.common.extensions.runWhenReady
 import com.ikhokha.common.helpers.showConfirmDialog
 import com.ikhokha.common.helpers.showErrorDialog
-import com.ikhokha.common.helpers.showSuccessDialog
 import com.ikhokha.common.models.Product
 import com.ikhokha.features.cart.databinding.FragmentCartBinding
 import com.ikhokha.features.common.adapters.CartItemsAdapter
@@ -50,9 +49,17 @@ class CartFragment : TopNavigationFragment(), CartItemsAdapter.ProductListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    override fun onTransitionAnimationComplete() {
+        super.onTransitionAnimationComplete()
 
         cartViewModel.products.value?.let {
             onProductsSet(it)
+        }?: run {
+            cartViewModel.getViewModelScope().launch(Dispatchers.IO) {
+                cartViewModel.getCartItems()
+            }
         }
 
         tbCart?.setNavigationOnClickListener {
@@ -160,5 +167,20 @@ class CartFragment : TopNavigationFragment(), CartItemsAdapter.ProductListener {
     override fun onHardwareBackPressed() {
         super.onHardwareBackPressed()
         clParent.visibility = View.INVISIBLE
+    }
+
+    inline fun View.waitForLayout(crossinline yourAction: () -> Unit) {
+        val vto = viewTreeObserver
+        vto.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+            override fun onGlobalLayout() {
+                when {
+                    vto.isAlive -> {
+                        vto.removeOnGlobalLayoutListener(this)
+                        yourAction()
+                    }
+                    else -> viewTreeObserver.removeOnGlobalLayoutListener(this)
+                }
+            }
+        })
     }
 }
