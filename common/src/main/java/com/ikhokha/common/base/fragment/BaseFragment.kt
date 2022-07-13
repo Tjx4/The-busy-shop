@@ -23,6 +23,10 @@ abstract class BaseFragment : Fragment() {
         drawerController.currentFragment = this
     }
 
+    open fun onHardwareBackPressed() {
+        /* No op */
+    }
+
     open fun onBackPressed() {
         drawerController.exitApp()
     }

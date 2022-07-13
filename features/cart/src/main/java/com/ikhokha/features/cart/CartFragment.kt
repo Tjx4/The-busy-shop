@@ -152,4 +152,13 @@ class CartFragment : TopNavigationFragment(), CartItemsAdapter.ProductListener {
         )
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        clParent.visibility = View.INVISIBLE
+    }
+
+    override fun onHardwareBackPressed() {
+        super.onHardwareBackPressed()
+        clParent.visibility = View.INVISIBLE
+    }
 }

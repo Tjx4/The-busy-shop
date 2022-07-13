@@ -158,9 +158,11 @@ class MainActivity : AppCompatActivity(), MyDrawerController {
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
+            currentFragment?.onHardwareBackPressed()
+
             when (currentFragment is TopNavigationFragment) {
                 true -> handleTopNavigation()
-                else -> currentFragment?.onBackPressed()
+                else -> { /* No opp */ }
             }
         }
 
