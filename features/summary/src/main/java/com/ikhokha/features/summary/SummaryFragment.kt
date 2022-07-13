@@ -9,8 +9,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ikhokha.common.base.fragment.BaseFragment
 import com.ikhokha.common.base.fragment.SubNavigationFragment
-import com.ikhokha.common.base.fragment.TopNavigationFragment
 import com.ikhokha.common.extensions.runWhenReady
+import com.ikhokha.common.helpers.showErrorDialog
 import com.ikhokha.common.models.Product
 import com.ikhokha.features.common.adapters.CartItemsAdapter
 import com.ikhokha.features.summary.databinding.FragmentSummaryBinding
@@ -28,7 +28,7 @@ class SummaryFragment : SubNavigationFragment(), CartItemsAdapter.ProductListene
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         summaryViewModel.products.observe(this) { onProductsSet(it) }
-        summaryViewModel.productsError.observe(this) { onProductsError(it) }
+        summaryViewModel.productsError.observe(this) { onNoProducts(it) }
     }
 
     override fun onCreateView(
@@ -94,8 +94,13 @@ class SummaryFragment : SubNavigationFragment(), CartItemsAdapter.ProductListene
         }
     }
 
-    private fun onProductsError(product: String) {
-
+    private fun onNoProducts(errorMessage: String) {
+        showErrorDialog(
+            requireContext(),
+            getString(com.ikhokha.common.R.string.error),
+            getString(com.ikhokha.common.R.string.no_summary_products),
+            getString(com.ikhokha.common.R.string.close)
+        )
     }
 
     override fun onProductClicked(product: Product, position: Int) {

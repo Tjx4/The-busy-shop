@@ -107,8 +107,6 @@ class CartFragment : TopNavigationFragment(), CartItemsAdapter.ProductListener {
 
         rvCartItems.runWhenReady {
             cartViewModel.showLoading.value = false
-            //Todo: use or remove
-            // cartViewModel.showAddButtons.value = true
         }
     }
 
