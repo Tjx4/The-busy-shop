@@ -30,7 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{previewViewModel.product.description}"
-                tools:text="Name"
+                tools:text="@string/name"
                 android:layout_gravity="center"/>
 
         </androidx.appcompat.widget.Toolbar>

@@ -16,6 +16,7 @@
     <string name="product_added">%1$s has been added to your cart</string>
     <string name="product_incremented">%1$s incremented by 1"</string>
     <string name="notice">Notice</string>
+    <string name="name">Name</string>
     <string name="ok">Ok</string>
     <string name="cancel">Cancel</string>
     <string name="confirm">Confirm</string>
