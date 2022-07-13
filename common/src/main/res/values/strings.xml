@@ -33,4 +33,5 @@
     <string name="price">Price</string>
     <string name="scanner_error">Scanner error</string>
     <string name="camera_permission">You need to give permission to your camera inorder to use this app</string>
+    <string name="scan_barcode">Scan barcode</string>
 </resources>
