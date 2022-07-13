@@ -52,13 +52,6 @@ class ScanFragment : TopNavigationFragment() {
         scanViewModel.incrementProductError.observe(this) { onProductIncrementError(it) }
     }
 
-    override fun onResume() {
-        super.onResume()
-        if (areAllPermissionsGranted(requireContext(), PERMISSIONS)) {
-            codeScanner.startPreview()
-        }
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
