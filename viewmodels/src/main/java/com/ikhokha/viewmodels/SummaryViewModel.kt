@@ -8,8 +8,6 @@ import com.ikhokha.common.helpers.getTotalPrice
 import com.ikhokha.common.models.Product
 import com.ikhokha.repositories.products.ProductsRepository
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class SummaryViewModel(application: Application, val productsRepository: ProductsRepository) : BaseViewModel(application)  {
@@ -36,10 +34,6 @@ class SummaryViewModel(application: Application, val productsRepository: Product
 
     init {
         _showLoading.value = true
-        viewModelScope.launch(Dispatchers.IO) {
-            delay(500)
-            getCartItems()
-        }
     }
 
     suspend fun getCartItems() {

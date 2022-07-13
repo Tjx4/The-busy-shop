@@ -123,7 +123,7 @@ class MainActivity : AppCompatActivity(), MyDrawerController {
     }
 
     override fun lastViewDestroyed(baseFragment: BaseFragment) {
-        currentFragment?.lastViewDestroyed(baseFragment)
+        currentFragment?.onTransitionAnimationComplete(baseFragment)
     }
 
     override fun onBackPressed() {

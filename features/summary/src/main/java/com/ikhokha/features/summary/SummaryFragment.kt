@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.ikhokha.common.base.fragment.BaseFragment
 import com.ikhokha.common.base.fragment.SubNavigationFragment
 import com.ikhokha.common.base.fragment.TopNavigationFragment
 import com.ikhokha.common.extensions.runWhenReady
@@ -15,6 +16,8 @@ import com.ikhokha.features.common.adapters.CartItemsAdapter
 import com.ikhokha.features.summary.databinding.FragmentSummaryBinding
 import com.ikhokha.viewmodels.SummaryViewModel
 import kotlinx.android.synthetic.main.fragment_summary.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SummaryFragment : SubNavigationFragment(), CartItemsAdapter.ProductListener {
@@ -43,6 +46,10 @@ class SummaryFragment : SubNavigationFragment(), CartItemsAdapter.ProductListene
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        summaryViewModel.products.value?.let {
+            onProductsSet(it)
+        }
+
         tbSummary?.setNavigationOnClickListener {
             onBackPressed()
         }
@@ -56,7 +63,18 @@ class SummaryFragment : SubNavigationFragment(), CartItemsAdapter.ProductListene
         }
     }
 
+    override fun onTransitionAnimationComplete(oldFragment: BaseFragment) {
+        super.onTransitionAnimationComplete(oldFragment)
+
+        summaryViewModel.products.value?.let { /* No opp */ } ?: run {
+            summaryViewModel.getViewModelScope().launch(Dispatchers.IO) {
+                summaryViewModel.getCartItems()
+            }
+        }
+    }
+
     private fun onProductsSet(products: List<Product>) {
+
         val itemsLayoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 

@@ -15,6 +15,7 @@ import com.budiyev.android.codescanner.DecodeCallback
 import com.budiyev.android.codescanner.ErrorCallback
 import com.budiyev.android.codescanner.ScanMode
 import com.google.zxing.Result
+import com.ikhokha.common.base.fragment.BaseFragment
 import com.ikhokha.common.base.fragment.TopNavigationFragment
 import com.ikhokha.common.constants.SHORT_VIBRATION_DURATION
 import com.ikhokha.common.helpers.*
@@ -74,16 +75,18 @@ class ScanFragment : TopNavigationFragment() {
         super.onViewCreated(view, savedInstanceState)
         initScanner()
         checkPermissions()
+
         //Todo: fix viewModelScope
         scanViewModel.getViewModelScope().launch(Dispatchers.IO) {
             scanViewModel.checkCartItems()
-
-            //Todo: definately remove
-            delay(500)
-            withContext(Dispatchers.Main) {
-                scanner_view?.visibility = View.VISIBLE
-            }
         }
+
+        scanner_view?.visibility = View.VISIBLE
+    }
+
+    override fun onTransitionAnimationComplete(oldFragment: BaseFragment) {
+        super.onTransitionAnimationComplete(oldFragment)
+        scanner_view?.visibility = View.VISIBLE
     }
 
     private fun requestPermissions() {

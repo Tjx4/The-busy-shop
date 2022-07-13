@@ -36,11 +36,8 @@ abstract class BaseFragment : Fragment() {
        drawerController.lastViewDestroyed(this)
     }
 
-    open fun lastViewDestroyed(oldFragment: BaseFragment) {
-        onTransitionAnimationComplete()
-    }
-
-    open fun onTransitionAnimationComplete(){
+    open fun onTransitionAnimationComplete(oldFragment: BaseFragment) {
+        val dd = 0
         /* No op */
     }
 }

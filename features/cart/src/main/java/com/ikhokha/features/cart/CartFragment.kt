@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.ikhokha.common.base.fragment.BaseFragment
 import com.ikhokha.common.base.fragment.TopNavigationFragment
 import com.ikhokha.common.extensions.runWhenReady
 import com.ikhokha.common.helpers.showConfirmDialog
@@ -49,17 +50,9 @@ class CartFragment : TopNavigationFragment(), CartItemsAdapter.ProductListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-    }
-
-    override fun onTransitionAnimationComplete() {
-        super.onTransitionAnimationComplete()
 
         cartViewModel.products.value?.let {
             onProductsSet(it)
-        }?: run {
-            cartViewModel.getViewModelScope().launch(Dispatchers.IO) {
-                cartViewModel.getCartItems()
-            }
         }
 
         tbCart?.setNavigationOnClickListener {
@@ -85,6 +78,16 @@ class CartFragment : TopNavigationFragment(), CartItemsAdapter.ProductListener {
 
         btnCheckout.setOnClickListener {
             drawerController.navigateFromCartToSummary()
+        }
+    }
+
+    override fun onTransitionAnimationComplete(oldFragment: BaseFragment) {
+        super.onTransitionAnimationComplete(oldFragment)
+
+        cartViewModel.products.value?.let { /* No opp */ } ?: run {
+            cartViewModel.getViewModelScope().launch(Dispatchers.IO) {
+                cartViewModel.getCartItems()
+            }
         }
     }
 
