@@ -99,8 +99,8 @@ class MainActivity : AppCompatActivity(), MyDrawerController {
             it.visibility = View.VISIBLE
 
             it.animate()
-                //.translationY(0f)
-                .alpha(1f)
+                .translationY(0f)
+                //.alpha(1f)
                 .setDuration(200)
                 .setListener(object : AnimatorListenerAdapter() {
                     override fun onAnimationEnd(animation: Animator?) {
@@ -113,8 +113,8 @@ class MainActivity : AppCompatActivity(), MyDrawerController {
     override fun hideBottomNav() {
         bnBottomNav?.let {
             it.animate()
-                //.translationY(it.height.toFloat())
-                .alpha(0.0f)
+                .translationY(it.height.toFloat())
+                //.alpha(0.0f)
                 .setDuration(200)
                 .setListener(object : AnimatorListenerAdapter() {
                     override fun onAnimationEnd(animation: Animator?) {
