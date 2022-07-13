@@ -180,6 +180,7 @@ class ScanFragment : TopNavigationFragment() {
 
     private fun onZoomDecreaseClicked() {
         imgBtnDecreaseZoom.setOnClickListener {
+            vibratePhone(requireContext(), SHORT_VIBRATION_DURATION)
             codeScanner.apply {
                 if (zoom > zoomStep) {
                     zoom -= zoomStep
@@ -193,6 +194,7 @@ class ScanFragment : TopNavigationFragment() {
 
     private fun onZoomIncreaseClicked() {
         imgBtnIncreaseZoom.setOnClickListener {
+            vibratePhone(requireContext(), SHORT_VIBRATION_DURATION)
             codeScanner.apply {
                 if (zoom < maxZoom - zoomStep) {
                     zoom += zoomStep
