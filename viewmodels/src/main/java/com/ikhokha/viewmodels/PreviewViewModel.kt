@@ -61,7 +61,7 @@ class PreviewViewModel(application: Application, val productsRepository: Product
 
      fun getFirebaseStorageRef(): StorageReference {
         return productsRepository.firebaseStorageRef
-    }
+     }
 
     suspend fun addProductToCart() {
         val product = _product.value
