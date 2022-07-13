@@ -74,7 +74,6 @@ class SummaryFragment : SubNavigationFragment(), CartItemsAdapter.ProductListene
     }
 
     private fun onProductsSet(products: List<Product>) {
-
         val itemsLayoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 

@@ -96,7 +96,6 @@ class MainActivity : AppCompatActivity(), MyDrawerController {
 
             it.animate()
                 .translationY(0f)
-                //.alpha(1f)
                 .setDuration(0)
                 .setListener(object : AnimatorListenerAdapter() {
                     override fun onAnimationEnd(animation: Animator?) {
@@ -110,7 +109,6 @@ class MainActivity : AppCompatActivity(), MyDrawerController {
         bnBottomNav?.let {
             it.animate()
                 .translationY(it.height.toFloat())
-                //.alpha(0.0f)
                 .setDuration(200)
                 .setListener(object : AnimatorListenerAdapter() {
                     override fun onAnimationEnd(animation: Animator?) {
@@ -122,7 +120,7 @@ class MainActivity : AppCompatActivity(), MyDrawerController {
     }
 
     fun handleTopNavigation() {
-        navMenuItems?.get(0)?.let { home ->
+        navMenuItems?.first()?.let { home ->
             when (bnBottomNav.selectedItemId) {
                 home.fragment -> finish()
                 else -> bnBottomNav.selectedItemId = home.fragment
