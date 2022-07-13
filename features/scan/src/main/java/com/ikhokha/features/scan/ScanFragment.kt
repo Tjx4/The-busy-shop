@@ -20,7 +20,9 @@ import com.ikhokha.features.scan.databinding.FragmentScanBinding
 import com.ikhokha.viewmodels.ScanViewModel
 import kotlinx.android.synthetic.main.fragment_scan.*
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ScanFragment : TopNavigationFragment() {
@@ -71,6 +73,12 @@ class ScanFragment : TopNavigationFragment() {
         //Todo: fix viewModelScope
         scanViewModel.getViewModelScope().launch(Dispatchers.IO) {
             scanViewModel.checkCartItems()
+
+            //Todo: definately remove
+            delay(1000)
+            withContext(Dispatchers.Main) {
+                scanner_view?.visibility = View.VISIBLE
+            }
         }
     }
 
