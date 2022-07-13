@@ -45,6 +45,13 @@ class ScanFragment : TopNavigationFragment() {
         scanViewModel.incrementProductError.observe(this) { onProductIncrementError(it) }
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (areAllPermissionsGranted(requireContext(), PERMISSIONS)) {
+            codeScanner.startPreview()
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -67,18 +74,17 @@ class ScanFragment : TopNavigationFragment() {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        if (areAllPermissionsGranted(requireContext(), PERMISSIONS)) {
-            codeScanner.startPreview()
-        }
+    private fun requestPermissions() {
+        requestNotGrantedPermissions(
+            requireActivity() as AppCompatActivity,
+            PERMISSIONS,
+            PERMISSION_REQUEST_CODE
+        )
     }
 
-    fun checkPermissions() {
+    private fun checkPermissions() {
         when (areAllPermissionsGranted(requireContext(), PERMISSIONS)) {
-            true -> {
-                codeScanner.startPreview()
-            }
+            true -> codeScanner.startPreview()
             else -> requestPermissions()
         }
     }
@@ -92,12 +98,8 @@ class ScanFragment : TopNavigationFragment() {
             requireContext(),
             PERMISSIONS
         )) {
-            true -> {
-                codeScanner.startPreview()
-            }
-            else -> {
-                showPermissionDialog()
-            }
+            true -> codeScanner.startPreview()
+            else -> showPermissionDialog()
         }
     }
 
@@ -114,14 +116,6 @@ class ScanFragment : TopNavigationFragment() {
             {
                 requireActivity().finish()
             }
-        )
-    }
-
-    private fun requestPermissions() {
-        requestNotGrantedPermissions(
-            requireActivity() as AppCompatActivity,
-            PERMISSIONS,
-            PERMISSION_REQUEST_CODE
         )
     }
 
