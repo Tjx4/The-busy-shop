@@ -11,10 +11,10 @@
         <action
             android:id="@+id/action_scanFragment_to_previewFragment"
             app:destination="@id/previewFragment"
-            app:enterAnim="@anim/slide_in_right_and_fade"
+            app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/no_transition"
             app:popEnterAnim="@anim/no_transition"
-            app:popExitAnim="@anim/slide_out_right_and_fade"
+            app:popExitAnim="@anim/slide_out_right"
             app:popUpToInclusive="false">
 
             <argument
@@ -31,19 +31,19 @@
         <action
             android:id="@+id/action_cartFragment_to_summaryFragment"
             app:destination="@id/summaryFragment"
-            app:enterAnim="@anim/slide_in_right_and_fade"
+            app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/no_transition"
             app:popEnterAnim="@anim/no_transition"
-            app:popExitAnim="@anim/slide_out_right_and_fade"
+            app:popExitAnim="@anim/slide_out_right"
             app:popUpToInclusive="false"/>
 
         <action
             android:id="@+id/action_cartFragment_to_previewFragment"
             app:destination="@id/previewFragment"
-            app:enterAnim="@anim/slide_in_right_and_fade"
+            app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/no_transition"
             app:popEnterAnim="@anim/no_transition"
-            app:popExitAnim="@anim/slide_out_right_and_fade"
+            app:popExitAnim="@anim/slide_out_right"
             app:popUpToInclusive="false">
 
             <argument
