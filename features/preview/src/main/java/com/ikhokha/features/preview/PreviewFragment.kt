@@ -92,13 +92,13 @@ class PreviewFragment : SubNavigationFragment() {
                     },
                     {
                         val dfd = it //Todo remove
-                    })
+                    }
+                )
             }
             imageRef.downloadUrl.addOnFailureListener {
                 val dfd = it //Todo remove
             }
         }
-
     }
 
     private fun onProductError(errorMessage: String) {
