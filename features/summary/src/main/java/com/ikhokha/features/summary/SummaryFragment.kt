@@ -43,17 +43,6 @@ class SummaryFragment : SubNavigationFragment(), CartItemsAdapter.ProductListene
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        tbSummary?.setNavigationOnClickListener {
-            onBackPressed()
-        }
-
-        btnProceed.setOnClickListener {
-            Toast.makeText(
-                requireContext(),
-                getString(com.ikhokha.common.R.string.proceed),
-                Toast.LENGTH_SHORT
-            ).show()
-        }
     }
 
     private fun onProductsSet(products: List<Product>) {
@@ -87,6 +76,22 @@ class SummaryFragment : SubNavigationFragment(), CartItemsAdapter.ProductListene
 
     override fun onDeleteProductClicked(product: Product, position: Int) {
         /* No opp */
+    }
+
+    override fun onNavigationAnimationEnds() {
+        super.onNavigationAnimationEnds()
+
+        tbSummary?.setNavigationOnClickListener {
+            onBackPressed()
+        }
+
+        btnProceed.setOnClickListener {
+            Toast.makeText(
+                requireContext(),
+                getString(com.ikhokha.common.R.string.proceed),
+                Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 
 }

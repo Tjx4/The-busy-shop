@@ -21,6 +21,7 @@ fun BottomNavigationView.setupWithCustomAnimNavController(myDrawerController: My
             .setPopUpTo(navController.graph.startDestination, false)
             .build()
 
+        //Todo: Remove
         val enterRightOption = NavOptions.Builder()
             .setLaunchSingleTop(true)
             .setEnterAnim(R.anim.fade_in)

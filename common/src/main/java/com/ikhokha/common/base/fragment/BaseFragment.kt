@@ -30,4 +30,27 @@ abstract class BaseFragment : Fragment() {
     open fun onBackPressed() {
         drawerController.exitApp()
     }
+
+
+
+    private var leavingDestination = false
+
+    fun navigateNext() {
+        leavingDestination = true
+        //findNavController().navigate(blaBlaBla)
+    }
+
+    open fun onNavigationAnimationEnds() {
+       val dd = 0
+    }
+
+    // We just need to add an extra check, to be sure that onNavigationAnimationEnds is not called on configuration change
+    override fun onDestroyView() {
+        super.onDestroyView()
+        if(leavingDestination) {
+            onNavigationAnimationEnds()
+            leavingDestination = false
+        }
+    }
+
 }

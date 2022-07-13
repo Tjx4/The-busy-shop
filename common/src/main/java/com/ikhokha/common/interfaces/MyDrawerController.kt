@@ -10,7 +10,6 @@ interface MyDrawerController {
 
     fun initBottomNavBar()
     fun onBackNav()
-    fun popAll()
     fun popBack()
     fun topNavBackClicked()
     fun exitApp()

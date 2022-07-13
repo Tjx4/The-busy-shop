@@ -58,10 +58,6 @@ class MainActivity : AppCompatActivity(), MyDrawerController {
         onBackPressed()
     }
 
-    override fun popAll() {
-        navController.popBackStack()
-    }
-
     override fun popBack() {
         navController.popBackStack()
     }
@@ -95,34 +91,11 @@ class MainActivity : AppCompatActivity(), MyDrawerController {
     }
 
     override fun showBottomNav() {
-        bnBottomNav?.let {
-            it.visibility = View.VISIBLE
-
-            it.animate()
-                .translationY(0f)
-                //.alpha(1f)
-                .setDuration(200)
-                .setListener(object : AnimatorListenerAdapter() {
-                    override fun onAnimationEnd(animation: Animator?) {
-                        super.onAnimationEnd(animation)
-                    }
-                })
-        }
+        bnBottomNav?.visibility = View.VISIBLE
     }
 
     override fun hideBottomNav() {
-        bnBottomNav?.let {
-            it.animate()
-                .translationY(it.height.toFloat())
-                //.alpha(0.0f)
-                .setDuration(200)
-                .setListener(object : AnimatorListenerAdapter() {
-                    override fun onAnimationEnd(animation: Animator?) {
-                        super.onAnimationEnd(animation)
-                        it.visibility = View.GONE
-                    }
-                })
-        }
+        bnBottomNav?.visibility = View.INVISIBLE
     }
 
     fun handleTopNavigation() {
@@ -135,16 +108,19 @@ class MainActivity : AppCompatActivity(), MyDrawerController {
     }
 
     override fun navigateFromScannerToPreview(productId: String) {
+        currentFragment?.navigateNext()
         val action = ScanFragmentDirections.actionScanFragmentToPreviewFragment(productId)
         navController.navigate(action)
     }
 
     override fun navigateFromCartToSummary() {
+        currentFragment?.navigateNext()
         val action = CartFragmentDirections.actionCartFragmentToSummaryFragment()
         navController.navigate(action)
     }
 
     override fun navigateFromCartToPreview(productId: String) {
+        currentFragment?.navigateNext()
         val action = CartFragmentDirections.actionCartFragmentToPreviewFragment(productId)
         navController.navigate(action)
     }
