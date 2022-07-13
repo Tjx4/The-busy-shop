@@ -12,7 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ScanFragment"
-        android:background="@color/light_background">
+        android:background="@color/light_background"
+        android:paddingBottom="?android:attr/actionBarSize">
 
         <com.budiyev.android.codescanner.CodeScannerView
             android:id="@+id/scanner_view"
@@ -20,12 +21,42 @@
             android:layout_height="match_parent"
             app:autoFocusButtonVisible="false"
             app:flashButtonVisible="false"
-            app:frameColor="@color/black"
+            app:frameColor="@color/white"
             app:frameThickness="5dp"
             app:frameAspectRatioWidth="6"
             app:frameAspectRatioHeight="2"
             app:frameSize="0.6"
-            app:maskColor="@color/trans_white"/>
+            app:maskColor="@color/transparent_black"/>
+
+        <ImageView
+            android:id="@+id/imgBtnDecreaseZoom"
+            android:layout_width="@dimen/button_zoom_size"
+            android:layout_height="@dimen/button_zoom_size"
+            android:layout_marginStart="@dimen/small_spacing"
+            android:layout_marginBottom="@dimen/large_spacing"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:tint="@color/white"
+            android:src="@drawable/ic_minus" />
+
+        <SeekBar
+            style="@style/SeekBarTheme"
+            android:id="@+id/seek_bar_zoom"
+            app:layout_constraintTop_toTopOf="@id/imgBtnDecreaseZoom"
+            app:layout_constraintBottom_toBottomOf="@id/imgBtnDecreaseZoom"
+            app:layout_constraintStart_toEndOf="@id/imgBtnDecreaseZoom"
+            app:layout_constraintEnd_toStartOf="@id/imgBtnIncreaseZoom" />
+
+        <ImageView
+            android:id="@+id/imgBtnIncreaseZoom"
+            android:layout_width="@dimen/button_zoom_size"
+            android:layout_height="@dimen/button_zoom_size"
+            android:layout_marginEnd="@dimen/small_spacing"
+            app:layout_constraintTop_toTopOf="@id/imgBtnDecreaseZoom"
+            app:layout_constraintBottom_toBottomOf="@id/imgBtnDecreaseZoom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="@color/white"
+            android:src="@drawable/ic_plus" />
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/tbScan"
@@ -38,6 +69,7 @@
             <TextView
                 style="@style/SubHeadingTextView"
                 android:id="@+id/tvDescription"
+                android:textColor="@color/light_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/scan_barcode"

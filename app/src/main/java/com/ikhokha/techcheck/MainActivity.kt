@@ -91,11 +91,34 @@ class MainActivity : AppCompatActivity(), MyDrawerController {
     }
 
     override fun showBottomNav() {
-        bnBottomNav?.visibility = View.VISIBLE
+        bnBottomNav?.let {
+            it.visibility = View.VISIBLE
+
+            it.animate()
+                .translationY(0f)
+                //.alpha(1f)
+                .setDuration(0)
+                .setListener(object : AnimatorListenerAdapter() {
+                    override fun onAnimationEnd(animation: Animator?) {
+                        super.onAnimationEnd(animation)
+                    }
+                })
+        }
     }
 
     override fun hideBottomNav() {
-        bnBottomNav?.visibility = View.INVISIBLE
+        bnBottomNav?.let {
+            it.animate()
+                .translationY(it.height.toFloat())
+                //.alpha(0.0f)
+                .setDuration(200)
+                .setListener(object : AnimatorListenerAdapter() {
+                    override fun onAnimationEnd(animation: Animator?) {
+                        super.onAnimationEnd(animation)
+                        it.visibility = View.GONE
+                    }
+                })
+        }
     }
 
     fun handleTopNavigation() {

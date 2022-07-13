@@ -9,11 +9,21 @@ import com.ikhokha.common.interfaces.MyDrawerController
 import com.ikhokha.common.models.NavMenuItem
 
 fun BottomNavigationView.setupWithCustomAnimNavController(myDrawerController: MyDrawerController, navController: NavController, navMenuItems: List<NavMenuItem?>) {
+    var lastItemIndex = 0
 
     this.setOnNavigationItemSelectedListener { item ->
-        val navigationOptions = NavOptions.Builder()
+        val enterLeftOptions = NavOptions.Builder()
             .setLaunchSingleTop(true)
-            .setEnterAnim(R.anim.fade_in)
+            .setEnterAnim(R.anim.slide_in_right)
+            .setExitAnim(R.anim.no_transition)
+            .setPopEnterAnim(R.anim.no_transition)
+            .setPopExitAnim(R.anim.no_transition)
+            .setPopUpTo(navController.graph.startDestination, false)
+            .build()
+
+        val enterRightOption = NavOptions.Builder()
+            .setLaunchSingleTop(true)
+            .setEnterAnim(R.anim.slide_in_left)
             .setExitAnim(R.anim.no_transition)
             .setPopEnterAnim(R.anim.no_transition)
             .setPopEnterAnim(R.anim.no_transition)
@@ -21,7 +31,11 @@ fun BottomNavigationView.setupWithCustomAnimNavController(myDrawerController: My
             .build()
 
         navMenuItems.first { it?.fragment == item?.itemId }?.let { screen ->
+            val itemIndex = screen.index
+            val navigationOptions =
+                if (itemIndex >= lastItemIndex) enterLeftOptions else enterRightOption
             navController.navigate(screen.fragment, null, navigationOptions)
+            lastItemIndex = itemIndex
         }
 
         true
