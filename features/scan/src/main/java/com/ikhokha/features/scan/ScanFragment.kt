@@ -1,7 +1,10 @@
 package com.ikhokha.features.scan
 
 import android.Manifest
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,6 +27,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 class ScanFragment : TopNavigationFragment() {
     private lateinit var binding: FragmentScanBinding
@@ -90,6 +94,21 @@ class ScanFragment : TopNavigationFragment() {
         )
     }
 
+
+    private fun requestPermissionsFromSettings() {
+        if (context == null) {
+            return
+        }
+        val i = Intent()
+        i.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+        i.addCategory(Intent.CATEGORY_DEFAULT)
+        i.data = Uri.parse("package:" + requireContext().packageName)
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+        i.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS)
+        requireContext().startActivity(i)
+    }
+
     private fun checkPermissions() {
         when (areAllPermissionsGranted(requireContext(), PERMISSIONS)) {
             true -> codeScanner.startPreview()
@@ -119,7 +138,7 @@ class ScanFragment : TopNavigationFragment() {
             getString(com.ikhokha.common.R.string.request),
             getString(com.ikhokha.common.R.string.close),
             {
-                requestPermissions()
+                requestPermissionsFromSettings()
             },
             {
                 requireActivity().finish()
