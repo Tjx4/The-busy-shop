@@ -56,7 +56,6 @@ class ScanFragment : TopNavigationFragment() {
     override fun onResume() {
         super.onResume()
         if (areAllPermissionsGranted(requireContext(), PERMISSIONS)) {
-            initZoomSeekBar()
             codeScanner.startPreview()
         }
     }
@@ -76,7 +75,7 @@ class ScanFragment : TopNavigationFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initScanner()
-        handleZoomChanged()
+        initZoomSeekBar()
         onZoomDecreaseClicked()
         onZoomIncreaseClicked()
         checkPermissions()
@@ -119,7 +118,6 @@ class ScanFragment : TopNavigationFragment() {
     private fun checkPermissions() {
         when (areAllPermissionsGranted(requireContext(), PERMISSIONS)) {
             true -> {
-                initZoomSeekBar()
                 codeScanner.startPreview()
             }
             else -> requestPermissions()
@@ -136,7 +134,6 @@ class ScanFragment : TopNavigationFragment() {
             PERMISSIONS
         )) {
             true -> {
-                initZoomSeekBar()
                 codeScanner.startPreview()
             }
             else -> showPermissionDialog()
@@ -175,9 +172,7 @@ class ScanFragment : TopNavigationFragment() {
             seek_bar_zoom.max = maxZoom
             seek_bar_zoom.progress = zoom
         }
-    }
 
-    private fun handleZoomChanged() {
         seek_bar_zoom.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onStartTrackingTouch(seekBar: SeekBar?) { }
             override fun onStopTrackingTouch(seekBar: SeekBar?) { }

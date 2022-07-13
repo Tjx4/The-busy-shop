@@ -253,6 +253,17 @@
         <item name="android:layout_height">@dimen/zoom_seek_bar_height</item>
         <item name="android:layout_marginLeft">@dimen/medium_spacing</item>
         <item name="android:layout_marginRight">@dimen/medium_spacing</item>
-        <item name="colorAccent">@color/white</item>
+        <item name="android:progressTint">@color/white</item>
+        <item name="android:thumbTint">@color/white</item>
+    </style>
+
+    <style name="ZoomButtonItemTheme">
+        <item name="colorControlHighlight">#0088cc</item>
+    </style>
+    <style name="ZoomButton" parent="SelectableItemBackground">
+        <item name="android:theme">@style/ZoomButtonItemTheme</item>
+        <item name="android:foreground">?attr/selectableItemBackground</item>
+        <item name="android:tint">@color/white</item>
+        <item name="tint">@color/white</item>
     </style>
 </resources>

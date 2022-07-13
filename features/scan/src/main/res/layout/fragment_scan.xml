@@ -29,6 +29,7 @@
             app:maskColor="@color/transparent_black"/>
 
         <ImageView
+            style="@style/ZoomButton"
             android:id="@+id/imgBtnDecreaseZoom"
             android:layout_width="@dimen/button_zoom_size"
             android:layout_height="@dimen/button_zoom_size"
@@ -36,7 +37,6 @@
             android:layout_marginBottom="@dimen/large_spacing"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:tint="@color/white"
             android:src="@drawable/ic_minus" />
 
         <SeekBar
@@ -48,6 +48,7 @@
             app:layout_constraintEnd_toStartOf="@id/imgBtnIncreaseZoom" />
 
         <ImageView
+            style="@style/ZoomButton"
             android:id="@+id/imgBtnIncreaseZoom"
             android:layout_width="@dimen/button_zoom_size"
             android:layout_height="@dimen/button_zoom_size"
@@ -55,7 +56,6 @@
             app:layout_constraintTop_toTopOf="@id/imgBtnDecreaseZoom"
             app:layout_constraintBottom_toBottomOf="@id/imgBtnDecreaseZoom"
             app:layout_constraintEnd_toEndOf="parent"
-            app:tint="@color/white"
             android:src="@drawable/ic_plus" />
 
         <androidx.appcompat.widget.Toolbar
@@ -63,7 +63,6 @@
             style="@style/ToolBarStyle"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:logo="@drawable/ic_scan"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
