@@ -28,7 +28,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-
 class ScanFragment : TopNavigationFragment() {
     private lateinit var binding: FragmentScanBinding
     private val scanViewModel: ScanViewModel by viewModel()
@@ -89,6 +88,7 @@ class ScanFragment : TopNavigationFragment() {
 
     override fun onTransitionAnimationComplete(oldFragment: BaseFragment) {
         super.onTransitionAnimationComplete(oldFragment)
+        //todo: handle
         //scanner_view?.visibility = View.VISIBLE
     }
 
