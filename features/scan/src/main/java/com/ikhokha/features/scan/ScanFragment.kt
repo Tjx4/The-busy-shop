@@ -8,6 +8,7 @@ import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SeekBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.budiyev.android.codescanner.CodeScanner
@@ -24,9 +25,7 @@ import com.ikhokha.features.scan.databinding.FragmentScanBinding
 import com.ikhokha.viewmodels.ScanViewModel
 import kotlinx.android.synthetic.main.fragment_scan.*
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -34,6 +33,8 @@ class ScanFragment : TopNavigationFragment() {
     private lateinit var binding: FragmentScanBinding
     private val scanViewModel: ScanViewModel by viewModel()
     private lateinit var codeScanner: CodeScanner
+    private var maxZoom: Int = 0
+    private val zoomStep = 5
     private val PERMISSION_REQUEST_CODE = 101
     private val PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
 
@@ -55,6 +56,7 @@ class ScanFragment : TopNavigationFragment() {
     override fun onResume() {
         super.onResume()
         if (areAllPermissionsGranted(requireContext(), PERMISSIONS)) {
+            initZoomSeekBar()
             codeScanner.startPreview()
         }
     }
@@ -73,16 +75,17 @@ class ScanFragment : TopNavigationFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initScanner()
         checkPermissions()
+        initScanner()
+        handleZoomChanged()
+        onZoomDecreaseClicked()
+        onZoomIncreaseClicked()
 
         //Todo: fix viewModelScope
         scanViewModel.getViewModelScope().launch(Dispatchers.IO) {
             scanViewModel.checkCartItems()
         }
 
-        //Todo:
-       // scanner_view?.visibility = View.VISIBLE
     }
 
     override fun onTransitionAnimationComplete(oldFragment: BaseFragment) {
@@ -115,7 +118,10 @@ class ScanFragment : TopNavigationFragment() {
 
     private fun checkPermissions() {
         when (areAllPermissionsGranted(requireContext(), PERMISSIONS)) {
-            true -> codeScanner.startPreview()
+            true -> {
+                initZoomSeekBar()
+                codeScanner.startPreview()
+            }
             else -> requestPermissions()
         }
     }
@@ -129,7 +135,10 @@ class ScanFragment : TopNavigationFragment() {
             requireContext(),
             PERMISSIONS
         )) {
-            true -> codeScanner.startPreview()
+            true -> {
+                initZoomSeekBar()
+                codeScanner.startPreview()
+            }
             else -> showPermissionDialog()
         }
     }
@@ -160,6 +169,53 @@ class ScanFragment : TopNavigationFragment() {
         }
     }
 
+    private fun initZoomSeekBar() {
+        getCameraParameters(true)?.apply {
+            this@ScanFragment.maxZoom = maxZoom
+            seek_bar_zoom.max = maxZoom
+            seek_bar_zoom.progress = zoom
+        }
+    }
+
+    private fun handleZoomChanged() {
+        seek_bar_zoom.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onStartTrackingTouch(seekBar: SeekBar?) { }
+            override fun onStopTrackingTouch(seekBar: SeekBar?) { }
+
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                if (fromUser) {
+                    codeScanner?.zoom = progress
+                }
+            }
+        })
+    }
+
+    private fun onZoomDecreaseClicked() {
+        imgBtnDecreaseZoom.setOnClickListener {
+            codeScanner?.apply {
+                if (zoom > zoomStep) {
+                    zoom -= zoomStep
+                } else {
+                    zoom = 0
+                }
+                seek_bar_zoom.progress = zoom
+            }
+        }
+    }
+
+    private fun onZoomIncreaseClicked() {
+        imgBtnIncreaseZoom.setOnClickListener {
+            codeScanner?.apply {
+                if (zoom < maxZoom - zoomStep) {
+                    zoom += zoomStep
+                } else {
+                    zoom = maxZoom
+                }
+                seek_bar_zoom.progress = zoom
+            }
+        }
+    }
+
     private fun handleScannedBarcode(result: Result) {
         vibratePhone(requireContext(), SHORT_VIBRATION_DURATION)
         //Todo: fix viewModelScope
@@ -176,6 +232,7 @@ class ScanFragment : TopNavigationFragment() {
             error?.message ?: getString(com.ikhokha.common.R.string.scanner_error),
             getString(com.ikhokha.common.R.string.close)
         ) {
+            initZoomSeekBar()
             codeScanner.startPreview()
         }
     }
@@ -200,6 +257,7 @@ class ScanFragment : TopNavigationFragment() {
             getString(com.ikhokha.common.R.string.product_incremented, product.description),
             getString(com.ikhokha.common.R.string.ok)
         ) {
+            initZoomSeekBar()
             codeScanner.startPreview()
         }
 
