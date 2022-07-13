@@ -108,19 +108,16 @@ class MainActivity : AppCompatActivity(), MyDrawerController {
     }
 
     override fun navigateFromScannerToPreview(productId: String) {
-        currentFragment?.navigateNext()
         val action = ScanFragmentDirections.actionScanFragmentToPreviewFragment(productId)
         navController.navigate(action)
     }
 
     override fun navigateFromCartToSummary() {
-        currentFragment?.navigateNext()
         val action = CartFragmentDirections.actionCartFragmentToSummaryFragment()
         navController.navigate(action)
     }
 
     override fun navigateFromCartToPreview(productId: String) {
-        currentFragment?.navigateNext()
         val action = CartFragmentDirections.actionCartFragmentToPreviewFragment(productId)
         navController.navigate(action)
     }
