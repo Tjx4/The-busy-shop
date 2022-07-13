@@ -104,7 +104,7 @@ class ScanFragment : TopNavigationFragment() {
     private fun showPermissionDialog() {
         showConfirmDialog(
             requireContext(),
-            getString(com.ikhokha.common.R.string.confirm),
+            getString(com.ikhokha.common.R.string.notice),
             getString(com.ikhokha.common.R.string.camera_permission),
             getString(com.ikhokha.common.R.string.request),
             getString(com.ikhokha.common.R.string.close),
