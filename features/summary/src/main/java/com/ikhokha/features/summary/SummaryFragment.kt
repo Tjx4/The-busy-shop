@@ -1,6 +1,7 @@
 package com.ikhokha.features.summary
 
 import android.Manifest
+import android.graphics.pdf.PdfDocument
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
@@ -11,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.internal.ViewUtils.getContentView
 import com.ikhokha.common.base.fragment.BaseFragment
 import com.ikhokha.common.base.fragment.SubNavigationFragment
 import com.ikhokha.common.constants.ALL_IMAGE_TYPES
@@ -157,6 +159,7 @@ class SummaryFragment : SubNavigationFragment(), CartItemsAdapter.ProductListene
 
 
     fun getPdf() {
+        /*
         val pdfPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
             .toString()
         val file = File(pdfPath, "summary.pdf")
@@ -166,6 +169,36 @@ class SummaryFragment : SubNavigationFragment(), CartItemsAdapter.ProductListene
         // val pdfWriter = PdfQ(file)
         //val pdfDocument = PdfDocument(pdfWriter)
         // val document = Document(pdfDocument)
+
+
+// create a new document
+        val pdfPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+            .toString()
+        val file = File(pdfPath, "summary.pdf")
+        val outputStream = FileOutputStream(file)
+
+        val document = PdfDocument()
+        // create a page description
+        val pageInfo =  PdfDocument.PageInfo.Builder(100, 100, 1).create()
+
+        // start a page
+        val page = document.startPage(pageInfo)
+
+        // draw something on the page
+        val content = getContentView()
+        content?.draw(page.canvas)
+
+        // finish the page
+        document.finishPage(page)
+
+        // add more pages
+
+        // write the document content
+        document.writeTo(outputStream)
+
+        // close the document
+        document.close();
+  */
     }
 
 }
