@@ -74,16 +74,12 @@ class ScanFragment : TopNavigationFragment() {
         onZoomDecreaseClicked()
         onZoomIncreaseClicked()
         checkPermissions()
+        codeScanner.startPreview()
+        scanViewModel.showLoading.value = false
 
         //Todo: fix viewModelScope
         scanViewModel.getViewModelScope().launch(Dispatchers.IO) {
             scanViewModel.checkCartItems()
-
-            delay(1000)
-            withContext(Dispatchers.Main) {
-                codeScanner.startPreview()
-                scanViewModel.showLoading.value = false
-            }
         }
     }
 

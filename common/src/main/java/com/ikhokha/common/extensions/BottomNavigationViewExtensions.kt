@@ -14,15 +14,15 @@ fun BottomNavigationView.setupWithCustomAnimNavController(myDrawerController: My
     this.setOnNavigationItemSelectedListener { item ->
         val enterLeftOptions = NavOptions.Builder()
             .setLaunchSingleTop(true)
-            .setEnterAnim(R.anim.fade_in)
+            .setEnterAnim(R.anim.slide_in_right)
             .setExitAnim(R.anim.no_transition)
             .setPopUpTo(navController.graph.startDestination, false)
             .build()
 
         val enterRightOption = NavOptions.Builder()
             .setLaunchSingleTop(true)
-            .setEnterAnim(R.anim.slide_in_left)
-            .setExitAnim(R.anim.no_transition)
+            .setEnterAnim(R.anim.no_transition)
+            .setExitAnim(R.anim.slide_out_right)
             .setPopUpTo(navController.graph.startDestination, false)
             .build()
 
