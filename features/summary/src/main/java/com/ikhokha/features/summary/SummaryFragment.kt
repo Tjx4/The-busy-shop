@@ -2,8 +2,10 @@ package com.ikhokha.features.summary
 
 import android.Manifest
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,6 +27,7 @@ import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.File
 import java.io.FileOutputStream
+
 
 class SummaryFragment : SubNavigationFragment(), CartItemsAdapter.ProductListener {
     private lateinit var binding: FragmentSummaryBinding
@@ -139,10 +142,18 @@ class SummaryFragment : SubNavigationFragment(), CartItemsAdapter.ProductListene
     private fun shareReceipt() {
         val shareIntent = Intent(Intent.ACTION_SEND)
         val img = getScreenshotFromRecyclerView(rvCartItems)
-        imgtest.setImageBitmap(img)
-        shareIntent.putExtra(Intent.EXTRA_STREAM, "img")
-        shareIntent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
-        shareIntent.type = "application/pdf"
+imgtest.setImageBitmap(img)
+        val path = MediaStore.Images.Media.insertImage(
+            requireContext().contentResolver,
+            img, "Design", null
+        )
+
+        val uri = Uri.parse(path)
+
+        shareIntent.putExtra(Intent.EXTRA_STREAM, uri)
+        shareIntent.putExtra(Intent.EXTRA_TEXT, "I found something cool!")
+        //shareIntent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
+        shareIntent.type = "image/*" //""application/pdf"
         startActivity(Intent.createChooser(shareIntent, "share"))
     }
 
