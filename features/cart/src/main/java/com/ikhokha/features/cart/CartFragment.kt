@@ -67,7 +67,6 @@ class CartFragment : TopNavigationFragment(), CartItemsAdapter.ProductListener {
                 getString(com.ikhokha.common.R.string.clear),
                 getString(com.ikhokha.common.R.string.cancel),
                 {
-                    //Todo: fix viewModelScope
                     cartViewModel.coroutineScope.launch(Dispatchers.IO) {
                         cartViewModel.clearItems()
                     }
@@ -116,7 +115,6 @@ class CartFragment : TopNavigationFragment(), CartItemsAdapter.ProductListener {
 
     private fun onProductDeleted(position: Int) {
         cartItemsAdapter.notifyItemRemoved(position)
-        //Todo: fix viewModelScope
         cartViewModel.coroutineScope.launch(Dispatchers.IO) {
             cartViewModel.checkCartItems()
         }
@@ -138,7 +136,6 @@ class CartFragment : TopNavigationFragment(), CartItemsAdapter.ProductListener {
     }
 
     override fun onDeleteProductClicked(product: Product, position: Int) {
-        //Todo: fix viewModelScope
         cartViewModel.coroutineScope.launch(Dispatchers.IO) {
             cartViewModel.deleteItem(product, position)
         }

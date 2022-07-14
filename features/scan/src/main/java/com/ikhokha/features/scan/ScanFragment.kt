@@ -77,7 +77,6 @@ class ScanFragment : TopNavigationFragment() {
         codeScanner.startPreview()
         scanViewModel.showLoading.value = false
 
-        //Todo: fix viewModelScope
         scanViewModel.coroutineScope.launch(Dispatchers.IO) {
             scanViewModel.checkCartItems()
         }
@@ -217,7 +216,6 @@ class ScanFragment : TopNavigationFragment() {
 
     private fun handleScannedBarcode(result: Result) {
         vibratePhone(requireContext(), SHORT_VIBRATION_DURATION)
-        //Todo: fix viewModelScope
         scanViewModel.coroutineScope.launch(Dispatchers.IO) {
             val productId = result.text
             scanViewModel.processProduct(productId)
@@ -241,7 +239,6 @@ class ScanFragment : TopNavigationFragment() {
 
     private fun onExistingProduct(productId: String) {
         scanViewModel.showLoading.value = true
-        //Todo: fix viewModelScope
         scanViewModel.coroutineScope.launch(Dispatchers.IO) {
             scanViewModel.incrementProduct(productId)
         }

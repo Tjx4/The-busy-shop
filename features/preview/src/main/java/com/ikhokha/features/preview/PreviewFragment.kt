@@ -48,7 +48,6 @@ class PreviewFragment : SubNavigationFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         arguments?.getString(PRODUCT_ID)?.let { productId ->
-            //Todo: fix viewModelScope
             previewViewModel.coroutineScope.launch(Dispatchers.IO) {
                 previewViewModel.getProduct(productId)
             }
@@ -59,7 +58,6 @@ class PreviewFragment : SubNavigationFragment() {
         }
 
         btnAddToCart.setOnClickListener {
-            //Todo: fix viewModelScope
             previewViewModel.coroutineScope.launch(Dispatchers.IO) {
                 previewViewModel.addProductToCart()
             }
@@ -72,7 +70,6 @@ class PreviewFragment : SubNavigationFragment() {
 
     private fun onProductSet(product: Product) {
         previewViewModel.showLoading.value = false
-        //Todo: fix viewModelScope
         previewViewModel.coroutineScope.launch(Dispatchers.IO) {
             previewViewModel.isItemExist()
         }
