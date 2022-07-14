@@ -113,10 +113,6 @@ class SummaryFragment : SubNavigationFragment(), CartItemsAdapter.ProductListene
        // val pdfWriter = PdfQ(file)
         //val pdfDocument = PdfDocument(pdfWriter)
        // val document = Document(pdfDocument)
-
-
-
-
     }
 
     fun getScreenshotFromRecyclerView(view: RecyclerView): Bitmap? {

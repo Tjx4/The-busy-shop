@@ -46,7 +46,7 @@ dependencies {
     //Smooth progressbar
     implementation "com.github.castorflex.smoothprogressbar:library-circular:$smoothprogressbar"
     //itext
-    implementation 'com.itextpdf:itext7-core:7.1.8'
+    implementation "com.itextpdf:itext7-core:$itext"
 
     //Modules
     implementation project("$common")
