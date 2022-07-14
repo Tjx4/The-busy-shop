@@ -1,7 +1,9 @@
 package com.ikhokha.features.summary
 
 import android.Manifest
+import android.app.Activity
 import android.content.Intent
+import android.icu.text.CaseMap
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
@@ -14,8 +16,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ikhokha.common.base.fragment.BaseFragment
 import com.ikhokha.common.base.fragment.SubNavigationFragment
+import com.ikhokha.common.constants.ALL_IMAGE_TYPES
 import com.ikhokha.common.extensions.getScreenshotFromRecyclerView
 import com.ikhokha.common.extensions.runWhenReady
+import com.ikhokha.common.extensions.share
+import com.ikhokha.common.helpers.getCurrentDateAndTime
 import com.ikhokha.common.helpers.showErrorDialog
 import com.ikhokha.common.models.Product
 import com.ikhokha.features.common.adapters.CartItemsAdapter
@@ -140,25 +145,29 @@ class SummaryFragment : SubNavigationFragment(), CartItemsAdapter.ProductListene
     }
 
     private fun shareReceipt() {
-        val shareIntent = Intent(Intent.ACTION_SEND)
-        val img = getScreenshotFromRecyclerView(rvCartItems)
-imgtest.setImageBitmap(img)
+        val heading = getString(com.ikhokha.common.R.string.summary)
+        val description =
+            getString(com.ikhokha.common.R.string.receipt_extra_text, getCurrentDateAndTime())
+
+        val imageBitmap = getScreenshotFromRecyclerView(rvCartItems)
         val path = MediaStore.Images.Media.insertImage(
             requireContext().contentResolver,
-            img, "Design", null
+            imageBitmap, heading, description
         )
-
         val uri = Uri.parse(path)
 
-        shareIntent.putExtra(Intent.EXTRA_STREAM, uri)
-        shareIntent.putExtra(Intent.EXTRA_TEXT, "I found something cool!")
-        //shareIntent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
-        shareIntent.type = "image/*" //""application/pdf"
-        startActivity(Intent.createChooser(shareIntent, "share"))
+        requireActivity().share(
+            heading,
+            ALL_IMAGE_TYPES,
+            description,
+            uri
+        )
     }
 
-    fun getPdf(){
-        val pdfPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString()
+
+    fun getPdf() {
+        val pdfPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+            .toString()
         val file = File(pdfPath, "summary.pdf")
         val outputStream = FileOutputStream(file)
 

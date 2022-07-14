@@ -3,6 +3,7 @@ package com.ikhokha.common.extensions
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Point
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.Display
@@ -71,4 +72,19 @@ fun Activity.getScreenWidth(): Int {
     }
 
     return Measuredwidth
+}
+
+fun Activity.share(
+    title: String,
+    type: String,
+    extraText: String?,
+    uri: Uri,
+    flags: Int? = null
+) {
+    val shareIntent = Intent(Intent.ACTION_SEND)
+    shareIntent.putExtra(Intent.EXTRA_STREAM, uri)
+    extraText?.let { shareIntent.putExtra(Intent.EXTRA_TEXT, it) }
+    flags?.let { shareIntent.flags = it }
+    shareIntent.type = type
+    startActivity(Intent.createChooser(shareIntent, title))
 }
