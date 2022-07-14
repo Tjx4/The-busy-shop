@@ -79,7 +79,7 @@ class ScanFragment : TopNavigationFragment() {
         scanViewModel.getViewModelScope().launch(Dispatchers.IO) {
             scanViewModel.checkCartItems()
 
-            delay(2000)
+            delay(1000)
             withContext(Dispatchers.Main) {
                 codeScanner.startPreview()
                 scanViewModel.showLoading.value = false
@@ -87,10 +87,15 @@ class ScanFragment : TopNavigationFragment() {
         }
     }
 
-    override fun onTransitionAnimationComplete(oldFragment: BaseFragment?) {
-        super.onTransitionAnimationComplete(oldFragment)
-        //codeScanner.startPreview()
-        //scanViewModel.showLoading.value = false
+    override fun onResume() {
+        super.onResume()
+        if(areAllPermissionsGranted(
+                requireContext(),
+                PERMISSIONS
+            )){
+            codeScanner.startPreview()
+            scanViewModel.showLoading.value = false
+        }
     }
 
     private fun requestPermissions() {
