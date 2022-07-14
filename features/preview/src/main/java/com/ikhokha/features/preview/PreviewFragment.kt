@@ -58,8 +58,8 @@ class PreviewFragment : SubNavigationFragment() {
         }
 
         btnAddToCart.setOnClickListener {
+            previewViewModel.showLoading.value = true
             previewViewModel.coroutineScope.launch(Dispatchers.IO) {
-                previewViewModel.showLoading.value = true
                 previewViewModel.addProductToCart()
             }
         }
