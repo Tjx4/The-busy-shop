@@ -78,13 +78,19 @@ class ScanFragment : TopNavigationFragment() {
         //Todo: fix viewModelScope
         scanViewModel.getViewModelScope().launch(Dispatchers.IO) {
             scanViewModel.checkCartItems()
+
+            delay(2000)
+            withContext(Dispatchers.Main) {
+                codeScanner.startPreview()
+                scanViewModel.showLoading.value = false
+            }
         }
     }
 
     override fun onTransitionAnimationComplete(oldFragment: BaseFragment?) {
         super.onTransitionAnimationComplete(oldFragment)
-        scanner_view?.visibility = View.VISIBLE
-        scanViewModel.showLoading.value = false
+        //codeScanner.startPreview()
+        //scanViewModel.showLoading.value = false
     }
 
     private fun requestPermissions() {
@@ -113,7 +119,7 @@ class ScanFragment : TopNavigationFragment() {
     private fun checkPermissions() {
         when (areAllPermissionsGranted(requireContext(), PERMISSIONS)) {
             true -> {
-                codeScanner.startPreview()
+                //codeScanner.startPreview()
             }
             else -> requestPermissions()
         }
