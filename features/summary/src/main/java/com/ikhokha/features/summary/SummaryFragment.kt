@@ -2,21 +2,14 @@ package com.ikhokha.features.summary
 
 import android.Manifest
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
-import android.graphics.pdf.PdfDocument
 import android.os.Bundle
 import android.os.Environment
-import android.util.LruCache
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.ikhokha.common.base.fragment.BaseFragment
 import com.ikhokha.common.base.fragment.SubNavigationFragment
 import com.ikhokha.common.extensions.getScreenshotFromRecyclerView
@@ -95,27 +88,6 @@ class SummaryFragment : SubNavigationFragment(), CartItemsAdapter.ProductListene
         )
     }
 
-    private fun shareReceipt() {
-        val shareIntent = Intent(Intent.ACTION_SEND)
-        val img = getScreenshotFromRecyclerView(rvCartItems)
-imgtest.setImageBitmap(img)
-        shareIntent.putExtra(Intent.EXTRA_STREAM, "img")
-        shareIntent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
-        shareIntent.type = "application/pdf"
-        startActivity(Intent.createChooser(shareIntent, "share"))
-    }
-
-    fun getPdf(){
-        val pdfPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString()
-        val file = File(pdfPath, "summary.pdf")
-        val outputStream = FileOutputStream(file)
-
-
-       // val pdfWriter = PdfQ(file)
-        //val pdfDocument = PdfDocument(pdfWriter)
-       // val document = Document(pdfDocument)
-    }
-
     override fun onTransitionAnimationComplete(oldFragment: BaseFragment?) {
         super.onTransitionAnimationComplete(oldFragment)
 
@@ -163,4 +135,26 @@ imgtest.setImageBitmap(img)
     override fun onDeleteProductClicked(product: Product, position: Int) {
         /* No opp */
     }
+
+    private fun shareReceipt() {
+        val shareIntent = Intent(Intent.ACTION_SEND)
+        val img = getScreenshotFromRecyclerView(rvCartItems)
+        imgtest.setImageBitmap(img)
+        shareIntent.putExtra(Intent.EXTRA_STREAM, "img")
+        shareIntent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
+        shareIntent.type = "application/pdf"
+        startActivity(Intent.createChooser(shareIntent, "share"))
+    }
+
+    fun getPdf(){
+        val pdfPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString()
+        val file = File(pdfPath, "summary.pdf")
+        val outputStream = FileOutputStream(file)
+
+
+        // val pdfWriter = PdfQ(file)
+        //val pdfDocument = PdfDocument(pdfWriter)
+        // val document = Document(pdfDocument)
+    }
+
 }
