@@ -32,7 +32,7 @@ class CartFragment : TopNavigationFragment(), CartItemsAdapter.ProductListener {
         cartViewModel.productsError.observe(this) { onNoProducts(it) }
         cartViewModel.deletedPosition.observe(this) { onProductDeleted(it) }
         cartViewModel.productDeleteError.observe(this) { onProductDeleteError(it) }
-        cartViewModel.cartClear.observe(this) { onCartCleared() }
+        cartViewModel.isCartCleared.observe(this) { onCartCleared() }
         cartViewModel.clearError.observe(this) { onCartClearError(it) }
     }
 

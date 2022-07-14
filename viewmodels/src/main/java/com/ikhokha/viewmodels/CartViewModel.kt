@@ -2,12 +2,9 @@ package com.ikhokha.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import com.ikhokha.common.models.Product
 import com.ikhokha.repositories.products.ProductsRepository
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class CartViewModel(application: Application, val productsRepository: ProductsRepository) :
@@ -33,10 +30,9 @@ class CartViewModel(application: Application, val productsRepository: ProductsRe
     val productDeleteError: MutableLiveData<String>
         get() = _productDeleteError
 
-    //Todo: rename
-    private val _cartClear: MutableLiveData<Boolean> = MutableLiveData()
-    val cartClear: MutableLiveData<Boolean>
-        get() = _cartClear
+    private val _isCartCleared: MutableLiveData<Boolean> = MutableLiveData()
+    val isCartCleared: MutableLiveData<Boolean>
+        get() = _isCartCleared
 
     private var _clearError: MutableLiveData<String> = MutableLiveData()
     val clearError: MutableLiveData<String>
@@ -79,7 +75,7 @@ class CartViewModel(application: Application, val productsRepository: ProductsRe
                 false -> _clearError.value = app.getString(com.ikhokha.common.R.string.clear_error)
                 else ->  {
                     (_products.value as ArrayList).clear()
-                    _cartClear.value = true
+                    _isCartCleared.value = true
                 }
             }
         }
