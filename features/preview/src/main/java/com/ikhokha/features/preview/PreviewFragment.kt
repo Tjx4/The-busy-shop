@@ -59,6 +59,7 @@ class PreviewFragment : SubNavigationFragment() {
 
         btnAddToCart.setOnClickListener {
             previewViewModel.coroutineScope.launch(Dispatchers.IO) {
+                previewViewModel.showLoading.value = true
                 previewViewModel.addProductToCart()
             }
         }
@@ -90,6 +91,7 @@ class PreviewFragment : SubNavigationFragment() {
     }
 
     private fun onProductError(errorMessage: String) {
+        previewViewModel.showLoading.value = false
         showErrorDialog(
             requireContext(),
             getString(com.ikhokha.common.R.string.error),
@@ -101,6 +103,7 @@ class PreviewFragment : SubNavigationFragment() {
     }
 
     private fun onProductAdded(product: Product) {
+        previewViewModel.showLoading.value = false
         showSuccessDialog(
             requireContext(),
             getString(com.ikhokha.common.R.string.success),
@@ -112,6 +115,7 @@ class PreviewFragment : SubNavigationFragment() {
     }
 
     private fun onProductAddError(errorMessage: String) {
+        previewViewModel.showLoading.value = false
         showErrorDialog(
             requireContext(),
             getString(com.ikhokha.common.R.string.error),
