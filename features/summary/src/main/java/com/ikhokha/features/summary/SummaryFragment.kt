@@ -98,7 +98,7 @@ class SummaryFragment : SubNavigationFragment(), CartItemsAdapter.ProductListene
     private fun shareReceipt() {
         val shareIntent = Intent(Intent.ACTION_SEND)
         val img = getScreenshotFromRecyclerView(rvCartItems)
-        imgtest.setImageBitmap(img)
+imgtest.setImageBitmap(img)
         shareIntent.putExtra(Intent.EXTRA_STREAM, "img")
         shareIntent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
         shareIntent.type = "application/pdf"

@@ -27,7 +27,7 @@
     <string name="increment_error">Error incrementing product</string>
     <string name="product_add_error">Error adding product</string>
     <string name="clear_cart_confirm">Are you sure you want to clear your cart</string>
-    <string name="product_not_found">Product not found</string>
+    <string name="product_not_found">%1$s not found in your shop</string>
     <string name="description">Description</string>
     <string name="quantity">Quantity</string>
     <string name="price">Price</string>
