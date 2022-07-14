@@ -1,9 +1,6 @@
 package com.ikhokha.features.summary
 
 import android.Manifest
-import android.app.Activity
-import android.content.Intent
-import android.icu.text.CaseMap
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
@@ -71,12 +68,6 @@ class SummaryFragment : SubNavigationFragment(), CartItemsAdapter.ProductListene
         }
 
         btnProceed.setOnClickListener {
-            Toast.makeText(
-                requireContext(),
-                getString(com.ikhokha.common.R.string.proceed),
-                Toast.LENGTH_SHORT
-            ).show()
-
             shareReceipt()
         }
     }
@@ -149,10 +140,10 @@ class SummaryFragment : SubNavigationFragment(), CartItemsAdapter.ProductListene
         val description =
             getString(com.ikhokha.common.R.string.receipt_extra_text, getCurrentDateAndTime())
 
-        val imageBitmap = getScreenshotFromRecyclerView(rvCartItems)
+        val cartItemsBitmap = getScreenshotFromRecyclerView(rvCartItems)
         val path = MediaStore.Images.Media.insertImage(
             requireContext().contentResolver,
-            imageBitmap, heading, description
+            cartItemsBitmap, heading, description
         )
         val uri = Uri.parse(path)
 
