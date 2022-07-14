@@ -91,7 +91,6 @@ class ScanFragment : TopNavigationFragment() {
             )){
             codeScanner.startPreview()
             scanViewModel.showLoading.value = false
-            initZoomSeekBar()
         }
     }
 
