@@ -67,7 +67,7 @@ class SummaryFragment : SubNavigationFragment(), CartItemsAdapter.ProductListene
         super.onTransitionAnimationComplete(oldFragment)
 
         summaryViewModel.products.value?.let { /* No opp */ } ?: run {
-            summaryViewModel.getViewModelScope().launch(Dispatchers.IO) {
+            summaryViewModel.coroutineScope.launch(Dispatchers.IO) {
                 summaryViewModel.getCartItems()
             }
         }
