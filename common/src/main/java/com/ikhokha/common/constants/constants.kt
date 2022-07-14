@@ -11,3 +11,4 @@ const val PREFERENCE = "_preferences"
 //Other
 const val SHORT_VIBRATION_DURATION = 70L
 const val ALL_IMAGE_TYPES = "image/*"
+const val PDF_TYPE = "application/pdf"

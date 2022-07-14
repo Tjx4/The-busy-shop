@@ -45,8 +45,8 @@ dependencies {
     implementation "io.insert-koin:koin-android:$koin"
     //Smooth progressbar
     implementation "com.github.castorflex.smoothprogressbar:library-circular:$smoothprogressbar"
-    //itext
-    implementation "com.itextpdf:itext7-core:$itext"
+    //itextpdf
+    implementation "com.itextpdf:itextg:$itextpdf"
 
     //Modules
     implementation project("$common")

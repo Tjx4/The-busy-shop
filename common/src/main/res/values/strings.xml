@@ -22,6 +22,7 @@
     <string name="confirm">Confirm</string>
     <string name="error">Error</string>
     <string name="close">Close</string>
+    <string name="try_again">Try again</string>
     <string name="request">Request</string>
     <string name="success">Success</string>
     <string name="increment_error">Error incrementing product</string>
@@ -38,4 +39,5 @@
     <string name="no_summary_products">Nothing to show in summary</string>
     <string name="no_summary_items">No items found</string>
     <string name="receipt_extra_text">This is a receipt for purchases made on %1$s</string>
+    <string name="pdf_error">Error creating receipt</string>
 </resources>

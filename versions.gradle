@@ -21,7 +21,7 @@ ext {
     multidex = "2.0.1"
     rounded_imageview = "2.3.0"
     code_scanner = "2.3.2"
-    itext=  "7.1.8"
+    itextpdf =  "5.5.10"
 
     //Testing
     mockito = "3.4.6"
