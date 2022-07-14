@@ -63,7 +63,7 @@ class SummaryFragment : SubNavigationFragment(), CartItemsAdapter.ProductListene
         }
     }
 
-    override fun onTransitionAnimationComplete(oldFragment: BaseFragment) {
+    override fun onTransitionAnimationComplete(oldFragment: BaseFragment?) {
         super.onTransitionAnimationComplete(oldFragment)
 
         summaryViewModel.products.value?.let { /* No opp */ } ?: run {

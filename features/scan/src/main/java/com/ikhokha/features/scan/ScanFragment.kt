@@ -1,6 +1,7 @@
 package com.ikhokha.features.scan
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -25,7 +26,9 @@ import com.ikhokha.features.scan.databinding.FragmentScanBinding
 import com.ikhokha.viewmodels.ScanViewModel
 import kotlinx.android.synthetic.main.fragment_scan.*
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ScanFragment : TopNavigationFragment() {
@@ -76,13 +79,12 @@ class ScanFragment : TopNavigationFragment() {
         scanViewModel.getViewModelScope().launch(Dispatchers.IO) {
             scanViewModel.checkCartItems()
         }
-
     }
 
-    override fun onTransitionAnimationComplete(oldFragment: BaseFragment) {
+    override fun onTransitionAnimationComplete(oldFragment: BaseFragment?) {
         super.onTransitionAnimationComplete(oldFragment)
-        //todo: handle
-        //scanner_view?.visibility = View.VISIBLE
+        scanner_view?.visibility = View.VISIBLE
+        scanViewModel.showLoading.value = false
     }
 
     private fun requestPermissions() {

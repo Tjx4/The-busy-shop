@@ -81,7 +81,7 @@ class CartFragment : TopNavigationFragment(), CartItemsAdapter.ProductListener {
         }
     }
 
-    override fun onTransitionAnimationComplete(oldFragment: BaseFragment) {
+    override fun onTransitionAnimationComplete(oldFragment: BaseFragment?) {
         super.onTransitionAnimationComplete(oldFragment)
 
         cartViewModel.products.value?.let { /* No opp */ } ?: run {

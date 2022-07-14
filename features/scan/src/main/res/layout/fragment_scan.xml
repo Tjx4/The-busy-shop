@@ -12,10 +12,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ScanFragment"
-        android:background="@color/light_background"
+        android:background="@color/dark_background"
         android:paddingBottom="?android:attr/actionBarSize">
 
         <com.budiyev.android.codescanner.CodeScannerView
+            android:visibility="gone"
             android:id="@+id/scanner_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -81,6 +82,7 @@
             style="@style/CircularProgressBarTheme"
             android:id="@+id/cpLoader"
             android:layout_gravity="center"
+            app:cpb_color="@color/white"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"

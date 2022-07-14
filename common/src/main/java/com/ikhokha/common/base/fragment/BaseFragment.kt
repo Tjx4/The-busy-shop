@@ -18,6 +18,11 @@ abstract class BaseFragment : Fragment() {
         drawerController.hideBottomNav()
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        drawerController.currentFragment = this
+    }
+
     override fun onResume() {
         super.onResume()
         drawerController.currentFragment = this
@@ -36,8 +41,8 @@ abstract class BaseFragment : Fragment() {
        drawerController.lastViewDestroyed(this)
     }
 
-    open fun onTransitionAnimationComplete(oldFragment: BaseFragment) {
-        val dd = 0
+    open fun onTransitionAnimationComplete(oldFragment: BaseFragment?) {
+        val currentFragment = this
         /* No op */
     }
 }

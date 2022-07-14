@@ -38,6 +38,10 @@ class ScanViewModel(application: Application, val productsRepository: ProductsRe
     val incrementProductError: MutableLiveData<String>
         get() = _incrementProductError
 
+    init {
+        _showLoading.value = true
+    }
+
     suspend fun checkCartItems() {
         val itemCount = productsRepository.getCartItemCount()
 

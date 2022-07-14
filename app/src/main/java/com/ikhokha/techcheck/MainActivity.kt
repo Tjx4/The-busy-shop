@@ -2,6 +2,7 @@ package com.ikhokha.techcheck
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
+import android.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.KeyEvent
@@ -145,6 +146,11 @@ class MainActivity : AppCompatActivity(), MyDrawerController {
 
     override fun lastViewDestroyed(baseFragment: BaseFragment) {
         currentFragment?.onTransitionAnimationComplete(baseFragment)
+    }
+
+    override fun onAttachFragment(fragment: Fragment?) {
+        super.onAttachFragment(fragment)
+        currentFragment?.onTransitionAnimationComplete(null)
     }
 
     override fun onBackPressed() {
