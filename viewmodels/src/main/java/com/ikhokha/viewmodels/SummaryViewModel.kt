@@ -41,7 +41,7 @@ class SummaryViewModel(application: Application, val productsRepository: Product
 
         withContext(Dispatchers.Main) {
             when (products.isNullOrEmpty()) {
-                true -> _productsError.value = "No items found"
+                true -> _productsError.value = app.getString(com.ikhokha.common.R.string.no_summary_items)
                 else -> _products.value = products
             }
         }
