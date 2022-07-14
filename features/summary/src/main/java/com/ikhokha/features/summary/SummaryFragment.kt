@@ -1,18 +1,14 @@
 package com.ikhokha.features.summary
 
 import android.Manifest
-import android.graphics.pdf.PdfDocument
 import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
 import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.internal.ViewUtils.getContentView
 import com.ikhokha.common.base.fragment.BaseFragment
 import com.ikhokha.common.base.fragment.SubNavigationFragment
 import com.ikhokha.common.constants.ALL_IMAGE_TYPES
@@ -29,9 +25,6 @@ import kotlinx.android.synthetic.main.fragment_summary.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.io.File
-import java.io.FileOutputStream
-
 
 class SummaryFragment : SubNavigationFragment(), CartItemsAdapter.ProductListener {
     private lateinit var binding: FragmentSummaryBinding
