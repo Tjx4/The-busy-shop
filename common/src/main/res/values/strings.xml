@@ -37,5 +37,5 @@
     <string name="scan_barcode">Scan barcode</string>
     <string name="no_summary_products">Nothing to show in summary</string>
     <string name="no_summary_items">No items found</string>
-    <string name="receipt_extra_text">This is your receipt for purchases made on %1$s</string>
+    <string name="receipt_extra_text">This is a receipt for purchases made on %1$s</string>
 </resources>
