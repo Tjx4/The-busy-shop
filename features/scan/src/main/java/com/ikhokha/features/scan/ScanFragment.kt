@@ -1,23 +1,17 @@
 package com.ikhokha.features.scan
 
 import android.Manifest
-import android.content.Context
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.budiyev.android.codescanner.CodeScanner
 import com.budiyev.android.codescanner.DecodeCallback
 import com.budiyev.android.codescanner.ErrorCallback
 import com.budiyev.android.codescanner.ScanMode
 import com.google.zxing.Result
-import com.ikhokha.common.base.fragment.BaseFragment
 import com.ikhokha.common.base.fragment.TopNavigationFragment
 import com.ikhokha.common.constants.SHORT_VIBRATION_DURATION
 import com.ikhokha.common.helpers.*
@@ -26,9 +20,7 @@ import com.ikhokha.features.scan.databinding.FragmentScanBinding
 import com.ikhokha.viewmodels.ScanViewModel
 import kotlinx.android.synthetic.main.fragment_scan.*
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ScanFragment : TopNavigationFragment() {
@@ -37,8 +29,8 @@ class ScanFragment : TopNavigationFragment() {
     private lateinit var codeScanner: CodeScanner
     private var maxZoom: Int = 0
     private val zoomStep = 5
-    private val PERMISSION_REQUEST_CODE = 101
-    private val PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
+    override var PERMISSION_REQUEST_CODE = 101
+    override var PERMISSIONS: Array<String>? = arrayOf(Manifest.permission.CAMERA)
 
     override fun onStart() {
         super.onStart()
@@ -53,6 +45,15 @@ class ScanFragment : TopNavigationFragment() {
         scanViewModel.noCartItems.observe(this) { onNoCartItems() }
         scanViewModel.incrementedProduct.observe(this) { onProductIncremented(it) }
         scanViewModel.incrementProductError.observe(this) { onProductIncrementError(it) }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        //Todo: re-look
+        if(allPermissionsGranted){
+            codeScanner.startPreview()
+            scanViewModel.showLoading.value = false
+        }
     }
 
     override fun onCreateView(
@@ -74,7 +75,6 @@ class ScanFragment : TopNavigationFragment() {
         onSeekBarChanged()
         onZoomDecreaseClicked()
         onZoomIncreaseClicked()
-        checkPermissions()
         codeScanner.startPreview()
         scanViewModel.showLoading.value = false
 
@@ -83,79 +83,19 @@ class ScanFragment : TopNavigationFragment() {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        if(areAllPermissionsGranted(
-                requireContext(),
-                PERMISSIONS
-            )){
-            codeScanner.startPreview()
-            scanViewModel.showLoading.value = false
-        }
+    override fun onPermissionsGranted() {
+        super.onPermissionsGranted()
+        //Todo
+        val p = 0
     }
 
-    private fun requestPermissions() {
-        requestNotGrantedPermissions(
-            requireActivity() as AppCompatActivity,
-            PERMISSIONS,
-            PERMISSION_REQUEST_CODE
-        )
-    }
-
-
-    private fun requestPermissionsFromSettings() {
-        if (context == null) {
-            return
-        }
-        val i = Intent()
-        i.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
-        i.addCategory(Intent.CATEGORY_DEFAULT)
-        i.data = Uri.parse("package:" + requireContext().packageName)
-        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
-        i.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS)
-        requireContext().startActivity(i)
-    }
-
-    private fun checkPermissions() {
-        when (areAllPermissionsGranted(requireContext(), PERMISSIONS)) {
-            true -> {
-                //codeScanner.startPreview()
-            }
-            else -> requestPermissions()
-        }
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        when (requestCode == PERMISSION_REQUEST_CODE && areAllPermissionsGranted(
-            requireContext(),
-            PERMISSIONS
-        )) {
-            true -> {
-                codeScanner.startPreview()
-            }
-            else -> showPermissionDialog()
-        }
-    }
-
-    private fun showPermissionDialog() {
-        showConfirmDialog(
-            requireContext(),
+    override fun onPermissionDeclined() {
+        super.onPermissionDeclined()
+        showPermissionDialog(
             getString(com.ikhokha.common.R.string.notice),
             getString(com.ikhokha.common.R.string.camera_permission),
-            getString(com.ikhokha.common.R.string.request),
-            getString(com.ikhokha.common.R.string.close),
-            {
-                requestPermissionsFromSettings()
-            },
-            {
-                requireActivity().finish()
-            }
-        )
+            Manifest.permission.CAMERA
+       )
     }
 
     private fun initScanner() {
@@ -163,8 +103,8 @@ class ScanFragment : TopNavigationFragment() {
             scanMode = ScanMode.SINGLE
             isAutoFocusEnabled = true
             isTouchFocusEnabled = false
-            decodeCallback = DecodeCallback(::handleScannedBarcode)
-            errorCallback = ErrorCallback(::scannerError)
+            decodeCallback = DecodeCallback(::onBarcodeScanned)
+            errorCallback = ErrorCallback(::onScannerError)
         }
     }
 
@@ -217,7 +157,7 @@ class ScanFragment : TopNavigationFragment() {
         }
     }
 
-    private fun handleScannedBarcode(result: Result) {
+    private fun onBarcodeScanned(result: Result) {
         vibratePhone(requireContext(), SHORT_VIBRATION_DURATION)
         scanViewModel.coroutineScope.launch(Dispatchers.IO) {
             val productId = result.text
@@ -225,7 +165,7 @@ class ScanFragment : TopNavigationFragment() {
         }
     }
 
-    private fun scannerError(error: Throwable?) {
+    private fun onScannerError(error: Throwable?) {
         showErrorDialog(
             requireContext(),
             getString(com.ikhokha.common.R.string.error),

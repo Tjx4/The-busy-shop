@@ -33,6 +33,7 @@
     <string name="price">Price</string>
     <string name="scanner_error">Scanner error</string>
     <string name="camera_permission">You need to give permission to your camera inorder to use this app</string>
+    <string name="external_storage_permission">You need to give permission for writing to external storage inorder to use this app</string>
     <string name="scan_barcode">Scan barcode</string>
     <string name="no_summary_products">Nothing to show in summary</string>
     <string name="no_summary_items">No items found</string>
