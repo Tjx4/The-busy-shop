@@ -71,6 +71,7 @@ class ScanFragment : TopNavigationFragment() {
         super.onViewCreated(view, savedInstanceState)
         initScanner()
         initZoomSeekBar()
+        onSeekBarChanged()
         onZoomDecreaseClicked()
         onZoomIncreaseClicked()
         checkPermissions()
@@ -90,6 +91,7 @@ class ScanFragment : TopNavigationFragment() {
             )){
             codeScanner.startPreview()
             scanViewModel.showLoading.value = false
+            initZoomSeekBar()
         }
     }
 
@@ -173,7 +175,9 @@ class ScanFragment : TopNavigationFragment() {
             seek_bar_zoom.max = maxZoom
             seek_bar_zoom.progress = zoom
         }
+    }
 
+    private fun onSeekBarChanged() {
         seek_bar_zoom.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onStartTrackingTouch(seekBar: SeekBar?) { }
             override fun onStopTrackingTouch(seekBar: SeekBar?) { }
