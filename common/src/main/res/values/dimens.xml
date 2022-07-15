@@ -5,6 +5,8 @@
     <dimen name="medium_text">16sp</dimen>
     <dimen name="sub_heading_text">20sp</dimen>
     <dimen name="heading_text">28sp</dimen>
+    <dimen name="pdf_sub_heading_text">16px</dimen>
+    <dimen name="pdf_medium_text">10px</dimen>
 
     <dimen name="xxxxsmall_spacing">2dp</dimen>
     <dimen name="xxxsmall_spacing">6dp</dimen>

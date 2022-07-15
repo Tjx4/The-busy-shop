@@ -158,7 +158,7 @@ class SummaryFragment : SubNavigationFragment(), CartItemsAdapter.ProductListene
         try {
             val summaryDocument = "summary.pdf"
             val pdfPath = Environment.getExternalStorageDirectory()
-                //.toString() + "/" + getCurrentDateAndTime(DMYHMSC) + "_" + summaryDocument
+                //.toString() + "/" + getCurrentDateAndTime(DMYHMSC) + "_" + summaryDocument //Todo: revert
                 .toString() + "/" + summaryDocument
 
             val fileOutputStream = FileOutputStream(pdfPath)
@@ -174,39 +174,70 @@ class SummaryFragment : SubNavigationFragment(), CartItemsAdapter.ProductListene
             val logo = Image.getInstance(bitmapData)
             document.add(logo)
 
-            val headingParagraph = Paragraph("Invoice")
-            headingParagraph.font.style = com.ikhokha.common.R.style.HeadingTextView
+            val headingText = Font(
+                Font.FontFamily.HELVETICA,
+                requireActivity().resources.getDimension(com.ikhokha.common.R.dimen.pdf_sub_heading_text),
+                Font.BOLD
+            )
+            val normalText = Font(
+                Font.FontFamily.HELVETICA,
+                requireActivity().resources.getDimension(com.ikhokha.common.R.dimen.pdf_medium_text),
+                Font.NORMAL
+            )
+            val normalBoldText = Font(
+                Font.FontFamily.HELVETICA,
+                requireActivity().resources.getDimension(com.ikhokha.common.R.dimen.pdf_medium_text),
+                Font.BOLD
+            )
+
+            val headingParagraph = Paragraph(Chunk("Invoice", headingText))
             headingParagraph.alignment = Element.ALIGN_CENTER
             document.add(headingParagraph)
 
             document.add(Phrase("\n"))
 
-            //val boldText = TextField("Bold").setBold()
-            //val paragraph2 = Paragraph("Hello world")
-            //paragraph2.add(boldText)
-            //pdfDocument.add(paragraph2)
-
             val table = PdfPTable(3)
-            val descriptionHeading =
-                PdfPCell(Phrase(getString(com.ikhokha.common.R.string.description)))
+
+            val descriptionHeading = PdfPCell(
+                Phrase(
+                    Chunk(
+                        getString(com.ikhokha.common.R.string.description),
+                        normalBoldText
+                    )
+                )
+            )
             table.addCell(descriptionHeading)
 
-            val quantityHeading = PdfPCell(Phrase(getString(com.ikhokha.common.R.string.quantity)))
+            val quantityHeading = PdfPCell(
+                Phrase(
+                    Chunk(
+                        getString(com.ikhokha.common.R.string.quantity),
+                        normalBoldText
+                    )
+                )
+            )
             table.addCell(quantityHeading)
 
-            val priceHeading = PdfPCell(Phrase(getString(com.ikhokha.common.R.string.price)))
+            val priceHeading = PdfPCell(
+                Phrase(
+                    Chunk(
+                        getString(com.ikhokha.common.R.string.price),
+                        normalBoldText
+                    )
+                )
+            )
             table.addCell(priceHeading)
 
             summaryViewModel.products.value?.forEach {
-                val description = PdfPCell(Phrase(it.description))
+                val description = PdfPCell(Phrase(Chunk(it.description, normalText)))
                 description.border = Rectangle.NO_BORDER
                 table.addCell(description)
 
-                val quantity = PdfPCell(Phrase("${it.quantity}"))
+                val quantity = PdfPCell(Phrase(Chunk("${it.quantity}", normalText)))
                 quantity.border = Rectangle.NO_BORDER
                 table.addCell(quantity)
 
-                val price = PdfPCell(Phrase("R${it.price}"))
+                val price = PdfPCell(Phrase(Chunk("R${it.price}", normalText)))
                 price.border = Rectangle.NO_BORDER
                 table.addCell(price)
             }
@@ -214,34 +245,39 @@ class SummaryFragment : SubNavigationFragment(), CartItemsAdapter.ProductListene
             val emptyCell = PdfPCell(Phrase(""))
             emptyCell.border = Rectangle.NO_BORDER
             table.addCell(emptyCell)
-            table.addCell(emptyCell)
 
-            val grandTotalParagraph = Paragraph(
-                getString(
-                    com.ikhokha.common.R.string.grand_total,
-                    summaryViewModel.grandTotal.value
+            val grandTotalTextParagraph = Paragraph(
+                Chunk(
+                    "\n" + getString(com.ikhokha.common.R.string.total),
+                    normalBoldText
                 )
             )
-            grandTotalParagraph.font.style = com.ikhokha.common.R.style.NormalTextView
-            //document.add(grandTotalParagraph)
+
+            val grandTotalTextCell = PdfPCell(grandTotalTextParagraph)
+            grandTotalTextCell.horizontalAlignment = Element.ALIGN_RIGHT
+            grandTotalTextCell.border = Rectangle.NO_BORDER
+            table.addCell(grandTotalTextCell)
+
+            //getString(com.ikhokha.common.R.string.grand_total, summaryViewModel.grandTotal.value)
+            val grandTotalParagraph = Paragraph(
+                Chunk("\nR${summaryViewModel.grandTotal.value}", normalBoldText)
+            )
+
             val grandTotal = PdfPCell(grandTotalParagraph)
             grandTotal.border = Rectangle.NO_BORDER
             table.addCell(grandTotal)
 
             table.headerRows = 1
-            table.spacingBefore = 1f
-//table.spacingAfter = 1f
             document.add(table)
 
-            document.add(Phrase("\n"))
+            document.add(Phrase("\n\n"))
 
             val orderDateParagraph = Paragraph(
-                getString(
+                Chunk(getString(
                     com.ikhokha.common.R.string.order_date,
                     getCurrentDateAndTime(DMYHM)
-                )
+                ), normalText)
             )
-            orderDateParagraph.font.style = com.ikhokha.common.R.style.NormalTextView
             orderDateParagraph.alignment = Element.ALIGN_CENTER
             document.add(orderDateParagraph)
 

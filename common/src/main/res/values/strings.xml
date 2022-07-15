@@ -15,7 +15,8 @@
     <string name="order_date">Order date: %1$s</string>
     <string name="product_added">%1$s has been added to your cart</string>
     <string name="product_incremented">%1$s incremented by 1"</string>
-    <string name="grand_total">Total R %1$f"</string>
+    <string name="total">Total:</string>
+    <string name="grand_total">Total R%1$f</string>
     <string name="notice">Notice</string>
     <string name="name">Name</string>
     <string name="ok">Ok</string>
