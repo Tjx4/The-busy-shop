@@ -3,6 +3,7 @@ package com.ikhokha.features.summary
 import android.Manifest
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
@@ -12,10 +13,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.internal.ViewUtils.getContentView
 import com.ikhokha.common.base.fragment.BaseFragment
 import com.ikhokha.common.base.fragment.SubNavigationFragment
 import com.ikhokha.common.constants.ALL_IMAGE_TYPES
+import com.ikhokha.common.constants.DMYHM
+import com.ikhokha.common.constants.DMYHMSC
 import com.ikhokha.common.constants.PDF_TYPE
 import com.ikhokha.common.extensions.getScreenshotFromRecyclerView
 import com.ikhokha.common.extensions.runWhenReady
@@ -27,18 +29,16 @@ import com.ikhokha.common.models.Product
 import com.ikhokha.features.common.adapters.CartItemsAdapter
 import com.ikhokha.features.summary.databinding.FragmentSummaryBinding
 import com.ikhokha.viewmodels.SummaryViewModel
-import com.itextpdf.text.Image
-import com.itextpdf.text.Paragraph
-import com.itextpdf.text.pdf.PdfDocument
+import com.itextpdf.text.*
+import com.itextpdf.text.pdf.PdfPCell
+import com.itextpdf.text.pdf.PdfPTable
 import com.itextpdf.text.pdf.PdfWriter
-import com.itextpdf.text.pdf.TextField
+import com.itextpdf.text.pdf.fonts.otf.TableHeader
 import kotlinx.android.synthetic.main.fragment_summary.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.ByteArrayOutputStream
-import java.io.File
-import java.io.FileInputStream
 import java.io.FileOutputStream
 
 class SummaryFragment : SubNavigationFragment(), CartItemsAdapter.ProductListener {
@@ -151,67 +151,73 @@ class SummaryFragment : SubNavigationFragment(), CartItemsAdapter.ProductListene
     private fun shareReceipt() {
         val heading = getString(com.ikhokha.common.R.string.summary)
         val description =
-            getString(com.ikhokha.common.R.string.receipt_extra_text, getCurrentDateAndTime())
+            getString(com.ikhokha.common.R.string.receipt_extra_text, getCurrentDateAndTime(DMYHM))
 
-        /*
-        val cartItemsBitmap = getScreenshotFromRecyclerView(rvCartItems)
-        val path = MediaStore.Images.Media.insertImage(
-            requireContext().contentResolver,
-            cartItemsBitmap, heading, description
-        )
-        val uri = Uri.parse(path)
-
-        requireActivity().share(
-            heading,
-            ALL_IMAGE_TYPES,
-            description,
-            uri
-        )
-        */
-
-        createPdf(heading, description)
+        shareReceiptPdf(heading, description)
     }
 
-
-    fun createPdf(heading: String, description: String) {
+    private fun shareReceiptPdf(heading: String, description: String) {
         try {
             val summaryDocument = "summary.pdf"
-            val pdfPath = Environment
-                .getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-                .toString()
+            val pdfPath = Environment.getExternalStorageDirectory()
+                //.toString() + "/" + getCurrentDateAndTime(DMYHMSC) + "_" + summaryDocument
+                .toString() + summaryDocument
 
-            val file = File(pdfPath, summaryDocument)
-            val outputStream = FileOutputStream(file)
+            val fileOutputStream = FileOutputStream(pdfPath)
+            val pdfDocument = Document()
+            PdfWriter.getInstance(pdfDocument, fileOutputStream)
+            pdfDocument.open()
 
-            /*
-            val pdfWriter = PdfWriter(file)
-            val pdfDocument = PdfDocument(pdfWriter)
-
-            val paragraph = Paragraph("Hello world")
-            */
-
-            val pdfDocument = PdfDocument()
-            PdfWriter.getInstance(pdfDocument, outputStream)
-
-            val paragraph = Paragraph("Hello world")
-
-
-          //  val boldText = TextField("Bold").setBold()
-         //   val paragraph2 = Paragraph("Hello world")
-          //  paragraph2.add(boldText)
-
+            val drawable = requireActivity().getDrawable(com.ikhokha.common.R.drawable.ic_logo)
+            val logoBitmap = (drawable as BitmapDrawable).bitmap
             val byteArrayOutputStream = ByteArrayOutputStream()
-            val cartItemsBitmap = getScreenshotFromRecyclerView(rvCartItems)
-            cartItemsBitmap?.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
+            logoBitmap?.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
             val bitmapData = byteArrayOutputStream.toByteArray()
-            //
-            //val image = Image(cartItemsBitmap)
+            val logo = Image.getInstance(bitmapData)
+            pdfDocument.add(logo)
 
+            val paragraph = Paragraph("Invoice")
+            paragraph.font.style = com.ikhokha.common.R.style.SubHeadingTextView
+            paragraph.alignment = Element.ALIGN_CENTER;
             pdfDocument.add(paragraph)
-            // pdfDocument.add(paragraph2)
-            // pdfDocument.add(image)
-            pdfDocument.close()
 
+            //val boldText = TextField("Bold").setBold()
+            //val paragraph2 = Paragraph("Hello world")
+            //paragraph2.add(boldText)
+            //pdfDocument.add(paragraph2)
+
+            val table = PdfPTable(3)
+            val descriptionHeading = PdfPCell( Phrase(getString(com.ikhokha.common.R.string.description)))
+            table.addCell(descriptionHeading)
+
+            val quantityHeading = PdfPCell( Phrase(getString(com.ikhokha.common.R.string.quantity)))
+            table.addCell(quantityHeading)
+
+            val priceHeading = PdfPCell( Phrase(getString(com.ikhokha.common.R.string.price)))
+            table.addCell(priceHeading)
+
+            summaryViewModel.products.value?.forEach {
+                val description = PdfPCell(Phrase(it.description))
+                description.border = Rectangle.NO_BORDER
+                table.addCell(description)
+
+                val quantity = PdfPCell(Phrase("${it.quantity}"))
+                description.border = Rectangle.NO_BORDER
+                table.addCell(quantity)
+
+                val price = PdfPCell( Phrase(Phrase("R${it.price}")))
+                description.border = Rectangle.NO_BORDER
+                table.addCell(price)
+            }
+
+            table.headerRows = 1
+            pdfDocument.add(table)
+
+            val paragraph2 = Paragraph(getString(com.ikhokha.common.R.string.order_date, getCurrentDateAndTime(DMYHM)))
+            paragraph2.font.style = com.ikhokha.common.R.style.NormalTextView
+            paragraph2.add(paragraph2)
+
+            pdfDocument.close()
 
             val uri = Uri.parse(pdfPath)
             requireActivity().share(
@@ -230,9 +236,25 @@ class SummaryFragment : SubNavigationFragment(), CartItemsAdapter.ProductListene
                 getString(com.ikhokha.common.R.string.try_again),
                 getString(com.ikhokha.common.R.string.close),
                 {
-                    createPdf(heading, description)
+                    shareReceiptPdf(heading, description)
                 }
             )
         }
+    }
+
+    private fun shareCartImage(heading: String, description: String) {
+        val cartItemsBitmap = getScreenshotFromRecyclerView(rvCartItems)
+        val path = MediaStore.Images.Media.insertImage(
+            requireContext().contentResolver,
+            cartItemsBitmap, heading, description
+        )
+        val uri = Uri.parse(path)
+
+        requireActivity().share(
+            heading,
+            ALL_IMAGE_TYPES,
+            description,
+            uri
+        )
     }
 }

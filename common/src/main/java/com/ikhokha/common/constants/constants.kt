@@ -12,3 +12,5 @@ const val PREFERENCE = "_preferences"
 const val SHORT_VIBRATION_DURATION = 70L
 const val ALL_IMAGE_TYPES = "image/*"
 const val PDF_TYPE = "application/pdf"
+const val DMYHM = "dd/M/yyyy hh:mm"
+const val DMYHMSC = "dd_M_yyyy_hh_mm" //Todo: rename
