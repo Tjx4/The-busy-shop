@@ -17,7 +17,6 @@ import com.ikhokha.common.base.fragment.BaseFragment
 import com.ikhokha.common.base.fragment.SubNavigationFragment
 import com.ikhokha.common.constants.ALL_IMAGE_TYPES
 import com.ikhokha.common.constants.DMYHM
-import com.ikhokha.common.constants.DMYHMSC
 import com.ikhokha.common.constants.PDF_TYPE
 import com.ikhokha.common.extensions.getScreenshotFromRecyclerView
 import com.ikhokha.common.extensions.runWhenReady
@@ -33,7 +32,6 @@ import com.itextpdf.text.*
 import com.itextpdf.text.pdf.PdfPCell
 import com.itextpdf.text.pdf.PdfPTable
 import com.itextpdf.text.pdf.PdfWriter
-import com.itextpdf.text.pdf.fonts.otf.TableHeader
 import kotlinx.android.synthetic.main.fragment_summary.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -161,12 +159,12 @@ class SummaryFragment : SubNavigationFragment(), CartItemsAdapter.ProductListene
             val summaryDocument = "summary.pdf"
             val pdfPath = Environment.getExternalStorageDirectory()
                 //.toString() + "/" + getCurrentDateAndTime(DMYHMSC) + "_" + summaryDocument
-                .toString() + summaryDocument
+                .toString() + "/" + summaryDocument
 
             val fileOutputStream = FileOutputStream(pdfPath)
-            val pdfDocument = Document()
-            PdfWriter.getInstance(pdfDocument, fileOutputStream)
-            pdfDocument.open()
+            val document = Document()
+            PdfWriter.getInstance(document, fileOutputStream)
+            document.open()
 
             val drawable = requireActivity().getDrawable(com.ikhokha.common.R.drawable.ic_logo)
             val logoBitmap = (drawable as BitmapDrawable).bitmap
@@ -174,12 +172,14 @@ class SummaryFragment : SubNavigationFragment(), CartItemsAdapter.ProductListene
             logoBitmap?.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
             val bitmapData = byteArrayOutputStream.toByteArray()
             val logo = Image.getInstance(bitmapData)
-            pdfDocument.add(logo)
+            document.add(logo)
 
             val paragraph = Paragraph("Invoice")
-            paragraph.font.style = com.ikhokha.common.R.style.SubHeadingTextView
-            paragraph.alignment = Element.ALIGN_CENTER;
-            pdfDocument.add(paragraph)
+            paragraph.font.style = com.ikhokha.common.R.style.HeadingTextView
+            paragraph.alignment = Element.ALIGN_CENTER
+            document.add(paragraph)
+
+            document.add(Phrase("\n"))
 
             //val boldText = TextField("Bold").setBold()
             //val paragraph2 = Paragraph("Hello world")
@@ -187,13 +187,13 @@ class SummaryFragment : SubNavigationFragment(), CartItemsAdapter.ProductListene
             //pdfDocument.add(paragraph2)
 
             val table = PdfPTable(3)
-            val descriptionHeading = PdfPCell( Phrase(getString(com.ikhokha.common.R.string.description)))
+            val descriptionHeading = PdfPCell(Phrase(getString(com.ikhokha.common.R.string.description)))
             table.addCell(descriptionHeading)
 
-            val quantityHeading = PdfPCell( Phrase(getString(com.ikhokha.common.R.string.quantity)))
+            val quantityHeading = PdfPCell(Phrase(getString(com.ikhokha.common.R.string.quantity)))
             table.addCell(quantityHeading)
 
-            val priceHeading = PdfPCell( Phrase(getString(com.ikhokha.common.R.string.price)))
+            val priceHeading = PdfPCell(Phrase(getString(com.ikhokha.common.R.string.price)))
             table.addCell(priceHeading)
 
             summaryViewModel.products.value?.forEach {
@@ -202,22 +202,26 @@ class SummaryFragment : SubNavigationFragment(), CartItemsAdapter.ProductListene
                 table.addCell(description)
 
                 val quantity = PdfPCell(Phrase("${it.quantity}"))
-                description.border = Rectangle.NO_BORDER
+                quantity.border = Rectangle.NO_BORDER
                 table.addCell(quantity)
 
                 val price = PdfPCell( Phrase(Phrase("R${it.price}")))
-                description.border = Rectangle.NO_BORDER
+                price.border = Rectangle.NO_BORDER
                 table.addCell(price)
             }
 
             table.headerRows = 1
-            pdfDocument.add(table)
+table.spacingBefore = 1f
+table.spacingAfter = 1f
+            document.add(table)
+
+            document.add(Phrase("\n"))
 
             val paragraph2 = Paragraph(getString(com.ikhokha.common.R.string.order_date, getCurrentDateAndTime(DMYHM)))
             paragraph2.font.style = com.ikhokha.common.R.style.NormalTextView
-            paragraph2.add(paragraph2)
+            document.add(paragraph2)
 
-            pdfDocument.close()
+            document.close()
 
             val uri = Uri.parse(pdfPath)
             requireActivity().share(
