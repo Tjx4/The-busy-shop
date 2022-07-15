@@ -17,6 +17,7 @@ import com.ikhokha.common.base.fragment.BaseFragment
 import com.ikhokha.common.base.fragment.SubNavigationFragment
 import com.ikhokha.common.constants.ALL_IMAGE_TYPES
 import com.ikhokha.common.constants.DMYHM
+import com.ikhokha.common.constants.DMYHMSC
 import com.ikhokha.common.constants.PDF_TYPE
 import com.ikhokha.common.extensions.getScreenshotFromRecyclerView
 import com.ikhokha.common.extensions.runWhenReady
@@ -158,8 +159,7 @@ class SummaryFragment : SubNavigationFragment(), CartItemsAdapter.ProductListene
         try {
             val summaryDocument = "summary.pdf"
             val pdfPath = Environment.getExternalStorageDirectory()
-                //.toString() + "/" + getCurrentDateAndTime(DMYHMSC) + "_" + summaryDocument //Todo: revert
-                .toString() + "/" + summaryDocument
+                .toString() + "/" + getCurrentDateAndTime(DMYHMSC) + "_" + summaryDocument
 
             val fileOutputStream = FileOutputStream(pdfPath)
             val document = Document()
