@@ -174,10 +174,10 @@ class SummaryFragment : SubNavigationFragment(), CartItemsAdapter.ProductListene
             val logo = Image.getInstance(bitmapData)
             document.add(logo)
 
-            val paragraph = Paragraph("Invoice")
-            paragraph.font.style = com.ikhokha.common.R.style.HeadingTextView
-            paragraph.alignment = Element.ALIGN_CENTER
-            document.add(paragraph)
+            val headingParagraph = Paragraph("Invoice")
+            headingParagraph.font.style = com.ikhokha.common.R.style.HeadingTextView
+            headingParagraph.alignment = Element.ALIGN_CENTER
+            document.add(headingParagraph)
 
             document.add(Phrase("\n"))
 
@@ -187,7 +187,8 @@ class SummaryFragment : SubNavigationFragment(), CartItemsAdapter.ProductListene
             //pdfDocument.add(paragraph2)
 
             val table = PdfPTable(3)
-            val descriptionHeading = PdfPCell(Phrase(getString(com.ikhokha.common.R.string.description)))
+            val descriptionHeading =
+                PdfPCell(Phrase(getString(com.ikhokha.common.R.string.description)))
             table.addCell(descriptionHeading)
 
             val quantityHeading = PdfPCell(Phrase(getString(com.ikhokha.common.R.string.quantity)))
@@ -205,21 +206,44 @@ class SummaryFragment : SubNavigationFragment(), CartItemsAdapter.ProductListene
                 quantity.border = Rectangle.NO_BORDER
                 table.addCell(quantity)
 
-                val price = PdfPCell( Phrase(Phrase("R${it.price}")))
+                val price = PdfPCell(Phrase("R${it.price}"))
                 price.border = Rectangle.NO_BORDER
                 table.addCell(price)
             }
 
+            val emptyCell = PdfPCell(Phrase(""))
+            emptyCell.border = Rectangle.NO_BORDER
+            table.addCell(emptyCell)
+            table.addCell(emptyCell)
+
+            val grandTotalParagraph = Paragraph(
+                getString(
+                    com.ikhokha.common.R.string.grand_total,
+                    summaryViewModel.grandTotal.value
+                )
+            )
+            grandTotalParagraph.font.style = com.ikhokha.common.R.style.NormalTextView
+            //document.add(grandTotalParagraph)
+            val grandTotal = PdfPCell(grandTotalParagraph)
+            grandTotal.border = Rectangle.NO_BORDER
+            table.addCell(grandTotal)
+
             table.headerRows = 1
-table.spacingBefore = 1f
-table.spacingAfter = 1f
+            table.spacingBefore = 1f
+//table.spacingAfter = 1f
             document.add(table)
 
             document.add(Phrase("\n"))
 
-            val paragraph2 = Paragraph(getString(com.ikhokha.common.R.string.order_date, getCurrentDateAndTime(DMYHM)))
-            paragraph2.font.style = com.ikhokha.common.R.style.NormalTextView
-            document.add(paragraph2)
+            val orderDateParagraph = Paragraph(
+                getString(
+                    com.ikhokha.common.R.string.order_date,
+                    getCurrentDateAndTime(DMYHM)
+                )
+            )
+            orderDateParagraph.font.style = com.ikhokha.common.R.style.NormalTextView
+            orderDateParagraph.alignment = Element.ALIGN_CENTER
+            document.add(orderDateParagraph)
 
             document.close()
 

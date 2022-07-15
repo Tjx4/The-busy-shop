@@ -94,6 +94,7 @@
     </style>
     <style name="NormalTextView" parent="BaseTextView">
         <item name="android:textSize">@dimen/medium_text</item>
+        <item name="android:textStyle">normal</item>
         <item name="android:gravity">center</item>
     </style>
     <style name="SmallTextView" parent="BaseTextView">
