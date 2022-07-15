@@ -152,10 +152,10 @@ class SummaryFragment : SubNavigationFragment(), CartItemsAdapter.ProductListene
         val description =
             getString(com.ikhokha.common.R.string.receipt_extra_text, getCurrentDateAndTime(DMYHM))
 
-        shareReceiptPdf(heading, description)
+        shareSummaryPdf(heading, description)
     }
 
-    private fun shareReceiptPdf(heading: String, description: String) {
+    private fun shareSummaryPdf(heading: String, description: String) {
         try {
             val summaryDocument = "summary.pdf"
             val pdfPath = Environment.getExternalStorageDirectory()
@@ -309,7 +309,7 @@ class SummaryFragment : SubNavigationFragment(), CartItemsAdapter.ProductListene
                 getString(com.ikhokha.common.R.string.try_again),
                 getString(com.ikhokha.common.R.string.close),
                 {
-                    shareReceiptPdf(heading, description)
+                    shareSummaryPdf(heading, description)
                 }
             )
         }
