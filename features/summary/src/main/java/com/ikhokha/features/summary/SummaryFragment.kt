@@ -166,12 +166,16 @@ class SummaryFragment : SubNavigationFragment(), CartItemsAdapter.ProductListene
             PdfWriter.getInstance(document, fileOutputStream)
             document.open()
 
-            val drawable = requireActivity().getDrawable(com.ikhokha.common.R.drawable.ic_logo)
+            val drawable = requireActivity().getDrawable(com.ikhokha.common.R.drawable.ic_logo_dark)
             val logoBitmap = (drawable as BitmapDrawable).bitmap
             val byteArrayOutputStream = ByteArrayOutputStream()
             logoBitmap?.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
             val bitmapData = byteArrayOutputStream.toByteArray()
             val logo = Image.getInstance(bitmapData)
+            logo.scaleAbsolute(
+                requireActivity().resources.getDimension(com.ikhokha.common.R.dimen.pdf_logo_size),
+                requireActivity().resources.getDimension(com.ikhokha.common.R.dimen.pdf_logo_size)
+            )
             document.add(logo)
 
             val headingText = Font(
@@ -190,7 +194,13 @@ class SummaryFragment : SubNavigationFragment(), CartItemsAdapter.ProductListene
                 Font.BOLD
             )
 
-            val headingParagraph = Paragraph(Chunk("Invoice", headingText))
+            val tittleParagraph = Paragraph(Chunk(getString(com.ikhokha.common.R.string.app_name), normalText))
+            tittleParagraph.alignment = Element.ALIGN_LEFT
+            document.add(tittleParagraph)
+
+            document.add(Phrase("\n"))
+
+            val headingParagraph = Paragraph(Chunk(getString(com.ikhokha.common.R.string.summary), headingText))
             headingParagraph.alignment = Element.ALIGN_CENTER
             document.add(headingParagraph)
 
@@ -258,7 +268,6 @@ class SummaryFragment : SubNavigationFragment(), CartItemsAdapter.ProductListene
             grandTotalTextCell.border = Rectangle.NO_BORDER
             table.addCell(grandTotalTextCell)
 
-            //getString(com.ikhokha.common.R.string.grand_total, summaryViewModel.grandTotal.value)
             val grandTotalParagraph = Paragraph(
                 Chunk("\nR${summaryViewModel.grandTotal.value}", normalBoldText)
             )

@@ -92,7 +92,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="@string/placeholder_price"
-            android:text="@{`Total R` + summaryViewModel.grandTotal}"
+            android:text="@{@string/total + summaryViewModel.grandTotal}"
             android:textStyle="bold"
             android:layout_marginHorizontal="@dimen/small_spacing"
             app:layout_constraintVertical_bias="0"
