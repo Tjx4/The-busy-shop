@@ -15,10 +15,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ikhokha.common.base.fragment.BaseFragment
 import com.ikhokha.common.base.fragment.SubNavigationFragment
-import com.ikhokha.common.constants.ALL_IMAGE_TYPES
-import com.ikhokha.common.constants.DMYHM
-import com.ikhokha.common.constants.DMYHMSC
-import com.ikhokha.common.constants.PDF_TYPE
+import com.ikhokha.common.constants.*
 import com.ikhokha.common.extensions.getScreenshotFromRecyclerView
 import com.ikhokha.common.extensions.runWhenReady
 import com.ikhokha.common.extensions.share
@@ -79,15 +76,13 @@ class SummaryFragment : SubNavigationFragment(), CartItemsAdapter.ProductListene
             onBackPressed()
         }
 
-        btnProceed.setOnClickListener {
-            shareReceipt()
-        }
-    }
+        btnProcess.setOnClickListener {
+            val heading = getString(com.ikhokha.common.R.string.summary)
+            val description =
+                getString(com.ikhokha.common.R.string.receipt_extra_text, getCurrentDateAndTime(DMYHM))
 
-    override fun onPermissionsGranted() {
-        super.onPermissionsGranted()
-        //Todo
-        val p = 0
+            shareSummaryPdf(heading, description)
+        }
     }
 
     override fun onPermissionDeclined() {
@@ -95,7 +90,7 @@ class SummaryFragment : SubNavigationFragment(), CartItemsAdapter.ProductListene
         showPermissionDialog(
             getString(com.ikhokha.common.R.string.notice),
             getString(com.ikhokha.common.R.string.external_storage_permission),
-            Manifest.permission.WRITE_EXTERNAL_STORAGE /*Todo: rethink show dialog due to one, handle many */
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
         )
     }
 
@@ -147,19 +142,10 @@ class SummaryFragment : SubNavigationFragment(), CartItemsAdapter.ProductListene
         /* No opp */
     }
 
-    private fun shareReceipt() {
-        val heading = getString(com.ikhokha.common.R.string.summary)
-        val description =
-            getString(com.ikhokha.common.R.string.receipt_extra_text, getCurrentDateAndTime(DMYHM))
-
-        shareSummaryPdf(heading, description)
-    }
-
     private fun shareSummaryPdf(heading: String, description: String) {
         try {
-            val summaryDocument = "summary.pdf"
             val pdfPath = Environment.getExternalStorageDirectory()
-                .toString() + "/" + getCurrentDateAndTime(DMYHMSC) + "_" + summaryDocument
+                .toString() + "/" + getCurrentDateAndTime(DMYHMSC) + "_" + SUMMARY_PDF
 
             val fileOutputStream = FileOutputStream(pdfPath)
             val document = Document()

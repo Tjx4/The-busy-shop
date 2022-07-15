@@ -49,7 +49,6 @@ class ScanFragment : TopNavigationFragment() {
 
     override fun onResume() {
         super.onResume()
-        //Todo: re-look
         if(allPermissionsGranted){
             codeScanner.startPreview()
             scanViewModel.showLoading.value = false
@@ -81,12 +80,6 @@ class ScanFragment : TopNavigationFragment() {
         scanViewModel.coroutineScope.launch(Dispatchers.IO) {
             scanViewModel.checkCartItems()
         }
-    }
-
-    override fun onPermissionsGranted() {
-        super.onPermissionsGranted()
-        //Todo
-        val p = 0
     }
 
     override fun onPermissionDeclined() {

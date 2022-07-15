@@ -42,4 +42,5 @@
     <string name="no_summary_items">No items found</string>
     <string name="receipt_extra_text">This is a receipt for purchases made on %1$s</string>
     <string name="pdf_error">Error creating receipt</string>
+    <string name="placeholder_date">Date: 00/00/00</string>
 </resources>

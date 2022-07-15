@@ -66,7 +66,7 @@ class ScanViewModel(application: Application, val productsRepository: ProductsRe
 
     suspend fun incrementProduct(productId: String) {
         val response =
-            productsRepository.incrementCartProductQuantity(productId) //Todo: maybe return product description
+            productsRepository.incrementCartProductQuantity(productId)
 
         withContext(Dispatchers.Main) {
             when (response) {

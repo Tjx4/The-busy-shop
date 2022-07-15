@@ -26,9 +26,6 @@
     <style name="ActionBarParentView">
         <item name="android:background">@color/dark_grey</item>
         <item name="android:paddingTop">?attr/actionBarSize</item>
-        <!-- Todo remove to enable scroll behind
-        <item name="android:paddingBottom">?attr/actionBarSize</item>
-         -->
     </style>
     <style name="AlertDialogCustom" parent="Theme.AppCompat.Light.Dialog.Alert">
     </style>
