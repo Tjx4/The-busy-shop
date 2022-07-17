@@ -1,30 +1,30 @@
-package com.ikhokha.features.cart.core.room
+package com.ikhokha.core.persistance.room
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.ikhokha.features.cart.constants.CART_DB
-import com.ikhokha.features.cart.core.room.tables.items.ItemsDAO
-import com.ikhokha.features.cart.core.room.tables.items.ItemsTable
+import com.ikhokha.common.constants.APP_DB
+import com.ikhokha.core.persistance.room.tables.users.UsersDAO
+import com.ikhokha.core.persistance.room.tables.users.UsersTable
 
-@Database(entities = [ItemsTable::class], version = 1, exportSchema = false)
-abstract class CartDB : RoomDatabase() {
-    abstract val itemsDAO: ItemsDAO
+@Database(entities = [UsersTable::class], version = 1, exportSchema = false)
+abstract class AppDB : RoomDatabase() {
+    abstract val usersDAO: UsersDAO
 
     companion object {
         @Volatile
-        private var INSTANCE: CartDB? = null
+        private var INSTANCE: AppDB? = null
 
-        fun getInstance(context: Context): CartDB {
+        fun getInstance(context: Context): AppDB {
             synchronized(this) {
                 var instance = INSTANCE
 
                 if (instance == null) {
                     instance = Room.databaseBuilder(
                         context.applicationContext,
-                        CartDB::class.java,
-                        CART_DB
+                        AppDB::class.java,
+                        APP_DB
                     )
                         .fallbackToDestructiveMigration()
                         .build()

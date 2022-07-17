@@ -55,9 +55,4 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$retrofit"
     //Smooth progressbar
     implementation "com.github.castorflex.smoothprogressbar:library-circular:$smoothprogressbar"
-
-    //Modules
-    implementation project("$common")
-    implementation project("$ui_common")
-    implementation project("$viewmodels")
 }

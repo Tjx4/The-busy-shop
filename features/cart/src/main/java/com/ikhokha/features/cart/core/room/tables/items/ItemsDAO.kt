@@ -1,4 +1,4 @@
-package com.ikhokha.features.cart.core.room.items
+package com.ikhokha.features.cart.core.room.tables.items
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
