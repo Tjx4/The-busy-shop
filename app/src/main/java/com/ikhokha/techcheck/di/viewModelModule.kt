@@ -1,6 +1,6 @@
 package com.ikhokha.techcheck.di
 
-import com.ikhokha.viewmodels.CartViewModel
+import com.ikhokha.features.cart.viewmodels.CartViewModel
 import com.ikhokha.viewmodels.SummaryViewModel
 import com.ikhokha.viewmodels.PreviewViewModel
 import com.ikhokha.viewmodels.ScanViewModel

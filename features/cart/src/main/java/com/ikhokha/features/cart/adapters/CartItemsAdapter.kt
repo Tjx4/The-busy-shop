@@ -1,4 +1,4 @@
-package com.ikhokha.features.common.adapters
+package com.ikhokha.features.cart.adapters
 
 import android.content.Context
 import android.view.LayoutInflater

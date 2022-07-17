@@ -23,7 +23,7 @@ import com.ikhokha.common.helpers.getCurrentDateAndTime
 import com.ikhokha.common.helpers.showConfirmDialog
 import com.ikhokha.common.helpers.showErrorDialog
 import com.ikhokha.common.models.Product
-import com.ikhokha.features.common.adapters.CartItemsAdapter
+import com.ikhokha.features.cart.adapters.CartItemsAdapter
 import com.ikhokha.features.summary.databinding.FragmentSummaryBinding
 import com.ikhokha.viewmodels.SummaryViewModel
 import com.itextpdf.text.*
@@ -37,10 +37,10 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.ByteArrayOutputStream
 import java.io.FileOutputStream
 
-class SummaryFragment : SubNavigationFragment(), CartItemsAdapter.ProductListener {
+class SummaryFragment : SubNavigationFragment(), com.ikhokha.features.cart.adapters.CartItemsAdapter.ProductListener {
     private lateinit var binding: FragmentSummaryBinding
     private val summaryViewModel: SummaryViewModel by viewModel()
-    private lateinit var cartItemsAdapter: CartItemsAdapter
+    private lateinit var cartItemsAdapter: com.ikhokha.features.cart.adapters.CartItemsAdapter
     override var PERMISSION_REQUEST_CODE = 1001
     override var PERMISSIONS: Array<String>? = arrayOf(
         Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -110,7 +110,7 @@ class SummaryFragment : SubNavigationFragment(), CartItemsAdapter.ProductListene
 
         itemsLayoutManager.initialPrefetchItemCount = products.size
         rvCartItems?.layoutManager = itemsLayoutManager
-        cartItemsAdapter = CartItemsAdapter(
+        cartItemsAdapter = com.ikhokha.features.cart.adapters.CartItemsAdapter(
             requireContext(),
             products,
             com.ikhokha.features.common.R.layout.summary_item_layout

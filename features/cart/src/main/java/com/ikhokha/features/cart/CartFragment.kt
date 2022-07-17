@@ -14,8 +14,8 @@ import com.ikhokha.common.helpers.showConfirmDialog
 import com.ikhokha.common.helpers.showErrorDialog
 import com.ikhokha.common.models.Product
 import com.ikhokha.features.cart.databinding.FragmentCartBinding
+import com.ikhokha.features.cart.viewmodels.CartViewModel
 import com.ikhokha.features.common.adapters.CartItemsAdapter
-import com.ikhokha.viewmodels.CartViewModel
 import kotlinx.android.synthetic.main.fragment_cart.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

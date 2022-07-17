@@ -5,7 +5,7 @@
     <data>
         <variable
             name="cartViewModel"
-            type="com.ikhokha.viewmodels.CartViewModel"/>
+            type="com.ikhokha.features.cart.viewmodels.CartViewModel"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

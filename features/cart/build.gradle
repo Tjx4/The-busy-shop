@@ -40,6 +40,23 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$appcompat"
     implementation "com.google.android.material:material:$material"
     implementation "androidx.constraintlayout:constraintlayout:$constraintlayout"
+    //Testing
+    testImplementation "junit:junit:$junit"
+    androidTestImplementation "androidx.test.ext:junit:$ext_junit"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso"
+    testImplementation "androidx.arch.core:core-testing:$core_testing"
+    testImplementation "org.mockito:mockito-core:$mockito"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_test"
+    //Work manager
+    implementation "androidx.work:work-runtime-ktx:$workmanager"
+    implementation "androidx.work:work-rxjava2:$workmanager"
+    implementation "androidx.work:work-gcm:$workmanager"
+    androidTestImplementation "androidx.work:work-testing:$workmanager"
+    //Paging
+    implementation "androidx.paging:paging-runtime-ktx:$paging"
+    //Firebase
+    implementation "com.google.firebase:firebase-database:$firebase_database"
+    implementation "com.google.firebase:firebase-storage:$firebase_storage"
     //koin
     implementation "io.insert-koin:koin-core:$koin"
     implementation "io.insert-koin:koin-android:$koin"
