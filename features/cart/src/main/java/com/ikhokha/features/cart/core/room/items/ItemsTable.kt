@@ -1,4 +1,4 @@
-package com.ikhokha.core.persistance.room.tables.items
+package com.ikhokha.features.cart.core.room.items
 
 import android.os.Parcelable
 import androidx.room.ColumnInfo

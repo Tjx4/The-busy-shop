@@ -43,6 +43,16 @@ dependencies {
     //koin
     implementation "io.insert-koin:koin-core:$koin"
     implementation "io.insert-koin:koin-android:$koin"
+    //Room
+    implementation "androidx.room:room-runtime:$room"
+    kapt "androidx.room:room-compiler:$room"
+    implementation "androidx.room:room-ktx:$room"
+    implementation "androidx.room:room-rxjava2:$room"
+    implementation "androidx.room:room-guava:$room"
+    testImplementation "androidx.room:room-testing:$room"
+    //Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit"
     //Smooth progressbar
     implementation "com.github.castorflex.smoothprogressbar:library-circular:$smoothprogressbar"
 

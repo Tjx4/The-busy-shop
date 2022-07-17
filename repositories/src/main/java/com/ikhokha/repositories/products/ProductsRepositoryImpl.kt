@@ -8,9 +8,8 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.ikhokha.common.extensions.getProductFromDataSnapshot
 import com.ikhokha.common.models.Product
-import com.ikhokha.core.persistance.room.CartDB
+import com.ikhokha.features.cart.core.room.CartDB
 import com.ikhokha.core.persistance.room.tables.items.ItemsTable
-import com.ikhokha.repositories.products.ProductsRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.resume
@@ -20,7 +19,7 @@ import kotlin.coroutines.suspendCoroutine
 class ProductsRepositoryImpl(
     val firebaseDatabase: FirebaseDatabase,
     val firebaseStorage: FirebaseStorage,
-    val cartDB: CartDB
+    val cartDB: com.ikhokha.features.cart.core.room.CartDB
 ) :
     ProductsRepository {
 

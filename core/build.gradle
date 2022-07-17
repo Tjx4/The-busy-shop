@@ -47,6 +47,9 @@ dependencies {
     implementation "androidx.room:room-rxjava2:$room"
     implementation "androidx.room:room-guava:$room"
     testImplementation "androidx.room:room-testing:$room"
+    //Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit"
 
     //Modules
     implementation project("$common")
